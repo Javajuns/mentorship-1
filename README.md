@@ -1,4 +1,4 @@
 # mentorship Java Juniors Mentorship
 java juniors mentorship workshop
 * Ivan Kovalenko
-* Oleksy Ostanin
+* Oleksy Ostanin <tnd.prof@gmail.com>
