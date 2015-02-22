@@ -1,12 +1,12 @@
-<HTML>
-<HEAD>Brainfuck interpreter</HEAD>
-<BODY>
-<H4>Brainfuck interpreter</H4>
+<html>
+<head>Brainfuck interpreter</head>
+<body>
+<h4>Brainfuck interpreter</h4>
 
-<FORM method="post" ACTION="">
+<form method="post" action="">
     <input type="text" name="raw_code">
     <input type="submit" value="interprete">
-</FORM>
+</form>
 <input type="text" name="output">
-</BODY>
-</HTML>
+</body>
+</html>
