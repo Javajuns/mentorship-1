@@ -13,7 +13,13 @@
             && session.getAttribute(
             "token").equals(request.getParameter("token"))) {
         session.setAttribute("token", null);*/
-        session.setAttribute("username",request.getParameter("username"));
+    if(request.getMethod().equals("POST")) {
+        session.setAttribute("username", request.getParameter("username"));
+    }
+    else
+    {
+        out.println("<br>Get unsupported!");
+    }
    /* } else {
         out.println("<br>Form was double submitted!");
     }*/
