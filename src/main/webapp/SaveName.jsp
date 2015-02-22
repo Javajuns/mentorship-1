@@ -1,10 +1,10 @@
-<HTML>
-<BODY>
+<html>
+<body>
 
 <%= session.getAttribute("token") %>
-<br>
+<br />
 <%= request.getParameter("token") %>
-<br>
+<br />
 <%= request.getHeader("Referer") %>
 
 
@@ -18,5 +18,5 @@
     }
 %>
 
-</BODY>
-</HTML>
+</body>
+</html>
