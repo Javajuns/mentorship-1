@@ -1,5 +1,5 @@
-<HTML>
-<BODY>
+<html>
+<body>
 Hello, <%= session.getAttribute("theName") %>
-</BODY>
-</HTML>
+</body>
+</html>
