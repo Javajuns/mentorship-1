@@ -8,7 +8,7 @@
         session.setAttribute("token", randomToken );
     %>
     <input type="hidden" name="token" value="<%= randomToken %>">
-    <input type=submit>
+    <input type="submit" value="Send Name">
 
 </form>
 </body>
