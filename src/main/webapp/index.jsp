@@ -6,12 +6,9 @@
     <%
         int myRnd = new Random().nextInt(1000);
         String randomToken = Integer.valueOf(myRnd).toString();
-        session.setAttribute(
-                "token", randomToken);
-
+        session.setAttribute("token", randomToken);
     %>
-    <input type="hidden" name="token"
-           value="<%= randomToken %>">
+    <input type="hidden" name="token" value="<%= randomToken %>">
     <input type="submit" value="Send Name">
 </form>
 </body>
