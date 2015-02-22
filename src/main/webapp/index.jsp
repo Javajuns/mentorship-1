@@ -10,9 +10,6 @@
     <%
         int myRnd = new Random().nextInt(1000);
         session.setAttribute("token", Integer.valueOf(myRnd).toString());
-
-        String randomToken = Integer.valueOf(myRnd).toString();
-        session.setAttribute("token", randomToken);
     %>
     <input type="hidden" name="token" value="<%= Integer.valueOf(myRnd).toString() %>">
     <input type=submit>
