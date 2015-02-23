@@ -1,0 +1,7 @@
+CREATE TABLE goods(
+id INT PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(255),
+price DOUBLE,
+category_id INT,
+rest DOUBLE
+);
