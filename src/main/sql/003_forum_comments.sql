@@ -2,5 +2,6 @@ CREATE TABLE forum_comments(
   id INT PRIMARY KEY auto_increment,
   user_id	 INT,
   topic_id INT,
-  msg VARCHAR(255)
+  msg VARCHAR(255),
+  date_created DATE
 );
