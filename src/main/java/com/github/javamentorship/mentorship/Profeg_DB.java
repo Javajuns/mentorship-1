@@ -11,10 +11,6 @@ public class Profeg_DB {
         comments.add("Coool!");
         comments.add("Sucks!");
     }
-    
-    public static String out_safe(String comment) {
-        return  comment.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
-    }
 
 
 }

@@ -12,4 +12,7 @@ public class DB {
         DB.comments.add("Sucks!");
     }
 
+    public static String out_safe(String comment) {
+        return  comment.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+    }
 }
