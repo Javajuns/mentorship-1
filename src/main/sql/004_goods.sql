@@ -11,5 +11,3 @@ FOREIGN KEY (category_id)
 REFERENCES PUBLIC.CATEGORY(id);
 
 CREATE INDEX idx_name ON goods(name);
-
-
