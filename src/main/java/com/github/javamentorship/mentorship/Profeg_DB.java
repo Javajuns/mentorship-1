@@ -35,25 +35,7 @@ public class Profeg_DB {
     }
     
     public static void add_safe(String comment) {
-
-        StringBuilder protectedComment = new StringBuilder(comment);
-        int index = 0;
-        while (index < protectedComment.length()) {
-            if(protectedComment.charAt(index) == '<') {
-                protectedComment.deleteCharAt(index);
-                protectedComment.insert(index, "&lt;");
-                index += 4;
-                continue;
-            }
-            if(protectedComment.charAt(index) == '>') {
-                protectedComment.deleteCharAt(index);
-                protectedComment.insert(index, "&gt;");
-                index += 4;
-                continue;
-            }
-            index++;
-        }
-        comments.add(protectedComment.toString());
+        comments.add(out_safe(comment));
     }
 
 
