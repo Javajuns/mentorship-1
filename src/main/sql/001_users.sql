@@ -7,11 +7,3 @@ CREATE TABLE users (
    date_created DATE,
    is_admin INT
 );
-
-
-CREATE TABLE orders(
-  FOREIGN KEY (id)
-  user_id INT,
-  goods_id INT,
-  amount INT
-  );
