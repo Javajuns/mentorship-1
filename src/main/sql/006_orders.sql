@@ -6,7 +6,7 @@ CREATE TABLE orders(
   amount DOUBLE
   );
 
-ALTER TABLE orders ADD CONSTRAINT fk_orders_id
-FOREIGN KEY (orders_id)
-REFERENCES PUBLIC.ORDERS(id);
+ALTER TABLE orders ADD CONSTRAINT fk_goods_id
+FOREIGN KEY (goods_id)
+REFERENCES PUBLIC.goods(id);
 
