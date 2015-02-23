@@ -13,25 +13,7 @@ public class Profeg_DB {
     }
     
     public static String out_safe(String comment) {
-        StringBuilder protectedComment = new StringBuilder(comment);
-        int index = 0;
-        while (index < protectedComment.length()) {
-            if(protectedComment.charAt(index) == '<') {
-                protectedComment.deleteCharAt(index);
-                protectedComment.insert(index, "&lt;");
-                index += 4;
-                continue;
-            }
-            if(protectedComment.charAt(index) == '>') {
-                protectedComment.deleteCharAt(index);
-                protectedComment.insert(index, "&gt;");
-                index += 4;
-                continue;
-            }
-            index++;
-        }
-        return protectedComment.toString();
-        
+        return  comment.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
     }
     
     public static void add_safe(String comment) {
