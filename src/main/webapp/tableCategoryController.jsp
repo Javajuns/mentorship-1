@@ -1,4 +1,5 @@
 <%@ page import="com.github.javamentorship.mentorship.DBImpl" %>
+<%@ page import="com.github.javamentorship.mentorship.CategoryDao" %>
 <%
     int result = 0;
     if (request.getMethod().equals("POST")) {
@@ -17,10 +18,10 @@
             result = DBImpl.update("DELETE FROM category WHERE ID=" + id);
         if ("Update".equals(request.getParameter("Update")))
             //result = DBImpl.update("UPDATE category SET NAME='" + name + "', PARENT_ID='" + parent_id + "' WHERE ID=" + id);
-            DBImpl.update(name, parent_id, id);
+            CategoryDao.update(name, parent_id, id);
         if ("Insert".equals(request.getParameter("Insert")))
             result = DBImpl.update("INSERT INTO category (id,name,parent_id) VALUES (" + id + ",'" + name + "','" + parent_id + "')");
-            //DBImpl.insert(name, parent_id, id);
+            //CategoryDao.insert(name, parent_id, id);
     }
 
     response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
