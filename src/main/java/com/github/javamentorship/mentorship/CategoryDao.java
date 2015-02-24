@@ -10,8 +10,7 @@ import java.sql.SQLException;
  */
 public class CategoryDao {
     public synchronized static void update(String name, int parentId, int id) throws SQLException, ClassNotFoundException {
-        Class.forName("org.hsqldb.jdbcDriver");
-        Connection conn = DriverManager.getConnection("jdbc:hsqldb:file:target/devDb/devDb", "sa", "");
+        Connection conn = DBConnectionPool.getConnection();
         PreparedStatement updateStmt = null;
         String updateString = "UPDATE category SET name = ?, parent_id = ? WHERE id = ?";
         updateStmt = conn.prepareStatement(updateString);
@@ -19,11 +18,11 @@ public class CategoryDao {
         updateStmt.setInt(2, parentId);
         updateStmt.setInt(3, id);
         updateStmt.executeUpdate();
+        updateStmt.close();
     }
 
     public synchronized static void insert(String name, int parentId, int id) throws SQLException, ClassNotFoundException {
-        Class.forName("org.hsqldb.jdbcDriver");
-        Connection conn = DriverManager.getConnection("jdbc:hsqldb:file:target/devDb/devDb", "sa", "");
+        Connection conn = DBConnectionPool.getConnection();
         PreparedStatement updateStmt = null;
         String updateString = "INSERT INTO category (name,parent_id,id) VALUES (?, ?, ?)";
         updateStmt = conn.prepareStatement(updateString);
@@ -31,5 +30,6 @@ public class CategoryDao {
         updateStmt.setInt(2, parentId);
         updateStmt.setInt(3, id);
         updateStmt.executeUpdate();
+        updateStmt.close();
     }
 }
