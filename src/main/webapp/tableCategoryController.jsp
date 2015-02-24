@@ -16,7 +16,7 @@
         if ("Update".equals(request.getParameter("Update")) && !"".equals(id) && !"".equals(name) && !"".equals(parent_id))
             result = DBImpl.update("UPDATE category SET NAME='" + name + "', PARENT_ID='" + parent_id + "' WHERE ID=" + id);
         if ("Insert".equals(request.getParameter("Insert")) && !"".equals(name) && !"".equals(parent_id))
-            result = DBImpl.update("INSERT INTO category (id,name,parent_id) VALUES (null,'" + name + "','" + parent_id + "')");
+            result = DBImpl.update("INSERT INTO category (id,name,parent_id) VALUES (" + id + ",'" + name + "','" + parent_id + "')");
     }
 
     response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
