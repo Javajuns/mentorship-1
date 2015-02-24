@@ -1,20 +1,23 @@
 package hello;
 
 import com.github.javamentorship.mentorship.DBImpl;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 public class HelloController {
 
-    @RequestMapping(value = "/")
-    public String index(Model model) throws SQLException, ClassNotFoundException {
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index(Map<String, Object> model) throws SQLException, ClassNotFoundException {
         ResultSet rs = DBImpl.select("SELECT * FROM category");
         List<Map<String, Object>> categories = new ArrayList<Map<String, Object>>();
 
@@ -25,8 +28,8 @@ public class HelloController {
             map.put("parentId", String.valueOf(rs.getInt("parent_id")));
             categories.add(map);
         }
-        model.addAttribute("categories", categories);
-        return "/index.jsp";
+        model.put("categories", categories);
+        return "index";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
