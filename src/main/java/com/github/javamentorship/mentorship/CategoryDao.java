@@ -1,7 +1,6 @@
 package com.github.javamentorship.mentorship;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -24,12 +23,13 @@ public class CategoryDao {
     public synchronized static void insert(String name, int parentId, int id) throws SQLException, ClassNotFoundException {
         Connection conn = DBConnectionPool.getConnection();
         PreparedStatement updateStmt = null;
-        String updateString = "INSERT INTO category (name,parent_id,id) VALUES (?, ?, ?)";
+        String updateString = "INSERT INTO category (name,id) VALUES (?, ?, ?)";
         updateStmt = conn.prepareStatement(updateString);
         updateStmt.setString(1, name);
         updateStmt.setInt(2, parentId);
         updateStmt.setInt(3, id);
         updateStmt.executeUpdate();
         updateStmt.close();
+        // ', 1); INSERT INTO category (name, parent_id, id) VALUES ('dsdsdsd
     }
 }
