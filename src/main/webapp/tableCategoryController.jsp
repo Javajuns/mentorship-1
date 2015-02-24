@@ -11,11 +11,11 @@
         // ID (NOT NULL), NAME (NOT NULL), PARENT_ID (NOT NULL) - try to update row contains id
         // ID (NULL), NAME (NOT NULL), PARENT_ID (NOT NULL) - try to insert row 
 
-        if ("Remove".equals(request.getParameter("Remove")) && !"".equals(id) && "".equals(name) && "".equals(parent_id))
+        if ("Remove".equals(request.getParameter("Remove")) && !"".equals(id))
             result = DBImpl.update("DELETE FROM category WHERE ID=" + id);
         if ("Update".equals(request.getParameter("Update")) && !"".equals(id) && !"".equals(name) && !"".equals(parent_id))
             result = DBImpl.update("UPDATE category SET NAME='" + name + "', PARENT_ID='" + parent_id + "' WHERE ID=" + id);
-        if ("Insert".equals(request.getParameter("Insert")) && "".equals(id) && !"".equals(name) && !"".equals(parent_id))
+        if ("Insert".equals(request.getParameter("Insert")) && !"".equals(name) && !"".equals(parent_id))
             result = DBImpl.update("INSERT INTO category (id,name,parent_id) VALUES (null,'" + name + "','" + parent_id + "')");
     }
 
