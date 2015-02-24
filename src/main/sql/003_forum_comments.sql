@@ -1,5 +1,5 @@
 CREATE TABLE forum_comments(
-  id INT PRIMARY KEY AUTO_INCREMENT,
+  id INT PRIMARY KEY,
   user_id	 INT,
   topic_id INT,
   msg VARCHAR(255),

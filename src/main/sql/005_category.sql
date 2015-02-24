@@ -1,5 +1,5 @@
 CREATE TABLE category (
-  id   INT PRIMARY KEY AUTO_INCREMENT,
+  id   INT PRIMARY KEY,
   name VARCHAR(255)
 );
 

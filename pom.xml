@@ -47,9 +47,14 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.185</version>
+            <groupId>hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>1.8.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.dbmaintain</groupId>
+            <artifactId>dbmaintain</artifactId>
+            <version>2.4</version>
         </dependency>
     </dependencies>
 
@@ -72,6 +77,33 @@
                     <verbose>true</verbose>
                     <debug>true</debug>
                     <fork>true</fork>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.dbmaintain</groupId>
+                <artifactId>dbmaintain-maven-plugin</artifactId>
+                <version>2.4</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>hsqldb</groupId>
+                        <artifactId>hsqldb</artifactId>
+                        <version>1.8.0.1</version>
+                    </dependency>
+                </dependencies>
+
+                <configuration>
+                    <databases>
+                        <database>
+                            <driverClassName>org.hsqldb.jdbcDriver</driverClassName>
+                            <url>jdbc:hsqldb:file:test;ifexists=false;shutdown=true</url>
+                            <dialect>hsqldb</dialect>
+                            <userName>sa</userName>
+                            <!--<password></password>-->
+                            <schemaNames>public</schemaNames>
+                        </database>
+                    </databases>
+                    <scriptLocations>src/main/sql</scriptLocations>
+                    <autoCreateDbMaintainScriptsTable>true</autoCreateDbMaintainScriptsTable>
                 </configuration>
             </plugin>
         </plugins>

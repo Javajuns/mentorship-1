@@ -17,7 +17,7 @@
             <th>PARENT ID</th>
         </tr>
         <%
-            ResultSet result = DBImpl.select("SELECT * FROM category");
+            ResultSet result = DBImpl.select("SELECT * FROM public.category");
             while (result.next()) {
                 out.println("<tr>");
                 out.println("<td>");
