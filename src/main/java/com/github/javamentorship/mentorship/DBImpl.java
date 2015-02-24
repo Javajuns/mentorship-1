@@ -2,33 +2,25 @@ package com.github.javamentorship.mentorship;
 import java.sql.*;
 public class DBImpl {
 
-        public static void main(String[] a)
-                throws Exception {
-            Class.forName("org.h2.Driver");
-            Connection conn = DriverManager.
-                    getConnection("jdbc:h2:~/test", "sa", "");
-            // add application code here
+    //Start Methods for update and select query
+    // Execute Update type commands for query
+    public synchronized static int update(String query) throws SQLException, ClassNotFoundException {
+        Class.forName("org.h2.Driver");
+        Connection conn = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
+        Statement stmt = conn.createStatement();
+        int result = stmt.executeUpdate(query);
+        return result;
 
-            Statement stmt = conn.createStatement();
+    }
 
-            String sql = "SELECT id,name,parent_id FROM category";
-            ResultSet rs = stmt.executeQuery(sql);
-            //STEP 5: Extract data from result set
-            while(rs.next()){
-                //Retrieve by column name
-                int id  = rs.getInt("id");
-                String name = rs.getString("name");
-                int parentId = rs.getInt("parent_id");
+    // Execute Select type commands for query
+    public synchronized static ResultSet select(String query) throws SQLException, ClassNotFoundException {
+        Class.forName("org.h2.Driver");
+        Connection conn = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
+        Statement stmt = conn.createStatement();
+        ResultSet result = stmt.executeQuery(query);
+        return result;
+    }
+    //End Methods for update and select query
 
-                //Display values
-                System.out.print("ID: " + id);
-                System.out.print(", Name: " + name);
-                System.out.println(", Parent ID: " + parentId);
-            }
-            rs.close();
-
-
-
-            conn.close();
-        }
 }
