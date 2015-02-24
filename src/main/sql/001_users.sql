@@ -1,5 +1,5 @@
 CREATE TABLE users (
-   id  INT PRIMARY KEY,
+   id  INTEGER IDENTITY,
    login VARCHAR(35),
    first_name VARCHAR(35),
    second_name VARCHAR(35),

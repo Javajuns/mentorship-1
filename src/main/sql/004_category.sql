@@ -1,4 +1,4 @@
 CREATE TABLE category (
-  id   INT PRIMARY KEY,
+  id   INTEGER IDENTITY,
   name VARCHAR(255) NOT NULL
 );

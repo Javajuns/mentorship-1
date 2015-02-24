@@ -1,5 +1,5 @@
 CREATE TABLE goods (
-  id          INT PRIMARY KEY,
+  id          INTEGER IDENTITY,
   name        VARCHAR(255),
   price       DOUBLE,
   category_id INT,
