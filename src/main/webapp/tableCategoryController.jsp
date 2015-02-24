@@ -5,7 +5,7 @@
 
         String id = request.getParameter("id");
         String name = request.getParameter("name");
-        String parent_id = request.getParameter("parent_id");
+        String parentId = request.getParameter("parent_id");
         // ACTION LOGIC
         // ID (NOT NULL), NAME (NULL), PARENT_ID (NULL) - try to delete row contains id
         // ID (NOT NULL), NAME (NOT NULL), PARENT_ID (NOT NULL) - try to update row contains id
@@ -13,10 +13,10 @@
 
         if ("Remove".equals(request.getParameter("Remove")) && !"".equals(id))
             result = DBImpl.update("DELETE FROM category WHERE ID=" + id);
-        if ("Update".equals(request.getParameter("Update")) && !"".equals(id) && !"".equals(name) && !"".equals(parent_id))
-            result = DBImpl.update("UPDATE category SET NAME='" + name + "', PARENT_ID='" + parent_id + "' WHERE ID=" + id);
-        if ("Insert".equals(request.getParameter("Insert")) && !"".equals(name) && !"".equals(parent_id))
-            result = DBImpl.update("INSERT INTO category (id,name,parent_id) VALUES (null,'" + name + "','" + parent_id + "')");
+        if ("Update".equals(request.getParameter("Update")) && !"".equals(id) && !"".equals(name) && !"".equals(parentId))
+            result = DBImpl.update("UPDATE category SET NAME='" + name + "', PARENT_ID='" + parentId + "' WHERE ID=" + id);
+        if ("Insert".equals(request.getParameter("Insert")) && !"".equals(name) && !"".equals(parentId))
+            result = DBImpl.update("INSERT INTO category (id,name,parent_id) VALUES (null,'" + name + "','" + parentId + "')");
     }
 
     response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
