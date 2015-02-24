@@ -10,10 +10,11 @@
 
 <form method="POST" action="tableCategoryController.jsp">
     <table border="1">
+        <caption>CATEGORY</caption>
         <tr>
-            <td>ID</td>
-            <td>NAME</td>
-            <td>PARENT ID</td>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>PARENT ID</th>
         </tr>
         <%
             ResultSet result = DBImpl.select("SELECT * FROM category");
