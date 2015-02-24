@@ -18,18 +18,17 @@ public class CategoryDao {
         updateStmt.setInt(3, id);
         updateStmt.executeUpdate();
         updateStmt.close();
+        conn.close();
     }
 
-    public synchronized static void insert(String name, int parentId, int id) throws SQLException, ClassNotFoundException {
+    public synchronized static void insert(String name) throws SQLException, ClassNotFoundException {
         Connection conn = DBConnectionPool.getConnection();
         PreparedStatement updateStmt = null;
-        String updateString = "INSERT INTO category (name,id) VALUES (?, ?, ?)";
+        String updateString = "INSERT INTO category (name) VALUES (?)";
         updateStmt = conn.prepareStatement(updateString);
         updateStmt.setString(1, name);
-        updateStmt.setInt(2, parentId);
-        updateStmt.setInt(3, id);
         updateStmt.executeUpdate();
         updateStmt.close();
-        // ', 1); INSERT INTO category (name, parent_id, id) VALUES ('dsdsdsd
+        conn.close();
     }
 }
