@@ -1,9 +1,8 @@
-package hello;
+package com.github.javamentorship.spring;
 
 import com.github.javamentorship.mentorship.DBImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.ResultSet;
@@ -14,10 +13,10 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class HelloController {
+public class NewController {
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(Map<String, Object> model) throws SQLException, ClassNotFoundException {
+    @RequestMapping({"/", "/hello"})
+    public String viewTable(Map<String, Object> model) throws SQLException, ClassNotFoundException {
         ResultSet rs = DBImpl.select("SELECT * FROM category");
         List<Map<String, Object>> categories = new ArrayList<Map<String, Object>>();
 
