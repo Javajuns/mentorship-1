@@ -19,7 +19,7 @@ public class HelloController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index() throws SQLException, ClassNotFoundException {
         List<Map<String, Object>> categories = CategoryDao.listAll();
-        ModelAndView modelAndView = new ModelAndView("index/index");
+        ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("categories", categories);
         return modelAndView;
     }
