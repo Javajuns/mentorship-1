@@ -1,5 +1,5 @@
 CREATE TABLE orders(
-  id INT PRIMARY KEY AUTO_INCREMENT,
+  id INT PRIMARY KEY,
   date_created DATE,
   user_id INT,
   goods_id INT,
