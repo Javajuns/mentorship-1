@@ -4,9 +4,9 @@ public class DBImpl {
 
     //Start Methods for update and select query
     // Execute Update type commands for query
+    @Deprecated
     public synchronized static int update(String query) throws SQLException, ClassNotFoundException {
-        Class.forName("org.hsqldb.jdbcDriver");
-        Connection conn = DriverManager.getConnection("jdbc:hsqldb:file:target/devDb/devDb", "sa", "");
+        Connection conn = DBConnectionPool.getConnection();
         Statement stmt = conn.createStatement();
         System.out.println(query);
         int result = stmt.executeUpdate(query);
@@ -15,9 +15,9 @@ public class DBImpl {
     }
 
     // Execute Select type commands for query
+    @Deprecated
     public synchronized static ResultSet select(String query) throws SQLException, ClassNotFoundException {
-        Class.forName("org.hsqldb.jdbcDriver");
-        Connection conn = DriverManager.getConnection("jdbc:hsqldb:file:target/devDb/devDb", "sa", "");
+        Connection conn = DBConnectionPool.getConnection();
         Statement stmt = conn.createStatement();
         System.out.println(query);
         ResultSet result = stmt.executeQuery(query);
