@@ -24,7 +24,7 @@ public class NewController {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("id", String.valueOf(rs.getInt("id")));
             map.put("name", rs.getString("name"));
-            map.put("parentId", String.valueOf(rs.getInt("parent_id")));
+            map.put("parent_id", String.valueOf(rs.getInt("parent_id")));
             categories.add(map);
         }
         model.put("categories", categories);
