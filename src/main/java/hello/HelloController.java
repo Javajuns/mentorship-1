@@ -13,19 +13,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RestController
+@RestController()
+//TODO @RequestMapping(value = "/hello")
 public class HelloController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Map<String, Object> model) throws SQLException, ClassNotFoundException {
         ResultSet rs = DBImpl.select("SELECT * FROM category");
         List<Map<String, Object>> categories = new ArrayList<Map<String, Object>>();
-
         while (rs.next()) {
             Map<String, Object> map = new HashMap<String, Object>();
-            map.put("id", String.valueOf(rs.getInt("id")));
+            map.put("id", String.valueOf(rs.getInt("id"))); //TODO integer
             map.put("name", rs.getString("name"));
-            map.put("parentId", String.valueOf(rs.getInt("parent_id")));
+            map.put("parentId", String.valueOf(rs.getInt("parent_id"))); //TODO Integer
             categories.add(map);
         }
         model.put("categories", categories);
@@ -36,7 +36,7 @@ public class HelloController {
     public String save(Integer id, String name, Integer parentId) throws SQLException, ClassNotFoundException {
         //code for insert
         //"INSERT INTO category (id,name,parent_id) VALUES (null,'" + name + "','" + parentId + "')"
-        int result = DBImpl.update("UPDATE category SET NAME='" + name + "', PARENT_ID='" + parentId + "' WHERE ID=" + id);
+        int result = DBImpl.update("UPDATE category SET NAME='" + name + "', PARENT_ID='" + parentId + "' WHERE ID=" + id); //TODO prepared statement
         return "redirect:/";
     }
 
