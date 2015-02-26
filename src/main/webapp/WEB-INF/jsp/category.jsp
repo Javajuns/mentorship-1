@@ -18,7 +18,7 @@
         <th>EDIT</th>
         <th>REMOVE</th>
     </tr>
-    <c:forEach items="${categories}" var="row">
+    <c:forEach items="${selectResult}" var="row">
         <tr>
             <td>
                 <c:out value="${row.get(\"id\")}"/>
@@ -33,7 +33,8 @@
                 <a href="<spring:url value="/category_insert.html" />"><spring:message code="link.update"/></a>
             </td>
             <td>
-                <a href="<spring:url value="/deleteCategory" />"><spring:message code="link.delete"/></a>
+                <a href="<spring:url value="/category_delete.html/${row.get(\"id\")}" />"><spring:message
+                        code="link.delete"/></a>
             </td>
         </tr>
     </c:forEach>
