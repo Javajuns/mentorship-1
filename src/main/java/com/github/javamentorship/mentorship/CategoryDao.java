@@ -9,8 +9,7 @@ import java.util.Map;
 public class CategoryDao {
     public synchronized static void update(String name, int parentId, int id) throws SQLException, ClassNotFoundException {
         Connection conn = DBConnectionPool.getConnection();
-        PreparedStatement updateStmt = null;
-        updateStmt = conn.prepareStatement("UPDATE category SET name = ?, parent_id = ? WHERE id = ?");
+        PreparedStatement updateStmt = conn.prepareStatement("UPDATE category SET name = ?, parent_id = ? WHERE id = ?");
         updateStmt.setString(1, name);
         updateStmt.setInt(2, parentId);
         updateStmt.setInt(3, id);
@@ -28,8 +27,8 @@ public class CategoryDao {
 
     public synchronized List<Map<String, Object>> listAll() throws SQLException, ClassNotFoundException {
         Connection conn = DBConnectionPool.getConnection();
-        Statement selectStatement = conn.createStatement();
-        ResultSet result = selectStatement.executeQuery("SELECT * FROM category");
+        PreparedStatement selectStatement = conn.prepareStatement("SELECT * FROM category");
+        ResultSet result = selectStatement.executeQuery();
         List<Map<String, Object>> categories = new ArrayList<Map<String, Object>>();
         while (result.next()) {
             Map<String, Object> map = new HashMap<String, Object>();
