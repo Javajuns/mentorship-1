@@ -3,8 +3,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                     http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-
     <!-- The Basics -->
     <groupId>com.github.javamentorship</groupId>
     <artifactId>mentorship</artifactId>
@@ -15,6 +13,11 @@
     <description>PowerMock core functionality.</description>
     <url>https://github.com/javamentorship</url>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.2.1.RELEASE</version>
+    </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,22 +26,18 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.4</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
@@ -47,37 +46,31 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>2.3.2</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
         </dependency>
         <dependency>
             <groupId>org.dbmaintain</groupId>
             <artifactId>dbmaintain</artifactId>
             <version>2.4</version>
         </dependency>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.3.2</version>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <source>${jdk}</source>
-                    <target>${jdk}</target>
-                    <compilerVersion>${jdk}</compilerVersion>
-                    <optimize>true</optimize>
-                    <verbose>true</verbose>
-                    <debug>true</debug>
-                    <fork>true</fork>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.dbmaintain</groupId>
@@ -90,7 +83,6 @@
                         <version>2.3.2</version>
                     </dependency>
                 </dependencies>
-
                 <configuration>
                     <databases>
                         <database>
@@ -108,6 +100,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>
