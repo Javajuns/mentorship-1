@@ -6,11 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.sql.SQLException;
 
 @RestController
@@ -27,10 +27,23 @@ public class CategoryController {
         return new ModelAndView("category", "nop", categoryDao.listAll());
     }
 
-    @RequestMapping("/category_insert.html")
+    @RequestMapping(value = "/category_insert.html", method = RequestMethod.GET)
     public ModelAndView getInsertCategoryView() throws SQLException, ClassNotFoundException {
         LOGGER.debug("Received request for get InsertCategory View");
-        return new ModelAndView("category_insert", "form", new CategoryInsertForm());
+        return new ModelAndView("category_insert", "insert_form", new CategoryInsertForm());
+    }
+
+    @RequestMapping(value = "/category_insert.html", method = RequestMethod.POST)
+    public String insertCategory(@ModelAttribute("insert_form") CategoryInsertForm form, BindingResult result) {
+        LOGGER.debug("Received request to create {}, with result={}", form, result);
+        try {
+            categoryDao.insert(form.getName());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/category";
     }
 
     /*@RequestMapping("/categoryUpdate")

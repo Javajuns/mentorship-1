@@ -5,12 +5,11 @@
 <body>
 <h1><spring:message code="category.insert"/></h1>
 <a href="<spring:url value="/category" />"><spring:message code="category.view"/></a>
-<form:form method="POST" action="/categoryInsert" modelAttribute="form">
+<form:form method="POST" action="/category_insert.html" modelAttribute="insert_form">
     <form:errors path="" element="div"/>
     <div>
-        <form:label path="id"><spring:message code="insert.name"/></form:label>
-        <form:input path="id"/>
-        <form:errors path="id"/>
+        <form:label path="name"><spring:message code="insert.name"/></form:label>
+        <form:input path="name"/>
     </div>
     <div>
         <input type="submit"/>
