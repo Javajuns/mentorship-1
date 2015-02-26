@@ -21,13 +21,13 @@
     <c:forEach items="${categories}" var="row">
         <tr>
             <td>
-                <c:out value="${row.get('id')}"/>
+                <c:out value="${row.get(\"id\")}"/>
             </td>
             <td>
-                <c:out value="${row.get('name')}"/>
+                <c:out value="${row.get(\"name\")}"/>
             </td>
             <td>
-                <c:out value="${row.get('parent_id')}"/>
+                <c:out value="${row.get(\"parent_id\")}"/>
             </td>
             <td>
                 <a href="<spring:url value="/category_insert.html" />"><spring:message code="link.update"/></a>
