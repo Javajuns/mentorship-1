@@ -1,5 +1,6 @@
 package com.github.javamentorship.spring;
 
+import com.github.javamentorship.domain.CategoryInsertForm;
 import com.github.javamentorship.mentorship.CategoryDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,19 +27,18 @@ public class CategoryController {
         return new ModelAndView("category", "nop", categoryDao.listAll());
     }
 
-    @RequestMapping("/categoryInsert")
-    public String insertCategory(@PathVariable String name) throws SQLException, ClassNotFoundException {
-        categoryDao.insert(name);
-        LOGGER.debug("Received request for INSERT new data in table CATEGORY");
-        return "redirect:/category";
+    @RequestMapping("/category_insert.html")
+    public ModelAndView getInsertCategoryView() throws SQLException, ClassNotFoundException {
+        LOGGER.debug("Received request for get InsertCategory View");
+        return new ModelAndView("category_insert", "form", new CategoryInsertForm());
     }
 
-    @RequestMapping("/categoryUpdate")
+    /*@RequestMapping("/categoryUpdate")
     public String updateCategory(@PathVariable int id, @PathVariable String name, @PathVariable int parent_id) throws SQLException, ClassNotFoundException {
         categoryDao.update(name, parent_id, id);
         LOGGER.debug("Received request for UPDATE data in table CATEGORY");
         return "redirect:/category";
-    }
+    }*/
 
     @RequestMapping("/categoryDelete")
     public String deleteCategory(@PathVariable int id) throws SQLException, ClassNotFoundException {
