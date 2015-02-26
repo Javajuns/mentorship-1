@@ -1,9 +1,6 @@
 package com.github.javamentorship.mentorship;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,16 +30,21 @@ public class CategoryDao {
         conn.close();
     }
 
-    public static List<Map<String, Object>> listAll() throws SQLException, ClassNotFoundException {
-        ResultSet rs = DBImpl.select("SELECT * FROM category");
+    public synchronized List<Map<String, Object>> listAll() throws SQLException, ClassNotFoundException {
+        Connection conn = DBConnectionPool.getConnection();
+        String selectString = "SELECT * FROM category";
+        Statement selectStatement = conn.createStatement();
+        ResultSet result = selectStatement.executeQuery(selectString);
         List<Map<String, Object>> categories = new ArrayList<Map<String, Object>>();
-        while (rs.next()) {
+        while (result.next()) {
             Map<String, Object> map = new HashMap<String, Object>();
-            map.put("id", String.valueOf(rs.getInt("id"))); //TODO integer
-            map.put("name", rs.getString("name"));
-            map.put("parentId", String.valueOf(rs.getInt("parent_id"))); //TODO Integer
+            map.put("id", result.getInt("id"));
+            map.put("name", result.getString("name"));
+            map.put("parent_id", result.getInt("parent_id"));
             categories.add(map);
         }
+        selectStatement.close();
+        conn.close();
         return categories;
     }
 }
