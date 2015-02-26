@@ -13,7 +13,7 @@ public class CategoryDao {
     public CategoryDao() {
     }
 
-    public synchronized static void update(String name, int parentId, int id) throws SQLException, ClassNotFoundException {
+    public synchronized void update(String name, int parentId, int id) throws SQLException, ClassNotFoundException {
         Connection conn = DBConnectionPool.getConnection();
         PreparedStatement updateStmt = conn.prepareStatement("UPDATE category SET name = ?, parent_id = ? WHERE id = ?");
         updateStmt.setString(1, name);
@@ -23,7 +23,7 @@ public class CategoryDao {
         updateStmt.close();
     }
 
-    public synchronized static void insert(String name) throws SQLException, ClassNotFoundException {
+    public synchronized void insert(String name) throws SQLException, ClassNotFoundException {
         Connection conn = DBConnectionPool.getConnection();
         PreparedStatement updateStmt = conn.prepareStatement("INSERT INTO category (name) VALUES (?)");
         updateStmt.setString(1, name);
