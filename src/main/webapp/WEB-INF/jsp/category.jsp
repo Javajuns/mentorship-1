@@ -7,7 +7,7 @@
 
 <html>
 <body>
-<h1><spring:message code="table.view"/></h1>
+<h1><spring:message code="category.view"/></h1>
 
 <table border="1">
     <caption>CATEGORY</caption>
@@ -30,14 +30,14 @@
                 <c:out value="${row.get('parent_id')}"/>
             </td>
             <td>
-                <a href="/categoryUpdate"/>
+                <a href="<spring:url value="/category_insert.html" />"><spring:message code="link.update"/></a>
             </td>
             <td>
-                <a href="/category"
+                <a href="<spring:url value="/deleteCategory" />"><spring:message code="link.delete"/></a>
             </td>
         </tr>
     </c:forEach>
 </table>
-
+<a href="<spring:url value="/category_insert.html" />"><spring:message code="category.insert"/></a>
 </body>
 </html>
