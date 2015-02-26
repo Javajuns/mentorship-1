@@ -20,6 +20,11 @@ public class CategoryController extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.getWriter().println("hello");
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         Integer id = Integer.valueOf(req.getParameter("id"));
@@ -44,7 +49,7 @@ public class CategoryController extends HttpServlet {
         }
 
         resp.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
-        resp.setHeader("Location", "/mentorship/tableCategoryView.jsp");
+        resp.setHeader("Location", "/tableCategoryView.jsp");
     }
 
     private boolean checkParameter(String param, HttpServletRequest request1) {

@@ -17,7 +17,7 @@
 
     <servlet-mapping>
         <servlet-name>CategoryController</servlet-name>
-        <url-pattern>/CategoryController</url-pattern>
+        <url-pattern>/MyCategoryController</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>Hello</servlet-name>
