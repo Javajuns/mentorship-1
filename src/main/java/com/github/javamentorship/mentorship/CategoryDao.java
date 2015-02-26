@@ -23,14 +23,6 @@ public class CategoryDao {
 
     public synchronized void update(String name, int parentId, int id) throws SQLException, ClassNotFoundException {
         Connection conn = DBConnectionPool.getConnection();
-        PreparedStatement updateStmt = conn.prepareStatement("DELETE FROM category WHERE ID=?");
-        updateStmt.setInt(1, id);
-        updateStmt.executeUpdate();
-        updateStmt.close();
-    }
-    
-    public synchronized void update(String name, int parentId, int id) throws SQLException, ClassNotFoundException {
-        Connection conn = DBConnectionPool.getConnection();
         PreparedStatement updateStmt = conn.prepareStatement("UPDATE category SET name = ?, parent_id = ? WHERE id = ?");
         updateStmt.setString(1, name);
         updateStmt.setInt(2, parentId);
