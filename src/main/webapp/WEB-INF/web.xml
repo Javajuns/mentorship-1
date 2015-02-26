@@ -13,4 +13,13 @@
         Welcome to Tomcat
     </description>
 
+    <servlet>
+        <servlet-name>CategoryController</servlet-name>
+        <servlet-class>com.github.javamentorship.controller.CategoryController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CategoryController</servlet-name>
+        <url-pattern>/CategoryController</url-pattern>
+    </servlet-mapping>
 </web-app>

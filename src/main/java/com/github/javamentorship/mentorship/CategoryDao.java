@@ -8,7 +8,7 @@ import java.sql.SQLException;
  * Created by ivan on 24.02.2015.
  */
 public class CategoryDao {
-    public synchronized static void update(String name, int parentId, int id) throws SQLException, ClassNotFoundException {
+    public synchronized void update(String name, int parentId, int id) throws SQLException, ClassNotFoundException {
         Connection conn = DBConnectionPool.getConnection();
         PreparedStatement updateStmt = null;
         String updateString = "UPDATE category SET name = ?, parent_id = ? WHERE id = ?";
@@ -21,7 +21,7 @@ public class CategoryDao {
         conn.close();
     }
 
-    public synchronized static void insert(String name) throws SQLException, ClassNotFoundException {
+    public synchronized void insert(String name) throws SQLException, ClassNotFoundException {
         Connection conn = DBConnectionPool.getConnection();
         PreparedStatement updateStmt = null;
         String updateString = "INSERT INTO category (name) VALUES (?)";

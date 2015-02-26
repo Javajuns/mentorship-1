@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<form method="POST" action="tableCategoryController.jsp">
+<form method="POST" action="/mentorship/CategoryController">
     <table border="1">
         <caption>CATEGORY</caption>
         <tr>
