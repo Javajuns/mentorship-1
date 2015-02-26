@@ -15,6 +15,8 @@
         <th>ID</th>
         <th>NAME</th>
         <th>PARENT ID</th>
+        <th>EDIT</th>
+        <th>REMOVE</th>
     </tr>
     <c:forEach items="${categories}" var="row">
         <tr>
@@ -26,6 +28,12 @@
             </td>
             <td>
                 <c:out value="${row.get('parent_id')}"/>
+            </td>
+            <td>
+                <a href="/categoryUpdate"/>
+            </td>
+            <td>
+                <a href="/category"
             </td>
         </tr>
     </c:forEach>
