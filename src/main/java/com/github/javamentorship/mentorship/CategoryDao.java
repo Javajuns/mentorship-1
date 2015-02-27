@@ -20,7 +20,7 @@ public class CategoryDao {
         updateStmt.executeUpdate();
         updateStmt.close();
     }
-    
+
     public synchronized void update(String name, int parentId, int id) throws SQLException, ClassNotFoundException {
         Connection conn = DBConnectionPool.getConnection();
         PreparedStatement updateStmt = conn.prepareStatement("UPDATE category SET name = ?, parent_id = ? WHERE id = ?");

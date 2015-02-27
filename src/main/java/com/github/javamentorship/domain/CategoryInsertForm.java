@@ -16,7 +16,6 @@ public class CategoryInsertForm {
     }
 
     public String getName() {
-
         return name;
     }
 
