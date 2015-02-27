@@ -30,7 +30,8 @@
                 <c:out value="${row.get(\"parent_id\")}"/>
             </td>
             <td>
-                <a href="<spring:url value="/category_insert.html" />"><spring:message code="link.update"/></a>
+                <a href="<spring:url value="/category_update_form.html/?id=${row.get(\"id\")}&name=${row.get(\"name\")}&parent_id=${row.get(\"parent_id\")}" />"><spring:message
+                        code="link.update"/></a>
             </td>
             <td>
                 <a href="<spring:url value="/category_delete.html/${row.get(\"id\")}" />"><spring:message
