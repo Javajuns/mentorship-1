@@ -12,7 +12,7 @@
 
     <servlet>
         <servlet-name>CategoryController</servlet-name>
-        <servlet-class>com.github.javamentorship.controller.CategoryController</servlet-class>
+        <servlet-class>com.github.javamentorship.category.controller.ShitCategoryController</servlet-class>
     </servlet>
 
     <servlet-mapping>

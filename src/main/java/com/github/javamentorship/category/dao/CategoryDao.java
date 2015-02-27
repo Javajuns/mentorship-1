@@ -1,4 +1,4 @@
-package com.github.javamentorship.mentorship;
+package com.github.javamentorship.category.dao;
 
 import org.springframework.stereotype.Component;
 

@@ -1,22 +1,18 @@
-package com.github.javamentorship.spring;
+package com.github.javamentorship.category.controller;
 
-import com.github.javamentorship.domain.CategoryInsertForm;
-import com.github.javamentorship.domain.CategoryUpdateForm;
-import com.github.javamentorship.mentorship.CategoryDao;
+import com.github.javamentorship.category.command.CategoryInsertForm;
+import com.github.javamentorship.category.command.CategoryUpdateForm;
+import com.github.javamentorship.category.dao.CategoryDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.SQLException;
 
 @Controller
-@RequestMapping("/hello")
 public class CategoryController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CategoryController.class);
@@ -26,13 +22,7 @@ public class CategoryController {
     @Autowired
     public CategoryUpdateForm updateForm;
 
-    @RequestMapping("/")
-    public String index() {
-        LOGGER.debug("Received request for SELECT from table CATEGORY");
-        return "redirect:/category.html";
-    }
-
-    @RequestMapping("/category.html")
+    @RequestMapping("/category")
     public ModelAndView viewCategory() throws SQLException, ClassNotFoundException {
         LOGGER.debug("Received request for SELECT from table CATEGORY");
         return new ModelAndView("category", "selectResult", categoryDao.listAll());
@@ -54,7 +44,7 @@ public class CategoryController {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return "redirect:/";
+        return "redirect:/category";
     }
 
     @RequestMapping(value = "/category_update_form.html", method = RequestMethod.GET)
@@ -71,14 +61,14 @@ public class CategoryController {
     public String updateCategory(@ModelAttribute("update_form") CategoryUpdateForm form) throws SQLException, ClassNotFoundException {
         categoryDao.update(form.getName(), form.getParent_id(), form.getId());
         LOGGER.debug("Received request for UPDATE data in table CATEGORY");
-        return "redirect:/";
+        return "redirect:/category";
     }
     
     @RequestMapping("/category_delete.html/{id}")
     public String deleteCategory(@PathVariable("id") Integer id) throws SQLException, ClassNotFoundException {
         categoryDao.delete(id);
         LOGGER.debug("Received request for DELETE new data in table CATEGORY");
-        return "redirect:/";
+        return "redirect:/category";
     }
 
 }

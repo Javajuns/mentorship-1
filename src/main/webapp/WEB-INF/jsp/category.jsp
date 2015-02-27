@@ -16,7 +16,7 @@
         <th>NAME</th>
         <th>PARENT ID</th>
         <th>EDIT</th>
-        <th>REMOVE</th>
+        <th>DEL</th>
     </tr>
     <c:forEach items="${selectResult}" var="row">
         <tr>

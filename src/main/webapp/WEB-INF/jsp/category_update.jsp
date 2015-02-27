@@ -5,7 +5,7 @@
 <html>
 <body>
 <h1><spring:message code="category.update"/></h1>
-<a href="<spring:url value="/" />"><spring:message code="category.view"/></a>
+<a href="<spring:url value="/category" />"><spring:message code="category.view"/></a>
 <form:form method="POST" action="/category_update.html" modelAttribute="update_form">
     <form:errors path="" element="div"/>
     <div>
