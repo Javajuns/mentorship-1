@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.Size;
 
-@Component
 public class CategoryUpdateForm {
 
     @NotEmpty
@@ -16,7 +15,7 @@ public class CategoryUpdateForm {
     private int id;
 
     @NotEmpty
-    private int parent_id;
+    private int parentId;
 
     public String getName() {
         return name;
@@ -34,12 +33,12 @@ public class CategoryUpdateForm {
         this.id = id;
     }
 
-    public int getParent_id() {
-        return parent_id;
+    public int getParentId() {
+        return parentId;
     }
 
-    public void setParent_id(int parent_id) {
-        this.parent_id = parent_id;
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
     }
 
     //TODO add toString();

@@ -18,23 +18,23 @@
         <th>EDIT</th>
         <th>DEL</th>
     </tr>
-    <c:forEach items="${selectResult}" var="row">
+    <c:forEach items="${viewCategory}" var="row">
         <tr>
             <td>
-                <c:out value="${row.get(\"id\")}"/>
+                <c:out value="${row.getId()}"/>
             </td>
             <td>
-                <c:out value="${row.get(\"name\")}"/>
+                <c:out value="${row.getName()}"/>
             </td>
             <td>
-                <c:out value="${row.get(\"parent_id\")}"/>
+                <c:out value="${row.getParentId()}"/>
             </td>
             <td>
-                <a href="<spring:url value="/category_update_form.html/?id=${row.get(\"id\")}&name=${row.get(\"name\")}&parent_id=${row.get(\"parent_id\")}" />"><spring:message
+                <a href="<spring:url value="/category_update_form.html/?id=${row.getId()}&name=${row.getName()}&parentId=${row.getParentId()}" />"><spring:message
                         code="link.update"/></a>
             </td>
             <td>
-                <a href="<spring:url value="/category_delete.html/${row.get(\"id\")}" />"><spring:message
+                <a href="<spring:url value="/category_delete.html/${row.getId()}" />"><spring:message
                         code="link.delete"/></a>
             </td>
         </tr>

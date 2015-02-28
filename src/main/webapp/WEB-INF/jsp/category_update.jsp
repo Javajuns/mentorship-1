@@ -17,8 +17,8 @@
         <form:input path="name"/>
     </div>
     <div>
-        <form:label path="parent_id"><spring:message code="update.parent_id"/></form:label>
-        <form:input path="parent_id"/>
+        <form:label path="parentId"><spring:message code="update.parentId"/></form:label>
+        <form:input path="parentId"/>
     </div>
     <div>
         <input type="submit"/>
