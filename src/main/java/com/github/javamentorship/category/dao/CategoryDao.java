@@ -14,4 +14,6 @@ public interface CategoryDao {
     public List<Category> listCategory() throws SQLException, ClassNotFoundException;
 
     public void deleteCategory(int id) throws SQLException, ClassNotFoundException;
+
+    Category getById(int id) throws SQLException;
 }

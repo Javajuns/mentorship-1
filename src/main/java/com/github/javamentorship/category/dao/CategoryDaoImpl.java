@@ -17,10 +17,25 @@ public class CategoryDaoImpl implements CategoryDao {
     @Override
     public synchronized void deleteCategory(int id) throws SQLException, ClassNotFoundException {
         Connection conn = DBConnectionPool.getConnection();
-        PreparedStatement updateStmt = conn.prepareStatement("DELETE FROM category WHERE ID=?");
+        PreparedStatement updateStmt = conn.prepareStatement("DELETE FROM category WHERE id = ?");
         updateStmt.setInt(1, id);
         updateStmt.executeUpdate();
         updateStmt.close();
+    }
+
+    @Override
+    public Category getById(int id) throws SQLException {
+        Connection conn = DBConnectionPool.getConnection();
+        PreparedStatement selectStatement = conn.prepareStatement("SELECT * FROM category WHERE id = ?");
+        selectStatement.setInt(1, id);
+        ResultSet result = selectStatement.executeQuery();
+        result.next();
+        Category category = new Category();
+        category.setId(result.getInt("id"));
+        category.setName(result.getString("name"));
+        category.setParentId(result.getInt("parentid"));
+        selectStatement.close();
+        return category;
     }
 
     @Override
@@ -50,11 +65,11 @@ public class CategoryDaoImpl implements CategoryDao {
         ResultSet result = selectStatement.executeQuery();
         List<Category> categories = new ArrayList<Category>();
         while (result.next()) {
-            Category row = new Category();
-            row.setId(result.getInt("id"));
-            row.setName(result.getString("name"));
-            row.setParentId(result.getInt("parentid"));
-            categories.add(row);
+            Category category = new Category();
+            category.setId(result.getInt("id"));
+            category.setName(result.getString("name"));
+            category.setParentId(result.getInt("parentid"));
+            categories.add(category);
         }
         selectStatement.close();
         return categories;

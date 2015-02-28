@@ -53,14 +53,12 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "/category_update_form.html", method = RequestMethod.GET)
-    public ModelAndView getUpdateCategoryView(@RequestParam("id") int id,
-                                              @RequestParam("name") String name,
-                                              @RequestParam("parentId") int parentId) {
-
+    public ModelAndView getUpdateCategoryView(@RequestParam("id") int id) {
+        Category category = categoryDao.getById(id);
         CategoryUpdateForm updateForm = new CategoryUpdateForm();
-        updateForm.setId(id);
-        updateForm.setName(name);
-        updateForm.setParentId(parentId);
+        updateForm.setId(category.getId());
+        updateForm.setName(category.getName());
+        updateForm.setParentId(category.getParentId());
         return new ModelAndView("category_update", "update_form", updateForm);
     }
 
