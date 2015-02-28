@@ -28,9 +28,8 @@ public class CategoryDaoImpl implements CategoryDao {
         selectStatement.setInt(1, id);
         ResultSet result = selectStatement.executeQuery();
         result.next();
-        Category category = hydrateCategory(result);
         selectStatement.close();
-        return category;
+        return hydrateCategory(result);
     }
 
     @Override
@@ -60,18 +59,16 @@ public class CategoryDaoImpl implements CategoryDao {
         ResultSet result = selectStatement.executeQuery();
         List<Category> categories = new ArrayList<Category>();
         while (result.next()) {
-            Category category = hydrateCategory(result);
-            categories.add(category);
+            categories.add(hydrateCategory(result));
         }
         selectStatement.close();
         return categories;
     }
 
     private Category hydrateCategory(ResultSet result) throws SQLException {
-        Category category = new Category();
-        category.setId(result.getInt("id"));
-        category.setName(result.getString("name"));
-        category.setParentId(result.getInt("parent_id"));
-        return category;
+        return new Category.CategoryBuilder().setId(result.getInt("id"))
+                .setName(result.getString("name"))
+                .setParentId(result.getInt("parent_id"))
+                .build();
     }
 }
