@@ -71,7 +71,7 @@ public class CategoryDaoImpl implements CategoryDao {
         Category category = new Category();
         category.setId(result.getInt("id"));
         category.setName(result.getString("name"));
-        category.setParentId(result.getInt("parentid"));
+        category.setParentId(result.getInt("parent_id"));
         return category;
     }
 }

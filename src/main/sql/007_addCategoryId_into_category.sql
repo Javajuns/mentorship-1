@@ -1,1 +1,1 @@
-ALTER TABLE category ADD COLUMN parentId INT;
+ALTER TABLE category ADD COLUMN parent_id INT;

@@ -52,8 +52,8 @@ public class CategoryController {
         return "redirect:/category";
     }
 
-    @RequestMapping(value = "/category_update_form.html", method = RequestMethod.GET)
-    public ModelAndView getUpdateCategoryView(@RequestParam("id") int id) {
+    @RequestMapping(value = "/category_update_form.html/{id}", method = RequestMethod.GET)
+    public ModelAndView getUpdateCategoryView(@PathVariable("id") int id) throws SQLException {
         Category category = categoryDao.getById(id);
         CategoryUpdateForm updateForm = new CategoryUpdateForm();
         updateForm.setId(category.getId());
