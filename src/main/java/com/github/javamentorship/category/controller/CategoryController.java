@@ -8,9 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -63,10 +65,14 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "/category_update.html", method = RequestMethod.POST)
-    public String updateCategory(@ModelAttribute("update_form") CategoryUpdateForm form) throws SQLException, ClassNotFoundException {
-        categoryDao.update(form.getName(), form.getParentId(), form.getId());
+    public String updateCategory(@Valid @ModelAttribute("update_form") CategoryUpdateForm form, BindingResult result) throws SQLException, ClassNotFoundException {
         LOGGER.debug("Received request for UPDATE data in table CATEGORY");
-        return "redirect:/category";
+        if (result.hasErrors()) {
+            return "category_update";
+        } else {
+            categoryDao.update(form.getName(), form.getParentId(), form.getId());
+            return "redirect:/category";
+        }
     }
     
     @RequestMapping("/category_delete.html/{id}")

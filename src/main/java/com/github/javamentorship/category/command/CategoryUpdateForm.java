@@ -2,19 +2,21 @@ package com.github.javamentorship.category.command;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+@Validated
 public class CategoryUpdateForm {
 
     @NotEmpty
     @Size(max = 64)
     private String name;
 
-    @NotEmpty
     private int id;
 
-    @NotEmpty
+    @Min(1)
     private int parentId;
 
     public String getName() {
@@ -40,6 +42,4 @@ public class CategoryUpdateForm {
     public void setParentId(int parentId) {
         this.parentId = parentId;
     }
-
-    //TODO add toString();
 }
