@@ -1,9 +1,17 @@
 package com.github.javamentorship.category.domain;
 
-public class Category {
+import javax.persistence.*;
 
+@Entity
+@Table(name="category")
+public class Category {
+    @Id
+    @GeneratedValue
+    @Column(name="id")
     private Integer id;
+    @Column(name="name")
     private String name;
+    @Column(name="parent_id")
     private Integer parentId;
 
     public Category(Integer id, String name, Integer parentId) {

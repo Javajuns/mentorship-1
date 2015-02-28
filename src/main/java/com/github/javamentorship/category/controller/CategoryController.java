@@ -35,7 +35,7 @@ public class CategoryController {
 
     @RequestMapping(value = "/category_insert.html", method = RequestMethod.GET)
     public ModelAndView getInsertCategoryView() throws SQLException, ClassNotFoundException {
-        List<Category> parentCategories = categoryDao.listCategory();
+        List<Category> parentCategories = new ArrayList<Category>(); //categoryDao.listCategory();
         Map<String,String> parentCategoryItems = new LinkedHashMap<String,String>();
         for(Category a: parentCategories) {
             parentCategoryItems.put(String.valueOf(a.getId()), a.getName());

@@ -27,11 +27,11 @@
 
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
-
+        <property name="hibernate.connection.autocommit">true</property>
         <!-- Drop and re-create the database schema on startup -->
         <!--<property name="hbm2ddl.auto">update</property>-->
 
-        <mapping resource="Category.hbm.xml"/>
+        <!--<mapping resource="Category.hbm.xml"/>-->
 
     </session-factory>
 

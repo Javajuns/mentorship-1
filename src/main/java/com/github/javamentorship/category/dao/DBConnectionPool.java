@@ -22,9 +22,9 @@ public class DBConnectionPool {
 
     public static Connection getConnection() {
         if (conn != null){
-            return conn;
+            return null; //conn;
         } else {
-            init();
+            //init();
             return conn;
         }
     }
