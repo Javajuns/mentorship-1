@@ -10,6 +10,8 @@
     <form:errors path="" element="div"/>
     <div>
         <form:label path="name"><spring:message code="insert.name"/></form:label>
+    </div>
+    <div>
         <form:input path="name"/>
     </div>
     <div>
