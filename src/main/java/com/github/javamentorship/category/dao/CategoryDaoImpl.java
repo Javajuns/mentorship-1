@@ -5,9 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Component
 public class CategoryDaoImpl implements CategoryDao {
@@ -30,10 +28,7 @@ public class CategoryDaoImpl implements CategoryDao {
         selectStatement.setInt(1, id);
         ResultSet result = selectStatement.executeQuery();
         result.next();
-        Category category = new Category();
-        category.setId(result.getInt("id"));
-        category.setName(result.getString("name"));
-        category.setParentId(result.getInt("parentid"));
+        Category category = hydrateCategory(result);
         selectStatement.close();
         return category;
     }
@@ -65,13 +60,18 @@ public class CategoryDaoImpl implements CategoryDao {
         ResultSet result = selectStatement.executeQuery();
         List<Category> categories = new ArrayList<Category>();
         while (result.next()) {
-            Category category = new Category();
-            category.setId(result.getInt("id"));
-            category.setName(result.getString("name"));
-            category.setParentId(result.getInt("parentid"));
+            Category category = hydrateCategory(result);
             categories.add(category);
         }
         selectStatement.close();
         return categories;
+    }
+
+    private Category hydrateCategory(ResultSet result) throws SQLException {
+        Category category = new Category();
+        category.setId(result.getInt("id"));
+        category.setName(result.getString("name"));
+        category.setParentId(result.getInt("parentid"));
+        return category;
     }
 }
