@@ -1,8 +1,11 @@
 package com.github.javamentorship.category.dao;
 
 import com.github.javamentorship.category.domain.Category;
+import com.github.javamentorship.category.hibernate.HibernateUtils;
 import org.springframework.stereotype.Component;
+import org.hibernate.Session;
 
+import java.util.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,16 +49,10 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public synchronized void addCategory(Category category) throws SQLException, ClassNotFoundException {
-        Connection conn = DBConnectionPool.getConnection();
-        PreparedStatement updateStmt = conn.prepareStatement("INSERT INTO category (name, parent_id) VALUES (?, ?)");
-        updateStmt.setString(1, category.getName());
-        if (category.getParentId()==0){
-            updateStmt.setNull(2,java.sql.Types.INTEGER);
-        }else {
-            updateStmt.setInt(2, category.getParentId());
-        }
-        updateStmt.executeUpdate();
-        updateStmt.close();
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        session.save(category);
+        session.getTransaction().commit();
     }
 
     @Override
