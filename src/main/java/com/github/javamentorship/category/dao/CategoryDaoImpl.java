@@ -10,10 +10,11 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class Dao implements CategoryDao {
-    public Dao() {
+public class CategoryDaoImpl implements CategoryDao {
+    public CategoryDaoImpl() {
     }
 
+    @Override
     public synchronized void deleteCategory(int id) throws SQLException, ClassNotFoundException {
         Connection conn = DBConnectionPool.getConnection();
         PreparedStatement updateStmt = conn.prepareStatement("DELETE FROM category WHERE ID=?");
@@ -22,6 +23,7 @@ public class Dao implements CategoryDao {
         updateStmt.close();
     }
 
+    @Override
     public synchronized void update(String name, int parentId, int id) throws SQLException, ClassNotFoundException {
         Connection conn = DBConnectionPool.getConnection();
         PreparedStatement updateStmt = conn.prepareStatement("UPDATE category SET name = ?, parent_id = ? WHERE id = ?");
@@ -32,6 +34,7 @@ public class Dao implements CategoryDao {
         updateStmt.close();
     }
 
+    @Override
     public synchronized void addCategory(String name) throws SQLException, ClassNotFoundException {
         Connection conn = DBConnectionPool.getConnection();
         PreparedStatement updateStmt = conn.prepareStatement("INSERT INTO category (name) VALUES (?)");
@@ -40,6 +43,7 @@ public class Dao implements CategoryDao {
         updateStmt.close();
     }
 
+    @Override
     public synchronized List<Category> listCategory() throws SQLException, ClassNotFoundException {
         Connection conn = DBConnectionPool.getConnection();
         PreparedStatement selectStatement = conn.prepareStatement("SELECT * FROM category");
