@@ -15,6 +15,15 @@
         <form:input path="name"/>
     </div>
     <div>
+        <form:label path="parentId"><spring:message code="insert.parentId"/></form:label>
+    </div>
+    <div>
+        <form:select path="parentId">
+            <form:option value="0" label="--- Select ---"/>
+            <form:options items="${parentCategories}" />
+        </form:select>
+    </div>
+    <div>
         <input type="submit"/>
     </div>
 </form:form>

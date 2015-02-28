@@ -12,9 +12,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class CategoryController {
@@ -35,15 +36,24 @@ public class CategoryController {
 
     @RequestMapping(value = "/category_insert.html", method = RequestMethod.GET)
     public ModelAndView getInsertCategoryView() throws SQLException, ClassNotFoundException {
+        List<Category> parentCategories = categoryDao.listCategory();
+        Map<String,String> parentCategoryItems = new LinkedHashMap<String,String>();
+        for(Category a: parentCategories) {
+            parentCategoryItems.put(String.valueOf(a.getId()), a.getName());
+        }
+
         LOGGER.debug("Received request for get InsertCategory View");
-        return new ModelAndView("category_insert", "insert_form", new CategoryInsertForm());
+        ModelAndView modelAndView = new ModelAndView("category_insert");
+        modelAndView.addObject("insert_form", new CategoryInsertForm());
+        modelAndView.addObject("parentCategories", parentCategoryItems);
+        return modelAndView;
     }
 
     @RequestMapping(value = "/category_insert.html", method = RequestMethod.POST)
     public String insertCategory(@ModelAttribute("insert_form") CategoryInsertForm form) {
         LOGGER.debug("Received request to create {}", form);
         try {
-            categoryDao.addCategory(form.getName());
+            categoryDao.addCategory(form.getName(), form.getParentId());
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -79,5 +89,7 @@ public class CategoryController {
         LOGGER.debug("Received request for DELETE new data in table CATEGORY");
         return "redirect:/category";
     }
+
+
 
 }

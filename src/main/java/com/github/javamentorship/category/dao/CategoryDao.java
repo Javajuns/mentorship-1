@@ -9,7 +9,7 @@ public interface CategoryDao {
 
     void update(String name, int parentId, int id) throws SQLException, ClassNotFoundException;
 
-    public void addCategory(String name) throws SQLException, ClassNotFoundException;
+    public void addCategory(String name, int parentId) throws SQLException, ClassNotFoundException;
 
     public List<Category> listCategory() throws SQLException, ClassNotFoundException;
 
