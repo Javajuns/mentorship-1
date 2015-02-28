@@ -12,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.sql.SQLException;
 import java.util.*;
@@ -53,7 +52,7 @@ public class CategoryController {
     public String insertCategory(@ModelAttribute("insert_form") CategoryInsertForm form) {
         LOGGER.debug("Received request to create {}", form);
         try {
-            categoryDao.addCategory(form.getName(), form.getParentId());
+            categoryDao.addCategory(new Category(null, form.getName(), form.getParentId()));
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

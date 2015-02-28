@@ -45,15 +45,14 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
-    public synchronized void addCategory(String name, int parentId) throws SQLException, ClassNotFoundException {
-        Category cat = new Category(null,name,parentId);
+    public synchronized void addCategory(Category category) throws SQLException, ClassNotFoundException {
         Connection conn = DBConnectionPool.getConnection();
         PreparedStatement updateStmt = conn.prepareStatement("INSERT INTO category (name, parent_id) VALUES (?, ?)");
-        updateStmt.setString(1,cat.getName());
-        if (parentId==0){
+        updateStmt.setString(1, category.getName());
+        if (category.getParentId()==0){
             updateStmt.setNull(2,java.sql.Types.INTEGER);
         }else {
-            updateStmt.setInt(2, cat.getParentId());
+            updateStmt.setInt(2, category.getParentId());
         }
         updateStmt.executeUpdate();
         updateStmt.close();
