@@ -52,7 +52,7 @@ public class CategoryController {
     public String insertCategory(@ModelAttribute("insert_form") CategoryInsertForm form) {
         LOGGER.debug("Received request to create {}", form);
         try {
-            categoryDao.addCategory(new Category(null, form.getName(), form.getParentId()));
+            categoryDao.addCategory(new Category(form.getName(), form.getParentId()));
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -63,7 +63,7 @@ public class CategoryController {
 
     @RequestMapping(value = "/category_update_form.html/{id}", method = RequestMethod.GET)
     public ModelAndView getUpdateCategoryView(@PathVariable("id") int id) throws SQLException {
-        Category category = categoryDao.getById(id);
+        Category category = categoryDao.getById(new Category(id));
         CategoryUpdateForm updateForm = new CategoryUpdateForm();
         updateForm.setId(category.getId());
         updateForm.setName(category.getName());
@@ -77,14 +77,14 @@ public class CategoryController {
         if (result.hasErrors()) {
             return "category_update";
         } else {
-            categoryDao.update(form.getName(), form.getParentId(), form.getId());
+            categoryDao.update(new Category(form.getId(), form.getName(), form.getParentId()));
             return "redirect:/category";
         }
     }
     
     @RequestMapping("/category_delete.html/{id}")
     public String deleteCategory(@PathVariable("id") int id) throws SQLException, ClassNotFoundException {
-        categoryDao.deleteCategory(id);
+        categoryDao.deleteCategory(new Category(id));
         LOGGER.debug("Received request for DELETE new data in table CATEGORY");
         return "redirect:/category";
     }

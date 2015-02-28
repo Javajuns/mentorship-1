@@ -2,11 +2,13 @@ package com.github.javamentorship.category.dao;
 
 import com.github.javamentorship.category.domain.Category;
 import com.github.javamentorship.category.hibernate.HibernateUtils;
-import org.springframework.stereotype.Component;
 import org.hibernate.Session;
+import org.springframework.stereotype.Component;
 
-import java.util.*;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,33 +18,33 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
-    public synchronized void deleteCategory(int id) throws SQLException, ClassNotFoundException {
+    public synchronized void deleteCategory(Category category) throws SQLException, ClassNotFoundException {
         Connection conn = DBConnectionPool.getConnection();
         PreparedStatement updateStmt = conn.prepareStatement("DELETE FROM category WHERE id = ?");
-        updateStmt.setInt(1, id);
+        updateStmt.setInt(1, category.getId());
         updateStmt.executeUpdate();
         updateStmt.close();
     }
 
     @Override
-    public Category getById(int id) throws SQLException {
+    public Category getById(Category category) throws SQLException {
         Connection conn = DBConnectionPool.getConnection();
         PreparedStatement selectStatement = conn.prepareStatement("SELECT * FROM category WHERE id = ?");
-        selectStatement.setInt(1, id);
+        selectStatement.setInt(1, category.getId());
         ResultSet result = selectStatement.executeQuery();
         result.next();
-        Category category = hydrateCategory(result);
+        Category categoryResult = hydrateCategory(result);
         selectStatement.close();
-        return category;
+        return categoryResult;
     }
 
     @Override
-    public synchronized void update(String name, int parentId, int id) throws SQLException, ClassNotFoundException {
+    public synchronized void update(Category category) throws SQLException, ClassNotFoundException {
         Connection conn = DBConnectionPool.getConnection();
         PreparedStatement updateStmt = conn.prepareStatement("UPDATE category SET name = ?, parent_id = ? WHERE id = ?");
-        updateStmt.setString(1, name);
-        updateStmt.setInt(2, parentId);
-        updateStmt.setInt(3, id);
+        updateStmt.setString(1, category.getName());
+        updateStmt.setInt(2, category.getParentId());
+        updateStmt.setInt(3, category.getId());
         updateStmt.executeUpdate();
         updateStmt.close();
     }
@@ -53,6 +55,7 @@ public class CategoryDaoImpl implements CategoryDao {
         session.beginTransaction();
         session.save(category);
         session.getTransaction().commit();
+        session.close();
     }
 
     @Override

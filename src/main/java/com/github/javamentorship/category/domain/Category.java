@@ -20,6 +20,14 @@ public class Category {
         this.parentId = parentId;
     }
 
+    public Category(String name, Integer parentId) {
+        this(null, name, parentId);
+    }
+
+    public Category(Integer id) {
+        this(id, null, null);
+    }
+
     public Category() {
     }
 
@@ -40,7 +48,6 @@ public class Category {
     }
 
     public Integer getId() {
-
         return id;
     }
 

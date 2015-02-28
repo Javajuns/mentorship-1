@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface CategoryDao {
 
-    void update(String name, int parentId, int id) throws SQLException, ClassNotFoundException;
+    void update(Category category) throws SQLException, ClassNotFoundException;
 
     public void addCategory(Category category) throws SQLException, ClassNotFoundException;
 
     public List<Category> listCategory() throws SQLException, ClassNotFoundException;
 
-    public void deleteCategory(int id) throws SQLException, ClassNotFoundException;
+    public void deleteCategory(Category category1) throws SQLException, ClassNotFoundException;
 
-    Category getById(int id) throws SQLException;
+    Category getById(Category categoryT) throws SQLException;
 }
