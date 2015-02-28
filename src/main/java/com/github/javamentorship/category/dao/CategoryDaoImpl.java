@@ -28,8 +28,9 @@ public class CategoryDaoImpl implements CategoryDao {
         selectStatement.setInt(1, id);
         ResultSet result = selectStatement.executeQuery();
         result.next();
+        Category category = hydrateCategory(result);
         selectStatement.close();
-        return hydrateCategory(result);
+        return category;
     }
 
     @Override
@@ -45,13 +46,14 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public synchronized void addCategory(String name, int parentId) throws SQLException, ClassNotFoundException {
+        Category cat = new Category(null,name,parentId);
         Connection conn = DBConnectionPool.getConnection();
         PreparedStatement updateStmt = conn.prepareStatement("INSERT INTO category (name, parent_id) VALUES (?, ?)");
-        updateStmt.setString(1, name);
+        updateStmt.setString(1,cat.getName());
         if (parentId==0){
             updateStmt.setNull(2,java.sql.Types.INTEGER);
         }else {
-            updateStmt.setInt(2, parentId);
+            updateStmt.setInt(2, cat.getParentId());
         }
         updateStmt.executeUpdate();
         updateStmt.close();
@@ -71,9 +73,10 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     private Category hydrateCategory(ResultSet result) throws SQLException {
-        return new Category.CategoryBuilder().setId(result.getInt("id"))
-                .setName(result.getString("name"))
-                .setParentId(result.getInt("parent_id"))
-                .build();
+        Category category = new Category();
+        category.setId(result.getInt("id"));
+        category.setName(result.getString("name"));
+        category.setParentId(result.getInt("parent_id"));
+        return category;
     }
 }
