@@ -27,10 +27,10 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
-    public synchronized Category getById(Category category) throws SQLException {
+    public synchronized Category getById(Integer id) throws SQLException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        Category result =  (Category) session.get(Category.class, category.getId());
+        Category result =  (Category) session.get(Category.class, id);
         session.getTransaction().commit();
         return result;
     }
@@ -39,7 +39,7 @@ public class CategoryDaoImpl implements CategoryDao {
     public synchronized void update(Category category) throws SQLException, ClassNotFoundException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        session.save(category);
+        session.update(category);
         session.getTransaction().commit();
     }
 

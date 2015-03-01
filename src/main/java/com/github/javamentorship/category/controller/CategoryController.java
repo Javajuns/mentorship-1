@@ -67,7 +67,7 @@ public class CategoryController {
     //TODO  /category_update_form.html -> /edit
     @RequestMapping(value = "/category_update_form.html/{id}", method = RequestMethod.GET)
     public ModelAndView getUpdateCategoryView(@PathVariable("id") int id) throws SQLException {
-        Category category = categoryDao.getById(new Category(id));
+        Category category = categoryDao.getById(id);
         CategoryUpdateForm updateForm = new CategoryUpdateForm();
         updateForm.setId(category.getId());
         updateForm.setName(category.getName());
@@ -82,9 +82,9 @@ public class CategoryController {
         if (result.hasErrors()) {
             return "category_update";
         } else {
-            Category category = categoryDao.getById(form.getId());;
-            category.setName();
-            category.setParentId();
+            Category category = categoryDao.getById(form.getId());
+            category.setName(form.getName());
+            category.setParentId(form.getParentId());
             categoryDao.update(category);
             return "redirect:/category";
         }

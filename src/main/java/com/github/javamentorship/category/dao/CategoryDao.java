@@ -15,6 +15,6 @@ public interface CategoryDao {
 
     void deleteCategory(Category category) throws SQLException, ClassNotFoundException;
 
-    Category getById(Category category) throws SQLException;
+    Category getById(Integer id) throws SQLException;
 
 }

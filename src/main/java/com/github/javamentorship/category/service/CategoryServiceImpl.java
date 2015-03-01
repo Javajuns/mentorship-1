@@ -40,6 +40,6 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     @Transactional
     public Category getById(Category category) throws SQLException {
-        return categoryDao.getById(category);
+        return categoryDao.getById(category.getId());
     }
 }
