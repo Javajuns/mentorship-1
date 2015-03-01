@@ -23,7 +23,7 @@ public class CategoryDaoImpl implements CategoryDao {
         query.setLong("id", category.getId());
         query.executeUpdate();
         session.getTransaction().commit();
-        if (session != null && session.isOpen()) {
+        if (session != null && session.isOpen()) { //TODO WTF? why we close the session?
             session.close();
         }
     }
@@ -46,9 +46,9 @@ public class CategoryDaoImpl implements CategoryDao {
     public synchronized void update(Category category) throws SQLException, ClassNotFoundException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        Query  query = session.createQuery("update Category set name= :name parent_id:parent_id where id= :id");
+        Query  query = session.createQuery("update Category set name = :name, parentId = :parentId where id = :id");
         query.setParameter("name", category.getName());
-        query.setInteger("parent_id", category.getParentId());
+        query.setInteger("parentId", category.getParentId());
         query.setInteger("id", category.getId());
         query.executeUpdate();
         session.getTransaction().commit();
