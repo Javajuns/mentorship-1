@@ -23,9 +23,6 @@ public class CategoryDaoImpl implements CategoryDao {
         query.setLong("id", category.getId());
         query.executeUpdate();
         session.getTransaction().commit();
-        if (session != null && session.isOpen()) { //TODO WTF? why we close the session?
-            session.close();
-        }
     }
 
     @Override
@@ -36,9 +33,6 @@ public class CategoryDaoImpl implements CategoryDao {
         query.setLong("id", category.getId());
         Category result = (Category) query.uniqueResult();
         session.getTransaction().commit();
-        if (session != null && session.isOpen()) {
-            session.close();
-        }
         return result;
     }
 
@@ -48,9 +42,6 @@ public class CategoryDaoImpl implements CategoryDao {
         session.beginTransaction();
         session.save(category);
         session.getTransaction().commit();
-        if (session != null && session.isOpen()) {
-            session.close();
-        }
     }
 
     @Override
@@ -59,9 +50,6 @@ public class CategoryDaoImpl implements CategoryDao {
         session.beginTransaction();
         session.save(category);
         session.getTransaction().commit();
-        if (session != null && session.isOpen()) {
-            session.close();
-        }
     }
 
     @Override
@@ -70,9 +58,6 @@ public class CategoryDaoImpl implements CategoryDao {
         session.beginTransaction();
         List<Category> categories = session.createQuery("from Category").list();
         session.getTransaction().commit();
-        if (session != null && session.isOpen()) {
-            session.close();
-        }
         return categories;
     }
 
