@@ -5,9 +5,7 @@ import com.github.javamentorship.category.hibernate.HibernateUtils;
 import org.springframework.stereotype.Component;
 import org.hibernate.Session;
 
-import java.util.*;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -16,56 +14,49 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
-    public synchronized void deleteCategory(int id) throws SQLException, ClassNotFoundException {
-        Connection conn = DBConnectionPool.getConnection();
-        PreparedStatement updateStmt = conn.prepareStatement("DELETE FROM category WHERE id = ?");
-        updateStmt.setInt(1, id);
-        updateStmt.executeUpdate();
-        updateStmt.close();
+    public synchronized void deleteCategory(Integer id) throws SQLException, ClassNotFoundException {
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        Category category = (Category) session.get(Category.class, id);
+        session.delete(category);
+        session.getTransaction().commit();
     }
 
     @Override
-    public Category getById(int id) throws SQLException {
-        Connection conn = DBConnectionPool.getConnection();
-        PreparedStatement selectStatement = conn.prepareStatement("SELECT * FROM category WHERE id = ?");
-        selectStatement.setInt(1, id);
-        ResultSet result = selectStatement.executeQuery();
-        result.next();
-        Category category = hydrateCategory(result);
-        selectStatement.close();
+    public Category getById(Integer id) throws SQLException {
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        Category category = (Category) session.get(Category.class, id);
+        session.getTransaction().commit();
         return category;
     }
 
     @Override
-    public synchronized void update(String name, int parentId, int id) throws SQLException, ClassNotFoundException {
-        Connection conn = DBConnectionPool.getConnection();
-        PreparedStatement updateStmt = conn.prepareStatement("UPDATE category SET name = ?, parent_id = ? WHERE id = ?");
-        updateStmt.setString(1, name);
-        updateStmt.setInt(2, parentId);
-        updateStmt.setInt(3, id);
-        updateStmt.executeUpdate();
-        updateStmt.close();
+    public synchronized void updateCategory(Integer id, String name, Integer parent_id) throws SQLException, ClassNotFoundException {
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        Category category = (Category) session.get(Category.class, id);
+        category.setName(name);
+        category.setParentId(parent_id);
+        session.update(category);
+        session.getTransaction().commit();
     }
 
     @Override
-    public synchronized void addCategory(Category category) throws SQLException, ClassNotFoundException {
+    public synchronized void addCategory(String name, Integer parentId) throws SQLException, ClassNotFoundException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
+        Category category = new Category(name, parentId);
         session.save(category);
         session.getTransaction().commit();
     }
 
     @Override
     public synchronized List<Category> listCategory() throws SQLException, ClassNotFoundException {
-        Connection conn = DBConnectionPool.getConnection();
-        PreparedStatement selectStatement = conn.prepareStatement("SELECT * FROM category");
-        ResultSet result = selectStatement.executeQuery();
-        List<Category> categories = new ArrayList<Category>();
-        while (result.next()) {
-            categories.add(hydrateCategory(result));
-        }
-        selectStatement.close();
-        return categories;
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        List category = session.createQuery("FROM Category").list();
+        return category;
     }
 
     private Category hydrateCategory(ResultSet result) throws SQLException {

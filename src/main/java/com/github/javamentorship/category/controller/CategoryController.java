@@ -35,7 +35,7 @@ public class CategoryController {
 
     @RequestMapping(value = "/category_insert.html", method = RequestMethod.GET)
     public ModelAndView getInsertCategoryView() throws SQLException, ClassNotFoundException {
-        List<Category> parentCategories = new ArrayList<Category>(); //categoryDao.listCategory();
+        List<Category> parentCategories = categoryDao.listCategory();
         Map<String,String> parentCategoryItems = new LinkedHashMap<String,String>();
         for(Category a: parentCategories) {
             parentCategoryItems.put(String.valueOf(a.getId()), a.getName());
@@ -54,11 +54,11 @@ public class CategoryController {
         if (result.hasErrors()) {
             return "category_insert";
         } else {
-            categoryDao.addCategory(new Category());
+
+            categoryDao.addCategory(form.getName(), form.getParentId());
         }
         return "redirect:/category";
     }
-
     @RequestMapping(value = "/category_update_form.html/{id}", method = RequestMethod.GET)
     public ModelAndView getUpdateCategoryView(@PathVariable("id") int id) throws SQLException {
         Category category = categoryDao.getById(id);
@@ -75,7 +75,7 @@ public class CategoryController {
         if (result.hasErrors()) {
             return "category_update";
         } else {
-            categoryDao.update(form.getName(), form.getParentId(), form.getId());
+            categoryDao.updateCategory(form.getId(), form.getName(), form.getParentId());
             return "redirect:/category";
         }
     }

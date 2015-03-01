@@ -14,13 +14,12 @@ public class Category {
     @Column(name="parent_id")
     private Integer parentId;
 
-    public Category(Integer id, String name, Integer parentId) {
-        this.id = id;
-        this.name = name;
-        this.parentId = parentId;
+    public Category() {
     }
 
-    public Category() {
+    public Category(String name, Integer parentId) {
+        this.name = name;
+        this.parentId = parentId;
     }
 
     public Integer getParentId() {
