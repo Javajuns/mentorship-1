@@ -2,7 +2,6 @@ package com.github.javamentorship.category.dao;
 
 import com.github.javamentorship.category.domain.Category;
 import com.github.javamentorship.category.hibernate.HibernateUtils;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +11,7 @@ import java.util.List;
 
 @Component
 public class CategoryDaoImpl implements CategoryDao {
+
     public CategoryDaoImpl() {
     }
 
@@ -19,9 +19,7 @@ public class CategoryDaoImpl implements CategoryDao {
     public synchronized void deleteCategory(Category category) throws SQLException, ClassNotFoundException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        Query query = session.createQuery("delete from Category where id= :id");
-        query.setLong("id", category.getId());
-        query.executeUpdate();
+        session.delete(category);
         session.getTransaction().commit();
     }
 
@@ -29,9 +27,7 @@ public class CategoryDaoImpl implements CategoryDao {
     public synchronized Category getById(Category category) throws SQLException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        Query query = session.createQuery("from Category where id= :id");
-        query.setLong("id", category.getId());
-        Category result = (Category) query.uniqueResult();
+        Category result =  (Category) session.get(Category.class, category.getId());
         session.getTransaction().commit();
         return result;
     }
@@ -40,7 +36,7 @@ public class CategoryDaoImpl implements CategoryDao {
     public synchronized void update(Category category) throws SQLException, ClassNotFoundException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        session.save(category);
+        session.update(category);
         session.getTransaction().commit();
     }
 
