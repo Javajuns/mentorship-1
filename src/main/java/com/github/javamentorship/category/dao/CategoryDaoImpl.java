@@ -13,11 +13,7 @@ import java.util.List;
 @Component
 public class CategoryDaoImpl implements CategoryDao {
 
-    private SessionFactory sessionFactory;
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    public SessionFactory sessionFactory;
 
     public CategoryDaoImpl() {
     }
@@ -43,7 +39,7 @@ public class CategoryDaoImpl implements CategoryDao {
     public synchronized void update(Category category) throws SQLException, ClassNotFoundException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        session.update(category);
+        session.save(category);
         session.getTransaction().commit();
     }
 

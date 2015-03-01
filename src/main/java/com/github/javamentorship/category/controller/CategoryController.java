@@ -82,7 +82,10 @@ public class CategoryController {
         if (result.hasErrors()) {
             return "category_update";
         } else {
-            categoryDao.update(new Category(form.getId(), form.getName(), form.getParentId()));
+            Category category = categoryDao.getById(form.getId());;
+            category.setName();
+            category.setParentId();
+            categoryDao.update(category);
             return "redirect:/category";
         }
     }
