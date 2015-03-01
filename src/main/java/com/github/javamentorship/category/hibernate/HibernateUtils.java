@@ -6,6 +6,10 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+/**
+ * Needs to be rewritten to Spring IoC
+ */
+@Deprecated
 public class HibernateUtils {
 
     private static final SessionFactory sessionFactory = buildSessionFactory();
@@ -14,7 +18,7 @@ public class HibernateUtils {
         try {
             Configuration configuration = new Configuration();
             configuration.configure("hibernate.cfg.xml");
-            configuration.addAnnotatedClass(Category.class);
+            configuration.addAnnotatedClass(Category.class); //TODO replace with configuration.addPackage("com.github.javamentorship.category.domain")
 
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
                     configuration.getProperties()).build();

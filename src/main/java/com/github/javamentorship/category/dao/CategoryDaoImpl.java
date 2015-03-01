@@ -30,12 +30,11 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public synchronized Category getById(Category category) throws SQLException {
-        Category result = null;
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         Query query = session.createQuery("from category where id= :id");
         query.setLong("id", category.getId());
-        result = (Category) query.uniqueResult();
+        Category result = (Category) query.uniqueResult();
         session.getTransaction().commit();
         if (session != null && session.isOpen()) {
             session.close();
@@ -71,10 +70,9 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public synchronized List<Category> listCategory() throws SQLException, ClassNotFoundException {
-        List<Category> categories = null;
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        categories = session.createQuery("from Category").list();
+        List<Category> categories = session.createQuery("from Category").list();
         session.getTransaction().commit();
         if (session != null && session.isOpen()) {
             session.close();

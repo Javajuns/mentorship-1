@@ -3,6 +3,7 @@ package com.github.javamentorship.category.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+@Deprecated
 public class DBConnectionPool {
 
     public static final String HSQLDB = "org.hsqldb.jdbcDriver";

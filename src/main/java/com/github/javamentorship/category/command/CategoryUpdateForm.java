@@ -14,10 +14,10 @@ public class CategoryUpdateForm {
     @Size(max = 64)
     private String name;
 
-    private int id;
+    private int id; //TODO change primitive int to Integer - it will allow us to keep null values
 
-    @Min(1)
-    private int parentId;
+    @Min(1) //TODO remove this constraint - we will don't use it
+    private int parentId; //TODO change primitive int to Integer
 
     public String getName() {
         return name;
