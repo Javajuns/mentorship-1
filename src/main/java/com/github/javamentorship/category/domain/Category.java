@@ -3,11 +3,14 @@ package com.github.javamentorship.category.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name="category")
+@Table(name="Category"
+        , uniqueConstraints={@UniqueConstraint(columnNames={"id"})}
+)
 public class Category {
+
     @Id
-    @GeneratedValue
-    @Column(name="id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="id", nullable=false, unique=true, length=7)
     private Integer id;
     @Column(name="name")
     private String name;

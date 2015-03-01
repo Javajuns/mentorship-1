@@ -3,7 +3,6 @@ package com.github.javamentorship.category.hibernate;
 import com.github.javamentorship.category.domain.Category;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
