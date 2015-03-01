@@ -30,18 +30,18 @@
                 <c:out value="${row.getParentId()}"/>
             </td>
             <td>
-                <a href="<spring:url value="/category_update_form.html/${row.getId()}" />">
+                <a href="<spring:url value="/category/edit/${row.getId()}" />">
                     <spring:message code="link.update"/>
                 </a>
             </td>
             <td>
-                <a href="<spring:url value="/category_delete.html/${row.getId()}" />">
+                <a href="<spring:url value="/category/delete/${row.getId()}" />">
                     <spring:message code="link.delete"/>
                 </a>
             </td>
         </tr>
     </c:forEach>
 </table>
-<a href="<spring:url value="/category_insert.html" />"><spring:message code="category.insert"/></a>
+<a href="<spring:url value="/category/add" />"><spring:message code="category.insert"/></a>
 </body>
 </html>

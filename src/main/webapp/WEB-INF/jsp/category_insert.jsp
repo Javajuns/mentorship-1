@@ -6,7 +6,7 @@
 <body>
 <h1><spring:message code="category.insert"/></h1>
 <a href="<spring:url value="/category" />"><spring:message code="category.view"/></a>
-<form:form method="POST" action="/category_insert.html" modelAttribute="insert_form">
+<form:form method="POST" action="/category/save" modelAttribute="insert_form">
     <form:errors path="" element="div"/>
     <div>
         <form:label path="name"><spring:message code="insert.name"/></form:label>

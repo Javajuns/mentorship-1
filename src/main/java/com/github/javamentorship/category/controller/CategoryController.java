@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 @Controller
-//TODO     @RequestMapping(value = "/category")
+@RequestMapping(value = "/category")
 public class CategoryController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CategoryController.class);
@@ -25,9 +25,8 @@ public class CategoryController {
     @Autowired
     public CategoryDao categoryDao;
 
-    //TODO  /category -> /
-    @RequestMapping("/category")
-    public ModelAndView viewCategory() throws SQLException, ClassNotFoundException {
+    @RequestMapping("")
+    public ModelAndView index() throws SQLException, ClassNotFoundException {
         LOGGER.debug("Received request for SELECT from table CATEGORY");
         ModelAndView modelAndView = new ModelAndView("category");
         List<Category> categories = categoryDao.listCategory();
@@ -35,9 +34,8 @@ public class CategoryController {
         return modelAndView;
     }
 
-    //TODO  /category_insert.html -> /add
-    @RequestMapping(value = "/category_insert.html", method = RequestMethod.GET)
-    public ModelAndView getInsertCategoryView() throws SQLException, ClassNotFoundException {
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public ModelAndView add() throws SQLException, ClassNotFoundException {
         LOGGER.debug("Received request for get InsertCategory View");
         List<Category> parentCategories = categoryDao.listCategory();
         Map<String,String> parentCategoryItems = new LinkedHashMap<String,String>();
@@ -50,9 +48,8 @@ public class CategoryController {
         return modelAndView;
     }
 
-     //TODO  /category_insert.html (POST) -> /save (POST)
-    @RequestMapping(value = "/category_insert.html", method = RequestMethod.POST)
-    public String insertCategory(@Valid @ModelAttribute("insert_form") CategoryInsertForm form, BindingResult result) throws SQLException, ClassNotFoundException {
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String save(@Valid @ModelAttribute("insert_form") CategoryInsertForm form, BindingResult result) throws SQLException, ClassNotFoundException {
         LOGGER.debug("Received request to create {}", form);
         try {
             categoryDao.addCategory(new Category(form.getName(), form.getParentId()));
@@ -64,9 +61,8 @@ public class CategoryController {
         return "redirect:/category";
     }
 
-    //TODO  /category_update_form.html -> /edit
-    @RequestMapping(value = "/category_update_form.html/{id}", method = RequestMethod.GET)
-    public ModelAndView getUpdateCategoryView(@PathVariable("id") int id) throws SQLException {
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public ModelAndView edit(@PathVariable("id") int id) throws SQLException {
         Category category = categoryDao.getById(id);
         CategoryUpdateForm updateForm = new CategoryUpdateForm();
         updateForm.setId(category.getId());
@@ -75,9 +71,8 @@ public class CategoryController {
         return new ModelAndView("category_update", "update_form", updateForm);
     }
 
-    //TODO  /category_update_form.html (POST) -> /update (POST)
-    @RequestMapping(value = "/category_update.html", method = RequestMethod.POST)
-    public String updateCategory(@Valid @ModelAttribute("update_form") CategoryUpdateForm form, BindingResult result) throws SQLException, ClassNotFoundException {
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String update(@Valid @ModelAttribute("update_form") CategoryUpdateForm form, BindingResult result) throws SQLException, ClassNotFoundException {
         LOGGER.debug("Received request for UPDATE data in table CATEGORY");
         if (result.hasErrors()) {
             return "category_update";
@@ -91,9 +86,8 @@ public class CategoryController {
     }
 
     //TODO delete request IS changing data. So it can't be called via GET request.
-    //TODO  /category_delete.html (GET) -> /delete (POST)
-    @RequestMapping("/category_delete.html/{id}")
-    public String deleteCategory(@PathVariable("id") int id) throws SQLException, ClassNotFoundException {
+    @RequestMapping("/delete/{id}")
+    public String delete(@PathVariable("id") int id) throws SQLException, ClassNotFoundException {
         categoryDao.deleteCategory(new Category(id));
         LOGGER.debug("Received request for DELETE new data in table CATEGORY");
         return "redirect:/category";
