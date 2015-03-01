@@ -46,11 +46,7 @@ public class CategoryDaoImpl implements CategoryDao {
     public synchronized void update(Category category) throws SQLException, ClassNotFoundException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        Query  query = session.createQuery("update Category set name = :name, parentId = :parentId where id = :id");
-        query.setParameter("name", category.getName());
-        query.setInteger("parentId", category.getParentId());
-        query.setInteger("id", category.getId());
-        query.executeUpdate();
+        session.save(category);
         session.getTransaction().commit();
         if (session != null && session.isOpen()) {
             session.close();
