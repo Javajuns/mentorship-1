@@ -1,6 +1,6 @@
 package com.github.javamentorship.category.service;
 
-import com.github.javamentorship.category.dao.CategoryDAO;
+import com.github.javamentorship.category.dao.CategoryDao;
 import com.github.javamentorship.category.domain.Category;
 import org.springframework.stereotype.Service;
 
@@ -11,35 +11,35 @@ import java.util.List;
 @Service
 public class CategoryServiceImpl implements CategoryService{
 
-    private CategoryDAO categoryDAO;
+    private CategoryDao categoryDao;
 
     @Override
     @Transactional
     public void update(Category category) throws SQLException, ClassNotFoundException {
-        categoryDAO.update(category);
+        categoryDao.update(category);
     }
 
     @Override
     @Transactional
     public void addCategory(Category category) throws SQLException, ClassNotFoundException {
-        categoryDAO.addCategory(category);
+        categoryDao.addCategory(category);
     }
 
     @Override
     @Transactional
     public List<Category> listCategory() throws SQLException, ClassNotFoundException {
-        return categoryDAO.listCategory();
+        return categoryDao.listCategory();
     }
 
     @Override
     @Transactional
     public void deleteCategory(Category category) throws SQLException, ClassNotFoundException {
-        categoryDAO.deleteCategory(category);
+        categoryDao.deleteCategory(category);
     }
 
     @Override
     @Transactional
     public Category getById(Category category) throws SQLException {
-        return categoryDAO.getById(category);
+        return categoryDao.getById(category);
     }
 }

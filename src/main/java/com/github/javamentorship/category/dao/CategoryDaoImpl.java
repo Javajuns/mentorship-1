@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @Component
-public class CategoryDAOImpl implements CategoryDAO {
+public class CategoryDaoImpl implements CategoryDao {
 
     private SessionFactory sessionFactory;
 
@@ -19,7 +19,7 @@ public class CategoryDAOImpl implements CategoryDAO {
         this.sessionFactory = sessionFactory;
     }
 
-    public CategoryDAOImpl() {
+    public CategoryDaoImpl() {
     }
 
     @Override

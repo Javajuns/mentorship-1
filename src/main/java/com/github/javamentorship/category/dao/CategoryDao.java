@@ -5,7 +5,7 @@ import com.github.javamentorship.category.domain.Category;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface CategoryDAO {
+public interface CategoryDao {
 
     void update(Category category) throws SQLException, ClassNotFoundException;
 
