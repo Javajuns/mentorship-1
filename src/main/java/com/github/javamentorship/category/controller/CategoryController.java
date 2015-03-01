@@ -39,8 +39,8 @@ public class CategoryController {
         LOGGER.debug("Received request for get InsertCategory View");
         List<Category> parentCategories = categoryDao.listCategory();
         Map<String,String> parentCategoryItems = new LinkedHashMap<String,String>();
-        for(Category a: parentCategories) { //TODO rename (Shift+F6) a -> parentCategory
-            parentCategoryItems.put(String.valueOf(a.getId()), a.getName()); //TODO String.valueOf(parentCategory.getId() -> category.getId().toString()
+        for(Category category: parentCategories) {
+            parentCategoryItems.put(String.valueOf(category.getId()), category.getName()); //TODO String.valueOf(parentCategory.getId() -> category.getId().toString()
         }
         ModelAndView modelAndView = new ModelAndView("category_insert");
         modelAndView.addObject("insert_form", new CategoryInsertForm());
