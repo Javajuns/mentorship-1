@@ -11,7 +11,7 @@ public class CategoryInsertForm {
     @NotEmpty
     @Size(max = 64)
     private String name;
-    private int parentId; //TODO change primitive int to Integer
+    private Integer parentId;
 
 
     public void setName(String name) {
@@ -22,10 +22,10 @@ public class CategoryInsertForm {
         return name;
     }
 
-    public void setParentId(int parentId) {
+    public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
-    public int getParentId() {
+    public Integer getParentId() {
         return parentId;
     }
 

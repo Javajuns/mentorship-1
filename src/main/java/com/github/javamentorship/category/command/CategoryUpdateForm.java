@@ -1,10 +1,8 @@
 package com.github.javamentorship.category.command;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 @Validated
@@ -13,11 +11,8 @@ public class CategoryUpdateForm {
     @NotEmpty
     @Size(max = 64)
     private String name;
-
-    private int id; //TODO change primitive int to Integer - it will allow us to keep null values
-
-    @Min(1) //TODO remove this constraint - we will don't use it
-    private int parentId; //TODO change primitive int to Integer
+    private Integer id;
+    private Integer parentId;
 
     public String getName() {
         return name;
@@ -27,19 +22,19 @@ public class CategoryUpdateForm {
         this.name = name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getParentId() {
+    public Integer getParentId() {
         return parentId;
     }
 
-    public void setParentId(int parentId) {
+    public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
 }
