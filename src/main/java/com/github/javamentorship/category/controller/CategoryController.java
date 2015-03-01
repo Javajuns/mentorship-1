@@ -2,7 +2,7 @@ package com.github.javamentorship.category.controller;
 
 import com.github.javamentorship.category.command.CategoryInsertForm;
 import com.github.javamentorship.category.command.CategoryUpdateForm;
-import com.github.javamentorship.category.dao.CategoryDao;
+import com.github.javamentorship.category.dao.CategoryDAO;
 import com.github.javamentorship.category.domain.Category;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ public class CategoryController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CategoryController.class);
 
     @Autowired
-    public CategoryDao categoryDao;
+    public CategoryDAO categoryDao;
 
     //TODO  /category -> /
     @RequestMapping("/category")

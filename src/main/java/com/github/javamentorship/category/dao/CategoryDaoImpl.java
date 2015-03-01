@@ -3,6 +3,7 @@ package com.github.javamentorship.category.dao;
 import com.github.javamentorship.category.domain.Category;
 import com.github.javamentorship.category.hibernate.HibernateUtils;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
@@ -10,9 +11,15 @@ import java.util.List;
 
 
 @Component
-public class CategoryDaoImpl implements CategoryDao {
+public class CategoryDAOImpl implements CategoryDAO {
 
-    public CategoryDaoImpl() {
+    private SessionFactory sessionFactory;
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    public CategoryDAOImpl() {
     }
 
     @Override
