@@ -32,6 +32,7 @@ public class Category {
     }
 
     public Category() {
+
     }
 
     public Integer getParentId() {

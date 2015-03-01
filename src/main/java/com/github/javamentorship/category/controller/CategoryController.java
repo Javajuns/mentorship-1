@@ -49,7 +49,7 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "/category_insert.html", method = RequestMethod.POST)
-    public String insertCategory(@ModelAttribute("insert_form") CategoryInsertForm form) {
+    public String insertCategory(@Valid @ModelAttribute("insert_form") CategoryInsertForm form, BindingResult result) throws SQLException, ClassNotFoundException {
         LOGGER.debug("Received request to create {}", form);
         try {
             categoryDao.addCategory(new Category(form.getName(), form.getParentId()));
@@ -60,7 +60,6 @@ public class CategoryController {
         }
         return "redirect:/category";
     }
-
     @RequestMapping(value = "/category_update_form.html/{id}", method = RequestMethod.GET)
     public ModelAndView getUpdateCategoryView(@PathVariable("id") int id) throws SQLException {
         Category category = categoryDao.getById(new Category(id));

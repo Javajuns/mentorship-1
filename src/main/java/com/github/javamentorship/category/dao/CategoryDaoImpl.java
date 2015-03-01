@@ -6,9 +6,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
 
 @Component
 public class CategoryDaoImpl implements CategoryDao {
@@ -23,11 +23,13 @@ public class CategoryDaoImpl implements CategoryDao {
         query.setLong("id", category.getId());
         query.executeUpdate();
         session.getTransaction().commit();
-        session.close();
+        if (session != null && session.isOpen()) {
+            session.close();
+        }
     }
 
     @Override
-    public Category getById(Category category) throws SQLException {
+    public synchronized Category getById(Category category) throws SQLException {
         Category result = null;
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
@@ -35,7 +37,9 @@ public class CategoryDaoImpl implements CategoryDao {
         query.setLong("id", category.getId());
         result = (Category) query.uniqueResult();
         session.getTransaction().commit();
-        session.close();
+        if (session != null && session.isOpen()) {
+            session.close();
+        }
         return result;
     }
 
@@ -49,7 +53,9 @@ public class CategoryDaoImpl implements CategoryDao {
         query.setInteger("id", category.getId());
         query.executeUpdate();
         session.getTransaction().commit();
-        session.close();
+        if (session != null && session.isOpen()) {
+            session.close();
+        }
     }
 
     @Override
@@ -58,7 +64,9 @@ public class CategoryDaoImpl implements CategoryDao {
         session.beginTransaction();
         session.save(category);
         session.getTransaction().commit();
-        session.close();
+        if (session != null && session.isOpen()) {
+            session.close();
+        }
     }
 
     @Override
@@ -68,15 +76,10 @@ public class CategoryDaoImpl implements CategoryDao {
         session.beginTransaction();
         categories = session.createQuery("from Category").list();
         session.getTransaction().commit();
-        session.close();
+        if (session != null && session.isOpen()) {
+            session.close();
+        }
         return categories;
     }
 
-    private Category hydrateCategory(ResultSet result) throws SQLException {
-        Category category = new Category();
-        category.setId(result.getInt("id"));
-        category.setName(result.getString("name"));
-        category.setParentId(result.getInt("parent_id"));
-        return category;
-    }
 }
