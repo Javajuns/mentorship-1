@@ -13,6 +13,7 @@
     </div>
     <div>
         <form:input path="name"/>
+        <form:errors path="name" element="div"/>
     </div>
     <div>
         <form:label path="parentId"><spring:message code="insert.parentId"/></form:label>
