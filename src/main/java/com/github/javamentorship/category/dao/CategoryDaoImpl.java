@@ -19,7 +19,7 @@ public class CategoryDaoImpl implements CategoryDao {
     public synchronized void deleteCategory(Category category) throws SQLException, ClassNotFoundException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        Query query = session.createQuery("delete from category where id= :id");
+        Query query = session.createQuery("delete from Category where id= :id");
         query.setLong("id", category.getId());
         query.executeUpdate();
         session.getTransaction().commit();
@@ -32,7 +32,7 @@ public class CategoryDaoImpl implements CategoryDao {
     public synchronized Category getById(Category category) throws SQLException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        Query query = session.createQuery("from category where id= :id");
+        Query query = session.createQuery("from Category where id= :id");
         query.setLong("id", category.getId());
         Category result = (Category) query.uniqueResult();
         session.getTransaction().commit();
@@ -46,7 +46,7 @@ public class CategoryDaoImpl implements CategoryDao {
     public synchronized void update(Category category) throws SQLException, ClassNotFoundException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        Query  query = session.createQuery("update category set name= :name parent_id:parent_id where id= :id");
+        Query  query = session.createQuery("update Category set name= :name parent_id:parent_id where id= :id");
         query.setParameter("name", category.getName());
         query.setInteger("parent_id", category.getParentId());
         query.setInteger("id", category.getId());
