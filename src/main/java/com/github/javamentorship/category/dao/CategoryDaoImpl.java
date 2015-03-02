@@ -19,7 +19,7 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
-    public synchronized void deleteCategory(Category category) throws SQLException, ClassNotFoundException {
+    public synchronized void deleteCategory(Category category) throws SQLException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         session.delete(category);
@@ -36,7 +36,7 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
-    public synchronized void update(Category category) throws SQLException, ClassNotFoundException {
+    public synchronized void update(Category category) throws SQLException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         session.update(category);
@@ -44,7 +44,7 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
-    public synchronized void addCategory(Category category) throws SQLException, ClassNotFoundException {
+    public synchronized void addCategory(Category category) throws SQLException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         session.save(category);
@@ -52,7 +52,7 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
-    public synchronized List<Category> listCategory() throws SQLException, ClassNotFoundException {
+    public synchronized List<Category> listCategory() throws SQLException {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         List<Category> categories = session.createQuery("from Category").list();
