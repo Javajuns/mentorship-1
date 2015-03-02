@@ -21,6 +21,7 @@ import java.util.*;
 public class CategoryController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CategoryController.class);
+    public static final String REDIRECT_TO_INDEX = "redirect:/category";
 
     @Autowired
     public CategoryDao categoryDao;
@@ -28,24 +29,34 @@ public class CategoryController {
     @RequestMapping("")
     public ModelAndView index() {
         LOGGER.debug("Received request for SELECT from table CATEGORY");
-        ModelAndView modelAndView = new ModelAndView("category");
-        List<Category> categories = categoryDao.listCategory();
-        modelAndView.addObject("viewCategory", categories);
-        return modelAndView;
+        try {
+            ModelAndView modelAndView = new ModelAndView("category");
+            List<Category> categories = categoryDao.listCategory();
+            modelAndView.addObject("viewCategory", categories);
+            return modelAndView;
+        } catch (SQLException e) {
+            LOGGER.error("Error during index", e);
+            return new ModelAndView("redirect:/");
+        }
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView add() {
         LOGGER.debug("Received request for get InsertCategory View");
-        List<Category> parentCategories = categoryDao.listCategory();
-        Map<String,String> parentCategoryItems = new LinkedHashMap<String,String>();
-        for(Category category: parentCategories) {
-            parentCategoryItems.put(category.getId().toString(), category.getName());
+        try {
+            ModelAndView modelAndView = new ModelAndView("category_insert");
+            modelAndView.addObject("insert_form", new CategoryInsertForm());
+            List<Category> parentCategories = categoryDao.listCategory();
+            Map<String,String> parentCategoryItems = new LinkedHashMap<String,String>();
+            for(Category category: parentCategories) {
+                parentCategoryItems.put(category.getId().toString(), category.getName());
+            }
+            modelAndView.addObject("parentCategories", parentCategoryItems);
+            return modelAndView;
+        } catch (SQLException e) {
+            LOGGER.error("Error during add", e);
+            return  new ModelAndView(REDIRECT_TO_INDEX);
         }
-        ModelAndView modelAndView = new ModelAndView("category_insert");
-        modelAndView.addObject("insert_form", new CategoryInsertForm());
-        modelAndView.addObject("parentCategories", parentCategoryItems);
-        return modelAndView;
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -59,17 +70,23 @@ public class CategoryController {
         } catch (SQLException e) {
             LOGGER.error("Error during saving", e);
         }
-        return "redirect:/category";
+        return REDIRECT_TO_INDEX;
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable("id") int id) {
-        Category category = categoryDao.getById(id);
-        CategoryUpdateForm updateForm = new CategoryUpdateForm();
-        updateForm.setId(category.getId());
-        updateForm.setName(category.getName());
-        updateForm.setParentId(category.getParentId());
-        return new ModelAndView("category_update", "update_form", updateForm);
+        try {
+            CategoryUpdateForm updateForm = new CategoryUpdateForm();
+            Category category = categoryDao.getById(id);
+            updateForm.setId(category.getId());
+            updateForm.setName(category.getName());
+            updateForm.setParentId(category.getParentId());
+            return new ModelAndView("category_update", "update_form", updateForm);
+        } catch (SQLException e) {
+            LOGGER.error("Error during edit", e);
+            return new ModelAndView(REDIRECT_TO_INDEX);
+        }
+
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -78,11 +95,15 @@ public class CategoryController {
         if (result.hasErrors()) {
             return "category_update";
         } else {
-            Category category = categoryDao.getById(form.getId());
-            category.setName(form.getName());
-            category.setParentId(form.getParentId());
-            categoryDao.update(category);
-            return "redirect:/category";
+            try {
+                Category category = categoryDao.getById(form.getId());
+                category.setName(form.getName());
+                category.setParentId(form.getParentId());
+                categoryDao.update(category);
+            } catch (SQLException e) {
+                LOGGER.error("Error during update", e);
+            }
+            return REDIRECT_TO_INDEX;
         }
     }
 
@@ -90,12 +111,16 @@ public class CategoryController {
     @RequestMapping("/delete/{id}")
     public String delete(@PathVariable("id") int id) {
         LOGGER.debug("Received request for DELETE new data in table CATEGORY");
-        Category category = categoryDao.getById(id);
-        if (category == null) {
-            LOGGER.debug("Category not found");
-            return "redirect:/category";
+        try {
+            Category category = categoryDao.getById(id);
+            if (category == null) {
+                LOGGER.debug("Category not found");
+                return REDIRECT_TO_INDEX;
+            }
+            categoryDao.deleteCategory(category);
+        } catch (SQLException e) {
+            LOGGER.error("Error during delete", e);
         }
-        categoryDao.deleteCategory(category);
-        return "redirect:/category";
+        return REDIRECT_TO_INDEX;
     }
 }
