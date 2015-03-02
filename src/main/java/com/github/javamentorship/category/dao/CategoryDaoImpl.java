@@ -20,7 +20,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public synchronized void deleteCategory(Category category) throws SQLException {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         session.delete(category);
         session.getTransaction().commit();
@@ -28,7 +28,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public synchronized Category getById(Integer id) throws SQLException {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         Category result =  (Category) session.get(Category.class, id);
         session.getTransaction().commit();
@@ -37,7 +37,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public synchronized void update(Category category) throws SQLException {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         session.update(category);
         session.getTransaction().commit();
@@ -45,7 +45,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public synchronized void addCategory(Category category) throws SQLException {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         session.save(category);
         session.getTransaction().commit();
@@ -53,7 +53,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public synchronized List<Category> listCategory() throws SQLException {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         List<Category> categories = session.createQuery("from Category").list();
         session.getTransaction().commit();
