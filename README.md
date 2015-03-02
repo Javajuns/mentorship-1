@@ -1,5 +1,7 @@
-[![Build Status](https://travis-ci.org/nonothing/mentorship.svg?branch=spring-boot)](https://travis-ci.org/nonothing/mentorship)
 # Java Juniors Mentorship
+
+[![Build Status](https://travis-ci.org/javamentorship/mentorship.svg?branch=spring-boot)](https://travis-ci.org/javamentorship/mentorship)
+
 java juniors mentorship workshop
 * Oleksy Ostanin <tnd.prof@gmail.com>
 * Ivan Kovalenko <iv.nik.kov@gmail.com>
