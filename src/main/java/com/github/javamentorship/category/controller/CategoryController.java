@@ -52,7 +52,10 @@ public class CategoryController {
     public String save(@Valid @ModelAttribute("insert_form") CategoryInsertForm form, BindingResult result) throws SQLException, ClassNotFoundException {
         LOGGER.debug("Received request to create {}", form);
         try {
-            categoryDao.addCategory(new Category(form.getName(), form.getParentId()));
+            Category category = new Category();
+            category.setName(form.getName());
+            category.setParentId(form.getParentId());
+            categoryDao.addCategory(category);
         } catch (SQLException e) {
             e.printStackTrace(); //TODO log exceptions to LOGGER
         } catch (ClassNotFoundException e) {
@@ -88,8 +91,13 @@ public class CategoryController {
     //TODO delete request IS changing data. So it can't be called via GET request.
     @RequestMapping("/delete/{id}")
     public String delete(@PathVariable("id") int id) throws SQLException, ClassNotFoundException {
-        categoryDao.deleteCategory(new Category(id));
         LOGGER.debug("Received request for DELETE new data in table CATEGORY");
+        Category category = categoryDao.getById(id);
+        if (category == null) {
+            LOGGER.debug("Category not found");
+            return "redirect:/category";
+        }
+        categoryDao.deleteCategory(category);
         return "redirect:/category";
     }
 }
