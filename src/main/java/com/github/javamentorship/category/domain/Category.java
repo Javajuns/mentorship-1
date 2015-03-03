@@ -3,17 +3,19 @@ package com.github.javamentorship.category.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Category")
+@Table(name="category")
 public class Category {
     @Id
     @GeneratedValue
     private Integer id;
-    @Column(name="name")
+    @Column(name="name", nullable = false)
     private String name;
-    @Column(name="parent_id")
+    @Column(name="parent_id", nullable = true)
     private Integer parentId;
 
     public Category() {
+        // no-args constructor required by JPA spec
+        // this one is protected since it shouldn't be used directly
     }
 
     public Integer getParentId() {
