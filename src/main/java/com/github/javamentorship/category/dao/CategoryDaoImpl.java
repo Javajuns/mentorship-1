@@ -23,29 +23,29 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Transactional
     @Override
-    public synchronized void delete(Category category) throws SQLException {
+    public synchronized void delete(Category category) {
         entityManager.remove(category);
     }
 
     @Override
-    public synchronized Category getById(Integer id) throws SQLException {
+    public synchronized Category getById(Integer id) {
         return entityManager.find(Category.class, id);
     }
 
     @Transactional
     @Override
-    public synchronized void update(Category category) throws SQLException {
+    public synchronized void update(Category category) {
         entityManager.persist(category);
     }
 
     @Transactional
     @Override
-    public synchronized void add(Category category) throws SQLException {
+    public synchronized void add(Category category) {
         entityManager.persist(category);
     }
 
     @Override
-    public synchronized List<Category> list() throws SQLException {
+    public synchronized List<Category> list() {
         List<Category> categories = entityManager.createQuery("from Category", Category.class).getResultList();
         return categories;
     }
