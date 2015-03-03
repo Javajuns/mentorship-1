@@ -32,7 +32,10 @@
         <!-- Drop and re-create the database schema on startup -->
         <!--<property name="hbm2ddl.auto">update</property>-->
 
-        <mapping resource="Category.hbm.xml"/>
+        <mapping resource="Category.hbn.xml"/>
+        <mapping resource="Orders.hbn.xml"/>
+        <mapping resource="Users.hbn.xml"/>
+        <mapping resource="Goods.hbn.xml"/>
 
     </session-factory>
 

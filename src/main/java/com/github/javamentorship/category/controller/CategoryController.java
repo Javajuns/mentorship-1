@@ -29,34 +29,24 @@ public class CategoryController {
     @RequestMapping("")
     public ModelAndView index() {
         LOGGER.debug("Received request for SELECT from table CATEGORY");
-        try {
-            ModelAndView modelAndView = new ModelAndView("category");
-            List<Category> categories = categoryDao.listCategory();
-            modelAndView.addObject("viewCategory", categories);
-            return modelAndView;
-        } catch (SQLException e) {
-            LOGGER.error("Error during index", e);
-            return new ModelAndView("redirect:/");
-        }
+        ModelAndView modelAndView = new ModelAndView("category");
+        List<Category> categories = categoryDao.list();
+        modelAndView.addObject("viewCategory", categories);
+        return modelAndView;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView add() {
         LOGGER.debug("Received request for get InsertCategory View");
-        try {
-            ModelAndView modelAndView = new ModelAndView("category_insert");
-            modelAndView.addObject("insert_form", new CategoryInsertForm());
-            List<Category> parentCategories = categoryDao.listCategory();
-            Map<String,String> parentCategoryItems = new LinkedHashMap<String,String>();
-            for(Category category: parentCategories) {
-                parentCategoryItems.put(category.getId().toString(), category.getName());
-            }
-            modelAndView.addObject("parentCategories", parentCategoryItems);
-            return modelAndView;
-        } catch (SQLException e) {
-            LOGGER.error("Error during add", e);
-            return  new ModelAndView(REDIRECT_TO_INDEX);
+        ModelAndView modelAndView = new ModelAndView("category_insert");
+        modelAndView.addObject("insert_form", new CategoryInsertForm());
+        List<Category> parentCategories = categoryDao.list();
+        Map<String, String> parentCategoryItems = new LinkedHashMap<String, String>();
+        for (Category category : parentCategories) {
+            parentCategoryItems.put(category.getId().toString(), category.getName());
         }
+        modelAndView.addObject("parentCategories", parentCategoryItems);
+        return modelAndView;
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -65,27 +55,18 @@ public class CategoryController {
         Category category = new Category();
         category.setName(form.getName());
         category.setParentId(form.getParentId());
-        try {
-            categoryDao.addCategory(category);
-        } catch (SQLException e) {
-            LOGGER.error("Error during saving", e);
-        }
+        categoryDao.add(category);
         return REDIRECT_TO_INDEX;
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable("id") int id) {
-        try {
-            CategoryUpdateForm updateForm = new CategoryUpdateForm();
-            Category category = categoryDao.getById(id);
-            updateForm.setId(category.getId());
-            updateForm.setName(category.getName());
-            updateForm.setParentId(category.getParentId());
-            return new ModelAndView("category_update", "update_form", updateForm);
-        } catch (SQLException e) {
-            LOGGER.error("Error during edit", e);
-            return new ModelAndView(REDIRECT_TO_INDEX);
-        }
+        CategoryUpdateForm updateForm = new CategoryUpdateForm();
+        Category category = categoryDao.getById(id);
+        updateForm.setId(category.getId());
+        updateForm.setName(category.getName());
+        updateForm.setParentId(category.getParentId());
+        return new ModelAndView("category_update", "update_form", updateForm);
 
     }
 
@@ -95,32 +76,23 @@ public class CategoryController {
         if (result.hasErrors()) {
             return "category_update";
         } else {
-            try {
-                Category category = categoryDao.getById(form.getId());
-                category.setName(form.getName());
-                category.setParentId(form.getParentId());
-                categoryDao.update(category);
-            } catch (SQLException e) {
-                LOGGER.error("Error during update", e);
-            }
+            Category category = categoryDao.getById(form.getId());
+            category.setName(form.getName());
+            category.setParentId(form.getParentId());
+            categoryDao.update(category);
             return REDIRECT_TO_INDEX;
         }
     }
 
-    //TODO delete request IS changing data. So it can't be called via GET request.
-    @RequestMapping("/delete/{id}")
-    public String delete(@PathVariable("id") int id) {
-        LOGGER.debug("Received request for DELETE new data in table CATEGORY");
-        try {
-            Category category = categoryDao.getById(id);
-            if (category == null) {
-                LOGGER.debug("Category not found");
-                return REDIRECT_TO_INDEX;
-            }
-            categoryDao.deleteCategory(category);
-        } catch (SQLException e) {
-            LOGGER.error("Error during delete", e);
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public String delete(@RequestParam int id) {
+        LOGGER.info("Received request for DELETE new data in table CATEGORY");
+        Category category = categoryDao.getById(id);
+        if (category == null) {
+            LOGGER.debug("Category not found");
+            return REDIRECT_TO_INDEX;
         }
+        categoryDao.delete(category);
         return REDIRECT_TO_INDEX;
     }
 }

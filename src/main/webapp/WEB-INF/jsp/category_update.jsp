@@ -8,17 +8,17 @@
 <a href="<spring:url value="/category" />"><spring:message code="category.view"/></a>
 <form:form method="POST" action="/category/update" modelAttribute="update_form">
     <div>
-        <form:label path="id"><spring:message code="update.id"/></form:label>
+        <form:label path="id"><spring:message code="category.update.id"/></form:label>
         <form:input path="id"/>
         <form:errors path="id" element="div"/>
     </div>
     <div>
-        <form:label path="name"><spring:message code="update.name"/></form:label>
+        <form:label path="name"><spring:message code="category.update.name"/></form:label>
         <form:input path="name"/>
         <form:errors path="name" element="div"/>
     </div>
     <div>
-        <form:label path="parentId"><spring:message code="update.parentId"/></form:label>
+        <form:label path="parentId"><spring:message code="category.update.parentId"/></form:label>
         <form:input path="parentId"/>
         <form:errors path="parentId" element="div"/>
     </div>

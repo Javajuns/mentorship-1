@@ -5,14 +5,14 @@
 
 <hibernate-mapping package="com.github.javamentorship.category.domain">
     <class name="Category" table="Category">
-    <id name="id" type="int">
+        <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="native"/>
         </id>
         <property name="name" type="java.lang.String">
             <column name="name" />
         </property>
-        <property name="parentId" type="int" not-null="true">
+        <property name="parentId" type="java.lang.Integer" not-null="true">
             <column name="parent_id"/>
         </property>
     </class>

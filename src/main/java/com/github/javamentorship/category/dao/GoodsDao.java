@@ -1,21 +1,21 @@
 package com.github.javamentorship.category.dao;
 
 import com.github.javamentorship.category.domain.Category;
+import com.github.javamentorship.category.domain.Goods;
 import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
 import java.util.List;
 
 @Repository
-public interface CategoryDao {
-    void update(Category category);
+public interface GoodsDao {
+    void update(Goods goods);
 
-    void add(Category category);
+    void add(Goods goods);
 
-    List<Category> list();
+    List<Goods> list();
 
-    void delete(Category category);
+    void delete(Goods goods);
 
-    Category getById(Integer id);
-
+    Goods getById(Integer id);
 }

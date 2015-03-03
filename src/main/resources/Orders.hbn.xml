@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.github.javamentorship.category.domain">
+    <class name="Orders" table="Orders">
+        <id name="id" type="int">
+            <column name="id"/>
+            <generator class="native"/>
+        </id>
+        <property name="dateCreated" type="java.util.Date">
+            <column name="date_created"/>
+        </property>
+        <property name="userId" type="java.lang.Integer">
+            <column name="user_id"/>
+        </property>
+        <property name="goodsId" type="java.lang.Integer">
+            <column name="goods_id"/>
+        </property>
+        <property name="amount" type="java.lang.Double">
+            <column name="amount"/>
+        </property>
+    </class>
+</hibernate-mapping>

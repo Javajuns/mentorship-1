@@ -1,6 +1,7 @@
 package com.github.javamentorship.category.service;
 
 import com.github.javamentorship.category.dao.CategoryDao;
+import com.github.javamentorship.category.dao.OrdersDao;
 import com.github.javamentorship.category.domain.Category;
 import org.springframework.stereotype.Service;
 
@@ -22,19 +23,19 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     @Transactional
     public void addCategory(Category category) throws SQLException, ClassNotFoundException {
-        categoryDao.addCategory(category);
+        categoryDao.add(category);
     }
 
     @Override
     @Transactional
     public List<Category> listCategory() throws SQLException, ClassNotFoundException {
-        return categoryDao.listCategory();
+        return categoryDao.list();
     }
 
     @Override
     @Transactional
     public void deleteCategory(Category category) throws SQLException, ClassNotFoundException {
-        categoryDao.deleteCategory(category);
+        categoryDao.delete(category);
     }
 
     @Override

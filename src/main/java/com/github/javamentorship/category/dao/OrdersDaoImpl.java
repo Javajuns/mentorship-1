@@ -1,6 +1,6 @@
 package com.github.javamentorship.category.dao;
 
-import com.github.javamentorship.category.domain.Category;
+import com.github.javamentorship.category.domain.Orders;
 import com.github.javamentorship.category.hibernate.HibernateUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,51 +11,51 @@ import java.util.List;
 
 
 @Component
-public class CategoryDaoImpl implements CategoryDao {
+public class OrdersDaoImpl implements OrdersDao {
 
-    public CategoryDaoImpl() {
+    public OrdersDaoImpl() {
     }
 
     @Override
-    public synchronized void delete(Category category) {
+    public synchronized void delete(Orders orders) {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        session.delete(category);
+        session.delete(orders);
         session.getTransaction().commit();
     }
 
     @Override
-    public synchronized Category getById(Integer id) {
+    public synchronized Orders getById(Integer id) {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        Category result =  (Category) session.get(Category.class, id);
+        Orders orders = (Orders) session.get(Orders.class, id);
         session.getTransaction().commit();
-        return result;
+        return orders;
     }
 
     @Override
-    public synchronized void update(Category category) {
+    public synchronized void update(Orders orders) {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        session.update(category);
-        session.getTransaction().commit();
-    }
-
-    @Override
-    public synchronized void add(Category category) {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        session.save(category);
+        session.update(orders);
         session.getTransaction().commit();
     }
 
     @Override
-    public synchronized List<Category> list() {
+    public synchronized void add(Orders orders) {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        List<Category> categories = session.createQuery("from Category").list();
+        session.save(orders);
         session.getTransaction().commit();
-        return categories;
+    }
+
+    @Override
+    public synchronized List<Orders> list() {
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        List<Orders> orders = session.createQuery("from Orders").list();
+        session.getTransaction().commit();
+        return orders;
     }
 
 }

@@ -9,14 +9,14 @@
 <form:form method="POST" action="/category/save" modelAttribute="insert_form">
     <form:errors path="" element="div"/>
     <div>
-        <form:label path="name"><spring:message code="insert.name"/></form:label>
+        <form:label path="name"><spring:message code="category.insert.name"/></form:label>
     </div>
     <div>
         <form:input path="name"/>
         <form:errors path="name" element="div"/>
     </div>
     <div>
-        <form:label path="parentId"><spring:message code="insert.parentId"/></form:label>
+        <form:label path="parentId"><spring:message code="category.insert.parentId"/></form:label>
     </div>
     <div>
         <form:select path="parentId">
