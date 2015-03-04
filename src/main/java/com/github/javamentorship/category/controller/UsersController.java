@@ -109,8 +109,13 @@ public class UsersController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginPost(@RequestParam String login, HttpSession session) {
-        session.setAttribute("login", login);
-        return REDIRECT_TO_INDEX;
+        if (usersDao.findByLoginIgnoringCase(login)!=null){
+            session.setAttribute("login", login);
+            return REDIRECT_TO_INDEX;
+        }
+        else{
+            return "redirect:/users/login";
+        }
     }
 
 }
