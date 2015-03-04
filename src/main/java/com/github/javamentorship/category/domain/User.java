@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "Users")
-public class Users {
+@Table(name = "users")
+public class User {
     @Id
     @GeneratedValue
     private Integer id;
@@ -22,7 +22,7 @@ public class Users {
     @Column(name = "is_admin")
     private Integer isAdmin;
 
-    public Users() {
+    public User() {
     }
 
     public Integer getId() {
