@@ -5,18 +5,19 @@
 
 <html>
 <body>
-<h1><spring:message code="category.view"/></h1>
-
+<h1><spring:message code="goods.view"/></h1>
 <table border="1">
-    <caption><spring:message code="category.name"/></caption>
+    <caption><spring:message code="goods.name"/></caption>
     <tr>
         <th>ID</th>
         <th>NAME</th>
-        <th>PARENT ID</th>
+        <th>PRICE</th>
+        <th>CATEGORY</th>
+        <th>REST</th>
         <th>EDIT</th>
         <th>DEL</th>
     </tr>
-    <c:forEach items="${viewCategory}" var="row">
+    <c:forEach items="${viewGoods}" var="row">
         <tr>
             <td>
                 <c:out value="${row.getId()}"/>
@@ -25,15 +26,21 @@
                 <c:out value="${row.getName()}"/>
             </td>
             <td>
-                <c:out value="${row.getParentId()}"/>
+                <c:out value="${row.getPrice()}"/>
             </td>
             <td>
-                <a href="<spring:url value="/category/edit/${row.getId()}" />">
+                <c:out value="${row.getCategoryId()}"/>
+            </td>
+            <td>
+                <c:out value="${row.getRest()}"/>
+            </td>
+            <td>
+                <a href="<spring:url value="/goods/edit/${row.getId()}" />">
                     <spring:message code="link.update"/>
                 </a>
             </td>
             <td>
-                <form method="POST" action="/category/delete">
+                <form method="POST" action="/goods/delete">
                     <input type="hidden" name="id" value="${row.getId()}"/>
                     <input type="submit" value="DEL">
                 </form>
@@ -41,6 +48,6 @@
         </tr>
     </c:forEach>
 </table>
-<a href="<spring:url value="/category/add" />"><spring:message code="category.insert"/></a>
+<a href="<spring:url value="/goods/add" />"><spring:message code="goods.insert"/></a>
 </body>
 </html>
