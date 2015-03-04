@@ -10,8 +10,6 @@ import javax.transaction.Transactional;
 import java.sql.SQLException;
 import java.util.List;
 
-
-@Component
 @Repository
 public class CategoryDaoImpl implements CategoryDao {
 
