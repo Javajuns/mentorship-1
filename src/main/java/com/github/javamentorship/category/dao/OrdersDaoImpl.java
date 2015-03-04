@@ -47,7 +47,7 @@ public class OrdersDaoImpl implements OrdersDao {
 
     @Override
     public synchronized List<Order> list() {
-        List<Order> orders = entityManager.createQuery("from orders", Order.class).getResultList();
+        List<Order> orders = entityManager.createQuery("from Order", Order.class).getResultList();
         return orders;
     }
 
