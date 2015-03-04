@@ -13,5 +13,4 @@ public interface CategoryDao {
     List<Category> list();
     void delete(Category category);
     Category getById(Integer id);
-
 }
