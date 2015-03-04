@@ -1,20 +1,20 @@
 package com.github.javamentorship.category.dao;
 
-import com.github.javamentorship.category.domain.Orders;
+import com.github.javamentorship.category.domain.Order;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public interface OrdersDao {
-    void update(Orders orders);
+    void update(Order order);
 
-    void add(Orders orders);
+    void add(Order order);
 
-    List<Orders> list();
+    List<Order> list();
 
-    void delete(Orders orders);
+    void delete(Order order);
 
-    Orders getById(Integer id);
+    Order getById(Integer id);
 
 }

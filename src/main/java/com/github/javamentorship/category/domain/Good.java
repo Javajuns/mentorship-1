@@ -3,8 +3,8 @@ package com.github.javamentorship.category.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Goods")
-public class Goods {
+@Table(name = "goods")
+public class Good {
     @Id
     @GeneratedValue
     private Integer id;
@@ -64,7 +64,7 @@ public class Goods {
         this.rest = rest;
     }
 
-    public Goods() {
+    public Good() {
 
     }
 }

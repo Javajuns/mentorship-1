@@ -1,61 +1,52 @@
 package com.github.javamentorship.category.dao;
 
-import com.github.javamentorship.category.domain.Goods;
-import com.github.javamentorship.category.hibernate.HibernateUtils;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import com.github.javamentorship.category.domain.Good;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-import java.sql.SQLException;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 
 @Component
+@Repository
 public class GoodsDaoImpl implements GoodsDao {
+
+    @PersistenceContext
+    public EntityManager entityManager;
 
     public GoodsDaoImpl() {
     }
 
+    @Transactional
     @Override
-    public synchronized void delete(Goods goods) {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        session.delete(goods);
-        session.getTransaction().commit();
+    public synchronized void delete(Good good) {
+        entityManager.remove(good);
     }
 
     @Override
-    public synchronized Goods getById(Integer id) {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        Goods goods = (Goods) session.get(Goods.class, id);
-        session.getTransaction().commit();
+    public synchronized Good getById(Integer id) {
+        return entityManager.find(Good.class, id);
+    }
+
+    @Transactional
+    @Override
+    public synchronized void update(Good good) {
+        entityManager.persist(good);
+    }
+
+
+    @Transactional
+    @Override
+    public synchronized void add(Good good) {
+        entityManager.persist(good);
+    }
+
+    @Override
+    public synchronized List<Good> list() {
+        List<Good> goods = entityManager.createQuery("from Good", Good.class).getResultList();
         return goods;
     }
-
-    @Override
-    public synchronized void update(Goods goods) {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        session.update(goods);
-        session.getTransaction().commit();
-    }
-
-    @Override
-    public synchronized void add(Goods goods) {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        session.save(goods);
-        session.getTransaction().commit();
-    }
-
-    @Override
-    public synchronized List<Goods> list() {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        List<Goods> goods = session.createQuery("from Goods").list();
-        session.getTransaction().commit();
-        return goods;
-    }
-
 }
