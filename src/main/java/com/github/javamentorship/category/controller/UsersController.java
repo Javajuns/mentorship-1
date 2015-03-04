@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -101,5 +102,15 @@ public class UsersController {
         return REDIRECT_TO_INDEX;
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "login";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String loginPost(@RequestParam String login, HttpSession session) {
+        session.setAttribute("login", login);
+        return REDIRECT_TO_INDEX;
+    }
 
 }

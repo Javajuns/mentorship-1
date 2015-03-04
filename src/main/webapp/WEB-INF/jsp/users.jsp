@@ -6,6 +6,8 @@
 <html>
 <body>
 <h1><spring:message code="users.view"/></h1>
+Hello
+<%= session.getAttribute("login") %>
 <table border="1">
     <caption><spring:message code="users.name"/></caption>
     <tr>
