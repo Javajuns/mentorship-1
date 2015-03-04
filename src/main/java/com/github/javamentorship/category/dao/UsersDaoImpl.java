@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @Component
-public class UsersDaoImpl implements UsersDao<Users> {
+public class UsersDaoImpl implements UsersDao<User> {
 
     @PersistenceContext
     public EntityManager entityManager;
@@ -23,47 +23,31 @@ public class UsersDaoImpl implements UsersDao<Users> {
 
     @Transactional
     @Override
-    public synchronized void delete(Users del_obj) {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        session.delete(del_obj);
-        session.getTransaction().commit();
+    public synchronized void delete(User user) {
+        entityManager.remove(user);
     }
 
     @Override
-    public synchronized Users getById(Integer id) {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        Users result = (Users) session.get(Users.class, id);
-        session.getTransaction().commit();
-        return result;
+    public synchronized User getById(Integer id) {
+        return entityManager.find(User.class, id);
     }
 
     @Transactional
     @Override
-    public synchronized void update(Users user) {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        session.update(user);
-        session.getTransaction().commit();
+    public synchronized void update(User user) {
+        entityManager.persist(user);
     }
 
     @Transactional
     @Override
-    public synchronized void add(Users user) {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        session.save(user);
-        session.getTransaction().commit();
+    public synchronized void add(User user) {
+        entityManager.persist(user);
     }
 
     @Override
-    public synchronized List<Users> list() {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        List<Users> categories = session.createQuery("from Users").list();
-        session.getTransaction().commit();
-        return categories;
+    public synchronized List<User> list() {
+        List<User> users = entityManager.createQuery("from User").getResultList();
+        return users;
     }
 
 }
