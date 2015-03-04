@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "Orders")
-public class Orders {
+@Table(name = "orders")
+public class Order {
     @Id
     @GeneratedValue
     private Integer id;
@@ -18,7 +18,7 @@ public class Orders {
     @Column(name = "amount")
     private Double amount;
 
-    public Orders() {
+    public Order() {
     }
 
     public Integer getId() {

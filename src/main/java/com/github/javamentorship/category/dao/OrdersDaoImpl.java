@@ -1,12 +1,10 @@
 package com.github.javamentorship.category.dao;
 
-import com.github.javamentorship.category.domain.Orders;
+import com.github.javamentorship.category.domain.Order;
 import com.github.javamentorship.category.hibernate.HibernateUtils;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
 import java.util.List;
 
 
@@ -17,43 +15,43 @@ public class OrdersDaoImpl implements OrdersDao {
     }
 
     @Override
-    public synchronized void delete(Orders orders) {
+    public synchronized void delete(Order order) {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        session.delete(orders);
+        session.delete(order);
         session.getTransaction().commit();
     }
 
     @Override
-    public synchronized Orders getById(Integer id) {
+    public synchronized Order getById(Integer id) {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        Orders orders = (Orders) session.get(Orders.class, id);
+        Order order = (Order) session.get(Order.class, id);
         session.getTransaction().commit();
-        return orders;
+        return order;
     }
 
     @Override
-    public synchronized void update(Orders orders) {
+    public synchronized void update(Order order) {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        session.update(orders);
-        session.getTransaction().commit();
-    }
-
-    @Override
-    public synchronized void add(Orders orders) {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        session.save(orders);
+        session.update(order);
         session.getTransaction().commit();
     }
 
     @Override
-    public synchronized List<Orders> list() {
+    public synchronized void add(Order order) {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        List<Orders> orders = session.createQuery("from Orders").list();
+        session.save(order);
+        session.getTransaction().commit();
+    }
+
+    @Override
+    public synchronized List<Order> list() {
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        List<Order> orders = session.createQuery("from Orders").list();
         session.getTransaction().commit();
         return orders;
     }
