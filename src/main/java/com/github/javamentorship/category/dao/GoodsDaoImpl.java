@@ -3,12 +3,10 @@ package com.github.javamentorship.category.dao;
 import com.github.javamentorship.category.domain.Good;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
-
 
 @Component
 @Repository
@@ -36,7 +34,6 @@ public class GoodsDaoImpl implements GoodsDao {
     public synchronized void update(Good good) {
         entityManager.persist(good);
     }
-
 
     @Transactional
     @Override
