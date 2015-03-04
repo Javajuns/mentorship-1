@@ -1,60 +1,53 @@
 package com.github.javamentorship.category.dao;
 
-import com.github.javamentorship.category.domain.Orders;
+import com.github.javamentorship.category.domain.Order;
 import com.github.javamentorship.category.hibernate.HibernateUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.sql.SQLException;
 import java.util.List;
 
-
 @Component
+@Repository
 public class OrdersDaoImpl implements OrdersDao {
+
+    @PersistenceContext
+    public EntityManager entityManager;
 
     public OrdersDaoImpl() {
     }
 
+    @Transactional
     @Override
-    public synchronized void delete(Orders orders) {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        session.delete(orders);
-        session.getTransaction().commit();
+    public synchronized void delete(Order orders) {
+        entityManager.remove(orders);
     }
 
     @Override
-    public synchronized Orders getById(Integer id) {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        Orders orders = (Orders) session.get(Orders.class, id);
-        session.getTransaction().commit();
-        return orders;
+    public synchronized Order getById(Integer id) {
+        return entityManager.find(Order.class, id);
+    }
+
+    @Transactional
+    @Override
+    public synchronized void update(Order orders) {
+        entityManager.persist(orders);
+    }
+    @Transactional
+    @Override
+    public synchronized void add(Order orders) {
+        entityManager.persist(orders);
     }
 
     @Override
-    public synchronized void update(Orders orders) {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        session.update(orders);
-        session.getTransaction().commit();
-    }
-
-    @Override
-    public synchronized void add(Orders orders) {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        session.save(orders);
-        session.getTransaction().commit();
-    }
-
-    @Override
-    public synchronized List<Orders> list() {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        List<Orders> orders = session.createQuery("from Orders").list();
-        session.getTransaction().commit();
+    public synchronized List<Order> list() {
+        List<Order> orders = entityManager.createQuery("from Order", Order.class).getResultList();
         return orders;
     }
 

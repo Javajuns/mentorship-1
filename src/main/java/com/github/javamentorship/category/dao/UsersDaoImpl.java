@@ -1,7 +1,6 @@
 package com.github.javamentorship.category.dao;
 
-import com.github.javamentorship.category.domain.Category;
-import com.github.javamentorship.category.domain.Users;
+import com.github.javamentorship.category.domain.User;
 import com.github.javamentorship.category.hibernate.HibernateUtils;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
@@ -13,7 +12,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 
-@Repository
+@Component
 public class UsersDaoImpl implements UsersDao<Users> {
 
     @PersistenceContext
@@ -24,32 +23,47 @@ public class UsersDaoImpl implements UsersDao<Users> {
 
     @Transactional
     @Override
-    public synchronized void delete(Users user) {
-        entityManager.remove(user);
+    public synchronized void delete(Users del_obj) {
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        session.delete(del_obj);
+        session.getTransaction().commit();
     }
 
     @Override
     public synchronized Users getById(Integer id) {
-        return entityManager.find(Users.class, id);
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        Users result = (Users) session.get(Users.class, id);
+        session.getTransaction().commit();
+        return result;
     }
 
     @Transactional
     @Override
     public synchronized void update(Users user) {
-        entityManager.persist(user);
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        session.update(user);
+        session.getTransaction().commit();
     }
 
     @Transactional
     @Override
     public synchronized void add(Users user) {
-        entityManager.persist(user);
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        session.save(user);
+        session.getTransaction().commit();
     }
 
     @Override
     public synchronized List<Users> list() {
-        List<Users> users = entityManager.createQuery("from Users", Users.class).getResultList();
-        return users;
-
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        List<Users> categories = session.createQuery("from Users").list();
+        session.getTransaction().commit();
+        return categories;
     }
 
 }

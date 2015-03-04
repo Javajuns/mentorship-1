@@ -1,10 +1,9 @@
 package com.github.javamentorship.category.controller;
 
-import com.github.javamentorship.category.domain.Users;
+import com.github.javamentorship.category.domain.User;
 import com.github.javamentorship.category.command.UsersInsertForm;
 import com.github.javamentorship.category.command.UsersUpdateForm;
 import com.github.javamentorship.category.dao.UsersDao;
-import com.github.javamentorship.category.domain.Users;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.sql.SQLException;
 import java.util.*;
 
 @Controller
@@ -31,7 +29,7 @@ public class UsersController {
     public ModelAndView index() {
         LOGGER.debug("Received request for SELECT from table USERS");
         ModelAndView modelAndView = new ModelAndView("users");
-        List<Users> categories = usersDao.list();
+        List<User> categories = usersDao.list();
         modelAndView.addObject("viewUsers", categories);
         return modelAndView;
     }
@@ -53,17 +51,17 @@ public class UsersController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@Valid @ModelAttribute("insert_form") UsersInsertForm form, BindingResult result) {
         LOGGER.debug("Received request to create {}", form);
-        Users users = new Users();
+        User user = new User();
      /*   users.setName(form.getName());
         users.setParentId(form.getParentId());*/
-        usersDao.add(users);
+        usersDao.add(user);
         return REDIRECT_TO_INDEX;
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable("id") int id) {
         UsersUpdateForm updateForm = new UsersUpdateForm();
-        Users user = (Users) usersDao.getById(id);
+        User user = (User) usersDao.getById(id);
 /*
         updateForm.setId(users.getId());
         updateForm.setName(users.getName());
@@ -80,12 +78,12 @@ public class UsersController {
             return "users_update";
         } else {
 
-            Users users = (Users) usersDao.getById(form.getId());
+            User user = (User) usersDao.getById(form.getId());
 /*
             users.setName(form.getName());
             users.setParentId(form.getParentId());
 */
-            usersDao.update(users);
+            usersDao.update(user);
             return REDIRECT_TO_INDEX;
         }
     }
@@ -93,12 +91,12 @@ public class UsersController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String delete(@RequestParam int id) {
         LOGGER.info("Received request for DELETE new data in table CATEGORY");
-        Users users = (Users) usersDao.getById(id);
-        if (users == null) {
+        User user = (User) usersDao.getById(id);
+        if (user == null) {
             LOGGER.debug("Users not found");
             return REDIRECT_TO_INDEX;
         }
-        usersDao.delete(users);
+        usersDao.delete(user);
         return REDIRECT_TO_INDEX;
     }
 }
