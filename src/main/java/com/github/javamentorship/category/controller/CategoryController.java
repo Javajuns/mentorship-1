@@ -31,7 +31,7 @@ public class CategoryController {
     public ModelAndView index() {
         LOGGER.debug("Received request for SELECT from table CATEGORY");
         ModelAndView modelAndView = new ModelAndView("category");
-        List<Category> categories = categoryDao.list();
+        Iterable<Category> categories = categoryDao.findAll();
         modelAndView.addObject("viewCategory", categories);
         return modelAndView;
     }
@@ -41,7 +41,7 @@ public class CategoryController {
         LOGGER.debug("Received request for get InsertCategory View");
         ModelAndView modelAndView = new ModelAndView("category_insert");
         modelAndView.addObject("insert_form", new CategoryInsertForm());
-        List<Category> parentCategories = categoryDao.list();
+        Iterable<Category> parentCategories = categoryDao.findAll();
         Map<String, String> parentCategoryItems = new LinkedHashMap<String, String>();
         for (Category category : parentCategories) {
             parentCategoryItems.put(category.getId().toString(), category.getName());
@@ -56,14 +56,14 @@ public class CategoryController {
         Category category = new Category();
         category.setName(form.getName());
         category.setParentId(form.getParentId());
-        categoryDao.add(category);
+        categoryDao.save(category);
         return REDIRECT_TO_INDEX;
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable("id") int id) {
         CategoryUpdateForm updateForm = new CategoryUpdateForm();
-        Category category = categoryDao.getById(id);
+        Category category = categoryDao.findOne(id);
         updateForm.setId(category.getId());
         updateForm.setName(category.getName());
         updateForm.setParentId(category.getParentId());
@@ -77,10 +77,10 @@ public class CategoryController {
         if (result.hasErrors()) {
             return "category_update";
         } else {
-            Category category = categoryDao.getById(form.getId());
+            Category category = categoryDao.findOne(form.getId());
             category.setName(form.getName());
             category.setParentId(form.getParentId());
-            categoryDao.update(category);
+            categoryDao.save(category);
             return REDIRECT_TO_INDEX;
         }
     }
@@ -88,7 +88,7 @@ public class CategoryController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String delete(@RequestParam int id) {
         LOGGER.info("Received request for DELETE new data in table CATEGORY");
-        Category category = categoryDao.getById(id);
+        Category category = categoryDao.findOne(id);
         if (category == null) {
             LOGGER.debug("Category not found");
             return REDIRECT_TO_INDEX;

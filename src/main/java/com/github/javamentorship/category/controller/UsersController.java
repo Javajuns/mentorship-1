@@ -3,6 +3,7 @@ package com.github.javamentorship.category.controller;
 import com.github.javamentorship.category.command.UsersInsertForm;
 import com.github.javamentorship.category.command.UsersUpdateForm;
 import com.github.javamentorship.category.dao.RepositoryDao;
+import com.github.javamentorship.category.dao.UsersDao;
 import com.github.javamentorship.category.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +24,7 @@ public class UsersController {
     public static final String REDIRECT_TO_INDEX = "redirect:/users";
 
     @Autowired
-    public RepositoryDao usersDao;
+    public UsersDao usersDao;
 
     @RequestMapping("")
     public ModelAndView index() {

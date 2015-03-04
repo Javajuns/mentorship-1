@@ -45,7 +45,7 @@ public class GoodsController {
         LOGGER.debug("Received request for get InsertGoods View");
         ModelAndView modelAndView = new ModelAndView("goods_insert");
         modelAndView.addObject("insert_form", new GoodsInsertForm());
-        List<Category> parentCategories = categoryDao.list();
+        Iterable<Category> parentCategories = categoryDao.findAll();
         Map<String, String> parentGoodsItems = new LinkedHashMap<String, String>();
         for (Category category : parentCategories) {
             parentGoodsItems.put(category.getId().toString(), category.getName());
