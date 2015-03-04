@@ -1,6 +1,5 @@
 package com.github.javamentorship.category.command;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.Date;

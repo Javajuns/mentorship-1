@@ -1,7 +1,6 @@
 package com.github.javamentorship.category.service;
 
 import com.github.javamentorship.category.dao.CategoryDao;
-import com.github.javamentorship.category.dao.OrdersDao;
 import com.github.javamentorship.category.domain.Category;
 import org.springframework.stereotype.Service;
 

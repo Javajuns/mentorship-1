@@ -1,9 +1,9 @@
 package com.github.javamentorship.category.controller;
 
-import com.github.javamentorship.category.domain.User;
 import com.github.javamentorship.category.command.UsersInsertForm;
 import com.github.javamentorship.category.command.UsersUpdateForm;
 import com.github.javamentorship.category.dao.UsersDao;
+import com.github.javamentorship.category.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.*;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/users")

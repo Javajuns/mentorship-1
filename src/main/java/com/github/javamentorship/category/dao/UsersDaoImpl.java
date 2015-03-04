@@ -1,9 +1,6 @@
 package com.github.javamentorship.category.dao;
 
 import com.github.javamentorship.category.domain.User;
-import com.github.javamentorship.category.hibernate.HibernateUtils;
-import org.hibernate.Session;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
