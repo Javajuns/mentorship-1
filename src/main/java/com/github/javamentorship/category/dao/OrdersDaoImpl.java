@@ -1,19 +1,13 @@
 package com.github.javamentorship.category.dao;
 
 import com.github.javamentorship.category.domain.Order;
-import com.github.javamentorship.category.hibernate.HibernateUtils;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.sql.SQLException;
 import java.util.List;
 
-@Component
 @Repository
 public class OrdersDaoImpl implements OrdersDao {
 
@@ -50,5 +44,4 @@ public class OrdersDaoImpl implements OrdersDao {
         List<Order> orders = entityManager.createQuery("from Order", Order.class).getResultList();
         return orders;
     }
-
 }
