@@ -30,7 +30,7 @@ public class UsersController {
     public ModelAndView index() {
         LOGGER.debug("Received request for SELECT from table USERS");
         ModelAndView modelAndView = new ModelAndView("users");
-        List<User> categories = usersDao.list();
+        Iterable<User> categories = usersDao.findAll();
         modelAndView.addObject("viewUsers", categories);
         return modelAndView;
     }
@@ -55,14 +55,14 @@ public class UsersController {
         User user = new User();
      /*   users.setName(form.getName());
         users.setParentId(form.getParentId());*/
-        usersDao.add(user);
+        usersDao.save(user);
         return REDIRECT_TO_INDEX;
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable("id") int id) {
         UsersUpdateForm updateForm = new UsersUpdateForm();
-        User user = (User) usersDao.getById(id);
+        User user = (User) usersDao.findOne(id);
 /*
         updateForm.setId(users.getId());
         updateForm.setName(users.getName());
@@ -79,12 +79,12 @@ public class UsersController {
             return "users_update";
         } else {
 
-            User user = (User) usersDao.getById(form.getId());
+            User user = (User) usersDao.findOne(form.getId());
 /*
             users.setName(form.getName());
             users.setParentId(form.getParentId());
 */
-            usersDao.update(user);
+            usersDao.save(user);
             return REDIRECT_TO_INDEX;
         }
     }
@@ -92,7 +92,7 @@ public class UsersController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String delete(@RequestParam int id) {
         LOGGER.info("Received request for DELETE new data in table CATEGORY");
-        User user = (User) usersDao.getById(id);
+        User user = (User) usersDao.findOne(id);
         if (user == null) {
             LOGGER.debug("Users not found");
             return REDIRECT_TO_INDEX;
@@ -100,4 +100,6 @@ public class UsersController {
         usersDao.delete(user);
         return REDIRECT_TO_INDEX;
     }
+
+
 }
