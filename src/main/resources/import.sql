@@ -1,1 +1,0 @@
-INSERT INTO CATEGORY (name, parent_id) VALUES ('Computers', null);
