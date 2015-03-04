@@ -1,12 +1,10 @@
 package com.github.javamentorship.category.dao;
 
-import com.github.javamentorship.category.domain.Goods;
+import com.github.javamentorship.category.domain.Good;
 import com.github.javamentorship.category.hibernate.HibernateUtils;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
 import java.util.List;
 
 
@@ -17,43 +15,43 @@ public class GoodsDaoImpl implements GoodsDao {
     }
 
     @Override
-    public synchronized void delete(Goods goods) {
+    public synchronized void delete(Good good) {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        session.delete(goods);
+        session.delete(good);
         session.getTransaction().commit();
     }
 
     @Override
-    public synchronized Goods getById(Integer id) {
+    public synchronized Good getById(Integer id) {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        Goods goods = (Goods) session.get(Goods.class, id);
+        Good good = (Good) session.get(Good.class, id);
         session.getTransaction().commit();
-        return goods;
+        return good;
     }
 
     @Override
-    public synchronized void update(Goods goods) {
+    public synchronized void update(Good good) {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        session.update(goods);
-        session.getTransaction().commit();
-    }
-
-    @Override
-    public synchronized void add(Goods goods) {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        session.save(goods);
+        session.update(good);
         session.getTransaction().commit();
     }
 
     @Override
-    public synchronized List<Goods> list() {
+    public synchronized void add(Good good) {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        List<Goods> goods = session.createQuery("from Goods").list();
+        session.save(good);
+        session.getTransaction().commit();
+    }
+
+    @Override
+    public synchronized List<Good> list() {
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        List<Good> goods = session.createQuery("from Goods").list();
         session.getTransaction().commit();
         return goods;
     }

@@ -5,7 +5,7 @@ import com.github.javamentorship.category.command.GoodsUpdateForm;
 import com.github.javamentorship.category.dao.CategoryDao;
 import com.github.javamentorship.category.dao.GoodsDao;
 import com.github.javamentorship.category.domain.Category;
-import com.github.javamentorship.category.domain.Goods;
+import com.github.javamentorship.category.domain.Good;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class GoodsController {
     public ModelAndView index() {
         LOGGER.debug("Received request for SELECT from table GOODS");
         ModelAndView modelAndView = new ModelAndView("goods");
-        List<Goods> goods = goodsDao.list();
+        List<Good> goods = goodsDao.list();
         modelAndView.addObject("viewGoods", goods);
         return modelAndView;
     }
@@ -55,24 +55,24 @@ public class GoodsController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@Valid @ModelAttribute("insert_form") GoodsInsertForm form, BindingResult result) {
         LOGGER.debug("Received request to create {}", form);
-        Goods goods = new Goods();
-        goods.setName(form.getName());
-        goods.setPrice(form.getPrice());
-        goods.setCategoryId(form.getCategoryId());
-        goods.setRest(form.getRest());
-        goodsDao.add(goods);
+        Good good = new Good();
+        good.setName(form.getName());
+        good.setPrice(form.getPrice());
+        good.setCategoryId(form.getCategoryId());
+        good.setRest(form.getRest());
+        goodsDao.add(good);
         return REDIRECT_TO_INDEX;
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable("id") int id) {
         GoodsUpdateForm updateForm = new GoodsUpdateForm();
-        Goods goods = goodsDao.getById(id);
-        updateForm.setId(goods.getId());
-        updateForm.setName(goods.getName());
-        updateForm.setPrice(goods.getPrice());
-        updateForm.setCategoryId(goods.getCategoryId());
-        updateForm.setRest(goods.getRest());
+        Good good = goodsDao.getById(id);
+        updateForm.setId(good.getId());
+        updateForm.setName(good.getName());
+        updateForm.setPrice(good.getPrice());
+        updateForm.setCategoryId(good.getCategoryId());
+        updateForm.setRest(good.getRest());
         return new ModelAndView("goods_update", "update_form", updateForm);
     }
 
@@ -82,12 +82,12 @@ public class GoodsController {
         if (result.hasErrors()) {
             return "goods_update";
         } else {
-            Goods goods = goodsDao.getById(form.getId());
-            goods.setName(form.getName());
-            goods.setPrice(form.getPrice());
-            goods.setCategoryId(form.getCategoryId());
-            goods.setRest(form.getRest());
-            goodsDao.update(goods);
+            Good good = goodsDao.getById(form.getId());
+            good.setName(form.getName());
+            good.setPrice(form.getPrice());
+            good.setCategoryId(form.getCategoryId());
+            good.setRest(form.getRest());
+            goodsDao.update(good);
             return REDIRECT_TO_INDEX;
         }
     }
@@ -95,12 +95,12 @@ public class GoodsController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String delete(@RequestParam int id) {
         LOGGER.debug("Received request for DELETE new data in table GOODS");
-        Goods goods = goodsDao.getById(id);
-        if (goods == null) {
+        Good good = goodsDao.getById(id);
+        if (good == null) {
             LOGGER.debug("Goods not found");
             return REDIRECT_TO_INDEX;
         }
-        goodsDao.delete(goods);
+        goodsDao.delete(good);
         return REDIRECT_TO_INDEX;
     }
 }
