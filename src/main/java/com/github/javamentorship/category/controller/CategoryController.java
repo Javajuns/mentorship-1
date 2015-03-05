@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -62,12 +61,21 @@ public class CategoryController {
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable("id") int id) {
+        ModelAndView modelAndView = new ModelAndView("category_update");
         CategoryUpdateForm updateForm = new CategoryUpdateForm();
+        Iterable<Category> parentCategories = categoryDao.findAll();
+        Map<String, String> parentCategoryItems = new LinkedHashMap<String, String>();
+        for (Category category : parentCategories) {
+            parentCategoryItems.put(category.getId().toString(), category.getName());
+        }
+        modelAndView.addObject("parentCategories", parentCategoryItems);
         Category category = categoryDao.findOne(id);
         updateForm.setId(category.getId());
         updateForm.setName(category.getName());
         updateForm.setParentId(category.getParentId());
-        return new ModelAndView("category_update", "update_form", updateForm);
+        modelAndView.addObject("update_form", updateForm);
+
+        return modelAndView;
 
     }
 

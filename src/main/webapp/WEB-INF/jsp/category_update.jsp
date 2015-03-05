@@ -19,8 +19,10 @@
     </div>
     <div>
         <form:label path="parentId"><spring:message code="category.update.parentId"/></form:label>
-        <form:input path="parentId"/>
-        <form:errors path="parentId" element="div"/>
+        <form:select path="parentId">
+            <form:option value="0" label="Root"/>
+            <form:options items="${parentCategories}"/>
+        </form:select>
     </div>
     <div>
         <input type="submit"/>
