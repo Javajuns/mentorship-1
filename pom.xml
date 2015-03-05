@@ -84,6 +84,11 @@
             <artifactId>hibernate-core</artifactId>
             <version>4.3.8.Final</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.stokito</groupId>
+            <artifactId>gag-annotations</artifactId>
+            <version>1.0.1</version>
+        </dependency>
     </dependencies>
 
     <build>

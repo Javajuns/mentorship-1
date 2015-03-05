@@ -1,11 +1,16 @@
 package com.github.javamentorship.category;
 
+import com.github.stokito.gag.annotation.remark.Hack;
+import com.github.stokito.gag.annotation.remark.Magic;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+
+@Magic
+@Hack
 
 @Configuration
 @EnableAutoConfiguration
