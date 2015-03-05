@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -35,7 +34,7 @@ public class GoodsController {
     public ModelAndView index() {
         LOGGER.debug("Received request for SELECT from table GOODS");
         ModelAndView modelAndView = new ModelAndView("goods");
-        List<Good> goods = goodsDao.list();
+        Iterable<Good> goods = goodsDao.findAll();
         modelAndView.addObject("viewGoods", goods);
         return modelAndView;
     }
@@ -62,20 +61,28 @@ public class GoodsController {
         good.setPrice(form.getPrice());
         good.setCategoryId(form.getCategoryId());
         good.setRest(form.getRest());
-        goodsDao.add(good);
+        goodsDao.save(good);
         return REDIRECT_TO_INDEX;
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable("id") int id) {
+        ModelAndView modelAndView = new ModelAndView("goods_update");
         GoodsUpdateForm updateForm = new GoodsUpdateForm();
-        Good good = goodsDao.getById(id);
+        Iterable<Category> parentCategories = categoryDao.findAll();
+        Map<String, String> parentCategoryItems = new LinkedHashMap<String, String>();
+        for (Category category : parentCategories) {
+            parentCategoryItems.put(category.getId().toString(), category.getName());
+        }
+        Good good = goodsDao.findOne(id);
         updateForm.setId(good.getId());
         updateForm.setName(good.getName());
         updateForm.setPrice(good.getPrice());
         updateForm.setCategoryId(good.getCategoryId());
         updateForm.setRest(good.getRest());
-        return new ModelAndView("goods_update", "update_form", updateForm);
+        modelAndView.addObject("update_form", updateForm);
+        modelAndView.addObject("parentCategories", parentCategoryItems);
+        return modelAndView;
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -84,12 +91,12 @@ public class GoodsController {
         if (result.hasErrors()) {
             return "goods_update";
         } else {
-            Good good = goodsDao.getById(form.getId());
+            Good good = goodsDao.findOne(form.getId());
             good.setName(form.getName());
             good.setPrice(form.getPrice());
             good.setCategoryId(form.getCategoryId());
             good.setRest(form.getRest());
-            goodsDao.update(good);
+            goodsDao.save(good);
             return REDIRECT_TO_INDEX;
         }
     }
@@ -97,7 +104,7 @@ public class GoodsController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String delete(@RequestParam int id) {
         LOGGER.debug("Received request for DELETE new data in table GOODS");
-        Good good = goodsDao.getById(id);
+        Good good = goodsDao.findOne(id);
         if (good == null) {
             LOGGER.debug("Goods not found");
             return REDIRECT_TO_INDEX;

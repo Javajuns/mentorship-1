@@ -24,8 +24,10 @@
     </div>
     <div>
         <form:label path="categoryId"><spring:message code="goods.col.categoryId"/></form:label>
-        <form:input path="categoryId"/>
-        <form:errors path="categoryId" element="div"/>
+        <form:select path="categoryId">
+            <form:option value="0" label="--- Select ---"/>
+            <form:options items="${parentCategories}"/>
+        </form:select>
     </div>
     <div>
         <form:label path="rest"><spring:message code="goods.col.rest"/></form:label>
