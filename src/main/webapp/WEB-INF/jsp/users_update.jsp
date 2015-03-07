@@ -1,4 +1,3 @@
-<%--suppress ALL --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -7,10 +6,13 @@
 <h1><spring:message code="users.update"/></h1>
 <a href="<spring:url value="/users" />"><spring:message code="users.view"/></a>
 <form:form method="POST" action="/users/update" modelAttribute="update_form">
-    <form:errors path="" element="div"/>
+    <div>
+        <form:hidden path="id"/>
+    </div>
     <div>
         <form:label path="login"><spring:message code="users.col.login"/></form:label>
         <form:input path="login"/>
+        <form:errors path="login"/>
     </div>
     <div>
         <form:label path="firstName"><spring:message code="users.col.first-name"/></form:label>

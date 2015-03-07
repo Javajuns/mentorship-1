@@ -1,4 +1,4 @@
-package com.github.javamentorship.user.controller;
+package com.github.javamentorship.category.controller;
 
 import com.github.javamentorship.category.command.UsersInsertForm;
 import com.github.javamentorship.category.command.UsersUpdateForm;
@@ -36,7 +36,7 @@ public class UsersController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView add() {
         LOGGER.debug("Received request for get InsertUsers View");
-        ModelAndView modelAndView = new ModelAndView("user_insert");
+        ModelAndView modelAndView = new ModelAndView("users_insert");
         modelAndView.addObject("insert_form", new UsersInsertForm());
         return modelAndView;
     }
@@ -49,7 +49,7 @@ public class UsersController {
         user.setFirstName(form.getFirstName());
         user.setSecondName(form.getSecondName());
         user.setEmail(form.getEmail());
-        user.setDateCreated(form.getDate_created());
+        user.setDateCreated(form.getDateCreated());
         user.setIsAdmin(form.getIsAdmin());
         usersDao.save(user);
         return REDIRECT_TO_INDEX;
@@ -57,14 +57,15 @@ public class UsersController {
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable("id") int id) {
-        ModelAndView modelAndView = new ModelAndView("user_update");
+        ModelAndView modelAndView = new ModelAndView("users_update");
         UsersUpdateForm updateForm = new UsersUpdateForm();
         User user = usersDao.findOne(id);
+        updateForm.setId(user.getId());
         updateForm.setLogin(user.getLogin());
         updateForm.setFirstName(user.getFirstName());
         updateForm.setSecondName(user.getSecondName());
         updateForm.setEmail(user.getEmail());
-        updateForm.setDate_created(user.getDateCreated());
+        updateForm.setDateCreated(user.getDateCreated());
         updateForm.setIsAdmin(user.getIsAdmin());
         modelAndView.addObject("update_form", updateForm);
         return modelAndView;
@@ -72,21 +73,16 @@ public class UsersController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@Valid @ModelAttribute("update_form") UsersUpdateForm form, BindingResult result) {
-        LOGGER.debug("Received request for UPDATE data in table CATEGORY");
-        if (result.hasErrors()) {
-            return "user_update";
-        } else {
-            User user = usersDao.findOne(form.getId());
-            user.setLogin(form.getLogin());
-            user.setFirstName(form.getFirstName());
-            user.setSecondName(form.getSecondName());
-            user.setEmail(form.getEmail());
-            user.setDateCreated(form.getDate_created());
-            user.setIsAdmin(form.getIsAdmin());
-            usersDao.save(user);
-            return REDIRECT_TO_INDEX;
-        }
+    public String update(@Valid @ModelAttribute("update_form") UsersUpdateForm updateForm, BindingResult result) {
+        User user = usersDao.findOne(updateForm.getId());
+        user.setLogin(updateForm.getLogin());
+        user.setFirstName(updateForm.getFirstName());
+        user.setSecondName(updateForm.getSecondName());
+        user.setEmail(updateForm.getEmail());
+        user.setDateCreated(updateForm.getDateCreated());
+        user.setIsAdmin(updateForm.getIsAdmin());
+        usersDao.save(user);
+        return REDIRECT_TO_INDEX;
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)

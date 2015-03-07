@@ -15,7 +15,7 @@ public class UsersInsertForm {
     private String firstName;
     private String secondName;
     private String email;
-    private Date date_created;
+    private Date dateCreated;
     private Integer isAdmin;
 
     public String getLogin() {
@@ -50,12 +50,12 @@ public class UsersInsertForm {
         this.email = email;
     }
 
-    public Date getDate_created() {
-        return date_created;
+    public Date getDateCreated() {
+        return dateCreated;
     }
 
-    public void setDate_created(Date date_created) {
-        this.date_created = date_created;
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     public Integer getIsAdmin() {
