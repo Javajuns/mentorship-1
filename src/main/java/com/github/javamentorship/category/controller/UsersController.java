@@ -78,9 +78,7 @@ public class UsersController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@Valid @ModelAttribute("update_form") UsersUpdateForm updateForm, BindingResult result) {
         LOGGER.debug("Received request for UPDATE data in table USERS");
-        if (result.hasErrors()) {
-            return "users_update";
-        } else {
+        if (!result.hasErrors()) {
             User user = usersDao.findOne(updateForm.getId());
             user.setLogin(updateForm.getLogin());
             user.setFirstName(updateForm.getFirstName());
@@ -90,6 +88,8 @@ public class UsersController {
             user.setIsAdmin(updateForm.getIsAdmin());
             usersDao.save(user);
             return REDIRECT_TO_INDEX;
+        } else {
+            return "users_update";
         }
     }
 

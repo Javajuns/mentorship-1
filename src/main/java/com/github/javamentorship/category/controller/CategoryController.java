@@ -82,14 +82,14 @@ public class CategoryController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@Valid @ModelAttribute("update_form") CategoryUpdateForm form, BindingResult result) {
         LOGGER.debug("Received request for UPDATE data in table CATEGORY");
-        if (result.hasErrors()) {
-            return "category_update";
-        } else {
+        if (!result.hasErrors()) {
             Category category = categoryDao.findOne(form.getId());
             category.setName(form.getName());
             category.setParentId(form.getParentId());
             categoryDao.save(category);
             return REDIRECT_TO_INDEX;
+        } else {
+            return "category_update";
         }
     }
 

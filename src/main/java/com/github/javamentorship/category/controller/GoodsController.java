@@ -88,9 +88,7 @@ public class GoodsController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@Valid @ModelAttribute("update_form") GoodsUpdateForm form, BindingResult result) {
         LOGGER.debug("Received request for UPDATE data in table GOODS");
-        if (result.hasErrors()) {
-            return "goods_update";
-        } else {
+        if (!result.hasErrors()) {
             Good good = goodsDao.findOne(form.getId());
             good.setName(form.getName());
             good.setPrice(form.getPrice());
@@ -98,6 +96,8 @@ public class GoodsController {
             good.setRest(form.getRest());
             goodsDao.save(good);
             return REDIRECT_TO_INDEX;
+        } else {
+            return "goods_update";
         }
     }
 

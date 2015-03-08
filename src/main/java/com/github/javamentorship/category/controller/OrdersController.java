@@ -70,9 +70,7 @@ public class OrdersController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@ModelAttribute("update_form") OrdersUpdateForm form, BindingResult result) {
         LOGGER.debug("Received request for UPDATE data in table CATEGORY");
-        if (result.hasErrors()) {
-            return "orders_update";
-        } else {
+        if (!result.hasErrors()) {
             Order order = ordersDao.findOne(form.getId());
             order.setDateCreated(form.getDateCreated());
             order.setUserId(form.getUserId());
@@ -80,6 +78,8 @@ public class OrdersController {
             order.setAmount(form.getAmount());
             ordersDao.save(order);
             return REDIRECT_TO_INDEX;
+        } else {
+            return "orders_update";
         }
     }
 
