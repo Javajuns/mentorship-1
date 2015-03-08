@@ -12,17 +12,16 @@ public class Good {
     private String name;
     @Column(name = "price", nullable = false)
     private Double price;
-    /*
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="CATEGORY_NAME", referencedColumnName="CATEGORY_ID")
-    private Category name;
-    this must work here
-    i will try it later
-    */
-    @Column(name = "category_id")
-    private Integer categoryId;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     @Column(name = "rest")
     private Double rest;
+
+    public Good() {
+    }
 
     public Integer getId() {
         return id;
@@ -48,14 +47,6 @@ public class Good {
         this.price = price;
     }
 
-    public Integer getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
-    }
-
     public Double getRest() {
         return rest;
     }
@@ -64,7 +55,12 @@ public class Good {
         this.rest = rest;
     }
 
-    public Good() {
-
+    public Category getCategory() {
+        return category;
     }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
 }

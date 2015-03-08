@@ -29,13 +29,13 @@
                 <c:out value="${row.getPrice()}"/>
             </td>
             <td>
-                <c:out value="${row.getCategoryId()}"/>
+                <a href="/category/edit/${row.getCategory().getId()}"><c:out value="${row.getCategory().getName()}"/></a>
             </td>
             <td>
                 <c:out value="${row.getRest()}"/>
             </td>
             <td>
-                <a href="<spring:url value="/goods/edit/${row.getId()}" />">
+                <a href="<spring:url value="/goods/edit/${row.getId()}"/>">
                     <spring:message code="link.update"/>
                 </a>
             </td>

@@ -60,7 +60,8 @@ public class GoodsController {
             Good good = new Good();
             good.setName(form.getName());
             good.setPrice(form.getPrice());
-            good.setCategoryId(form.getCategoryId());
+            Category category = categoryDao.findOne(form.getCategoryId());
+            good.setCategory(category);
             good.setRest(form.getRest());
             goodsDao.save(good);
             return REDIRECT_TO_INDEX;
@@ -82,7 +83,7 @@ public class GoodsController {
         updateForm.setId(good.getId());
         updateForm.setName(good.getName());
         updateForm.setPrice(good.getPrice());
-        updateForm.setCategoryId(good.getCategoryId());
+        updateForm.setCategoryId(good.getCategory().getId());
         updateForm.setRest(good.getRest());
         modelAndView.addObject("update_form", updateForm);
         modelAndView.addObject("parentCategories", parentCategoryItems);
@@ -96,7 +97,8 @@ public class GoodsController {
             Good good = goodsDao.findOne(form.getId());
             good.setName(form.getName());
             good.setPrice(form.getPrice());
-            good.setCategoryId(form.getCategoryId());
+            Category category = categoryDao.findOne(form.getCategoryId());
+            good.setCategory(category);
             good.setRest(form.getRest());
             goodsDao.save(good);
             return REDIRECT_TO_INDEX;
