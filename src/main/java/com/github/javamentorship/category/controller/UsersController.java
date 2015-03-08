@@ -46,15 +46,19 @@ public class UsersController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@Valid @ModelAttribute("insert_form") UsersInsertForm form, BindingResult result) {
         LOGGER.debug("Received request to create {}", form);
-        User user = new User();
-        user.setLogin(form.getLogin());
-        user.setFirstName(form.getFirstName());
-        user.setSecondName(form.getSecondName());
-        user.setEmail(form.getEmail());
-        user.setDateCreated(form.getDateCreated());
-        user.setIsAdmin(form.getIsAdmin());
-        usersDao.save(user);
-        return REDIRECT_TO_INDEX;
+        if (!result.hasErrors()) {
+            User user = new User();
+            user.setLogin(form.getLogin());
+            user.setFirstName(form.getFirstName());
+            user.setSecondName(form.getSecondName());
+            user.setEmail(form.getEmail());
+            user.setDateCreated(form.getDateCreated());
+            user.setIsAdmin(form.getIsAdmin());
+            usersDao.save(user);
+            return REDIRECT_TO_INDEX;
+        } else {
+            return "redirect:/users/add";
+        }
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)

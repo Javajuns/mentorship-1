@@ -52,11 +52,15 @@ public class CategoryController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@Valid @ModelAttribute("insert_form") CategoryInsertForm form, BindingResult result) {
         LOGGER.debug("Received request to create {}", form);
-        Category category = new Category();
-        category.setName(form.getName());
-        category.setParentId(form.getParentId());
-        categoryDao.save(category);
-        return REDIRECT_TO_INDEX;
+        if (!result.hasErrors()) {
+            Category category = new Category();
+            category.setName(form.getName());
+            category.setParentId(form.getParentId());
+            categoryDao.save(category);
+            return REDIRECT_TO_INDEX;
+        } else {
+            return "redirect:/users/add";
+        }
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)

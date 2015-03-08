@@ -56,13 +56,17 @@ public class GoodsController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@Valid @ModelAttribute("insert_form") GoodsInsertForm form, BindingResult result) {
         LOGGER.debug("Received request to create {}", form);
-        Good good = new Good();
-        good.setName(form.getName());
-        good.setPrice(form.getPrice());
-        good.setCategoryId(form.getCategoryId());
-        good.setRest(form.getRest());
-        goodsDao.save(good);
-        return REDIRECT_TO_INDEX;
+        if (!result.hasErrors()) {
+            Good good = new Good();
+            good.setName(form.getName());
+            good.setPrice(form.getPrice());
+            good.setCategoryId(form.getCategoryId());
+            good.setRest(form.getRest());
+            goodsDao.save(good);
+            return REDIRECT_TO_INDEX;
+        } else {
+            return "redirect:/goods/add";
+        }
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)

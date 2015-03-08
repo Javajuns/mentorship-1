@@ -46,13 +46,17 @@ public class OrdersController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute("insert_form") OrdersInsertForm form, BindingResult result) {
         LOGGER.info("Received request to create {}", form);
-        Order order = new Order();
-        order.setDateCreated(form.getDateCreated());
-        order.setUserId(form.getUserId());
-        order.setGoodsId(form.getGoodsId());
-        order.setAmount(form.getAmount());
-        ordersDao.save(order);
-        return REDIRECT_TO_INDEX;
+        if (!result.hasErrors()) {
+            Order order = new Order();
+            order.setDateCreated(form.getDateCreated());
+            order.setUserId(form.getUserId());
+            order.setGoodsId(form.getGoodsId());
+            order.setAmount(form.getAmount());
+            ordersDao.save(order);
+            return REDIRECT_TO_INDEX;
+        } else {
+            return "redirect:/orders/add";
+        }
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
