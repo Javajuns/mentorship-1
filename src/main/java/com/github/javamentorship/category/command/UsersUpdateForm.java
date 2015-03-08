@@ -1,6 +1,8 @@
 package com.github.javamentorship.category.command;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.Size;
@@ -22,6 +24,7 @@ public class UsersUpdateForm {
     @NotEmpty
     @Size(max = 254)
     private String email;
+    @DateTimeFormat(iso= ISO.DATE)
     private Date dateCreated;
     private boolean isAdmin;
 
