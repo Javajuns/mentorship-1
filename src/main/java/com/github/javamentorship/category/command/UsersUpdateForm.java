@@ -58,11 +58,9 @@ public class UsersUpdateForm {
     public void setEmail(String email) {
         this.email = email;
     }
-
     public Date getDateCreated() {
         return dateCreated;
     }
-
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
@@ -72,5 +70,4 @@ public class UsersUpdateForm {
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
-
 }

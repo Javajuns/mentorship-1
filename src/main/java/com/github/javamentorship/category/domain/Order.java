@@ -9,13 +9,13 @@ public class Order {
     @Id
     @GeneratedValue
     private Integer id;
-    @Column(name = "date_created")
-    private Date dateCreated;
-    @Column(name = "user_id")
+    @Column(name = "date_created", nullable = false)
+    private Date dateCreated = new Date();
+    @Column(name = "user_id", nullable = false)
     private Integer userId;
-    @Column(name = "goods_id")
+    @Column(name = "goods_id", nullable = false)
     private Integer goodsId;
-    @Column(name = "amount")
+    @Column(name = "amount", nullable = false)
     private Double amount;
 
     public Order() {

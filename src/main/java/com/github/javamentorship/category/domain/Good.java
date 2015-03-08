@@ -8,9 +8,9 @@ public class Good {
     @Id
     @GeneratedValue
     private Integer id;
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private Double price;
     /*
     @ManyToOne(fetch=FetchType.EAGER)

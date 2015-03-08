@@ -9,16 +9,16 @@ public class User {
     @Id
     @GeneratedValue
     private Integer id;
-    @Column(name = "login")
+    @Column(name = "login", nullable = false)
     private String login;
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
-    @Column(name = "second_name")
+    @Column(name = "second_name", nullable = false)
     private String secondName;
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
-    @Column(name = "date_created")
-    private Date dateCreated;
+    @Column(name = "date_created", nullable = false)
+    private Date dateCreated = new Date();
     @Column(name = "is_admin", nullable = false)
     private boolean isAdmin = false;
 
