@@ -29,6 +29,7 @@
     <div>
         <form:label path="dateCreated"><spring:message code="users.col.date-created"/></form:label>
         <form:input path="dateCreated"/>
+        <form:errors path="dateCreated" element="div"/>
     </div>
     <div>
         <form:label path="isAdmin"><spring:message code="users.col.isadmin"/></form:label>
