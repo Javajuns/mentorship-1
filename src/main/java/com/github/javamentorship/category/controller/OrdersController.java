@@ -28,7 +28,7 @@ public class OrdersController {
     public ModelAndView index() {
         LOGGER.debug("Received request for SELECT from table CATEGORY");
         ModelAndView modelAndView = new ModelAndView("orders");
-        List<Order> orders = ordersDao.list();
+        Iterable<Order> orders = ordersDao.findAll();
         modelAndView.addObject("viewOrders", orders);
         return modelAndView;
     }
@@ -38,12 +38,8 @@ public class OrdersController {
         LOGGER.debug("Received request for get InsertCategory View");
         ModelAndView modelAndView = new ModelAndView("orders_insert");
         modelAndView.addObject("insert_form", new OrdersInsertForm());
-        List<Order> parentOrders = ordersDao.list();
-/*            Map<String,String> parentOrderItems = new LinkedHashMap<String,String>();
-            for(Orders category: parentOrders) {
-                parentOrderItems.put(category.getId().toString(), category.getName());
-            }
-            modelAndView.addObject("parentOrders", parentOrderItems);*/
+        Iterable<Order> parentOrders = ordersDao.findAll();
+        modelAndView.addObject("parentOrders", parentOrders);
         return modelAndView;
     }
 
@@ -55,14 +51,14 @@ public class OrdersController {
         order.setUserId(form.getUserId());
         order.setGoodsId(form.getGoodsId());
         order.setAmount(form.getAmount());
-        ordersDao.add(order);
+        ordersDao.save(order);
         return REDIRECT_TO_INDEX;
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable("id") Integer id) {
         OrdersUpdateForm updateForm = new OrdersUpdateForm();
-        Order order = ordersDao.getById(id);
+        Order order = ordersDao.findOne(id);
         order.setDateCreated(updateForm.getDateCreated());
         order.setUserId(updateForm.getUserId());
         order.setGoodsId(updateForm.getGoodsId());
@@ -77,12 +73,12 @@ public class OrdersController {
         if (result.hasErrors()) {
             return "orders_update";
         } else {
-            Order order = ordersDao.getById(form.getId());
+            Order order = ordersDao.findOne(form.getId());
             order.setDateCreated(form.getDateCreated());
             order.setUserId(form.getUserId());
             order.setGoodsId(form.getGoodsId());
             order.setAmount(form.getAmount());
-            ordersDao.update(order);
+            ordersDao.save(order);
             return REDIRECT_TO_INDEX;
         }
     }
@@ -90,7 +86,7 @@ public class OrdersController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String delete(@RequestParam int id) {
         LOGGER.info("Received request for DELETE new data in table ORDER");
-        Order order = ordersDao.getById(id);
+        Order order = ordersDao.findOne(id);
         if (order == null) {
             LOGGER.debug("Order not found");
             return REDIRECT_TO_INDEX;

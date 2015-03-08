@@ -4,6 +4,8 @@ import com.github.javamentorship.category.command.UsersInsertForm;
 import com.github.javamentorship.category.command.UsersUpdateForm;
 import com.github.javamentorship.category.dao.UsersDao;
 import com.github.javamentorship.category.domain.User;
+import com.github.stokito.gag.annotation.remark.Magic;
+import com.github.stokito.gag.annotation.remark.WTF;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,17 +74,23 @@ public class UsersController {
 
     }
 
+    @WTF
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@Valid @ModelAttribute("update_form") UsersUpdateForm updateForm, BindingResult result) {
-        User user = usersDao.findOne(updateForm.getId());
-        user.setLogin(updateForm.getLogin());
-        user.setFirstName(updateForm.getFirstName());
-        user.setSecondName(updateForm.getSecondName());
-        user.setEmail(updateForm.getEmail());
-        user.setDateCreated(updateForm.getDateCreated());
-        user.setIsAdmin(updateForm.getIsAdmin());
-        usersDao.save(user);
-        return REDIRECT_TO_INDEX;
+        LOGGER.debug("Received request for UPDATE data in table USERS");
+        if (result.hasErrors()) {
+            return "users_update";
+        } else {
+            User user = usersDao.findOne(updateForm.getId());
+            user.setLogin(updateForm.getLogin());
+            user.setFirstName(updateForm.getFirstName());
+            user.setSecondName(updateForm.getSecondName());
+            user.setEmail(updateForm.getEmail());
+            user.setDateCreated(updateForm.getDateCreated());
+            user.setIsAdmin(updateForm.getIsAdmin());
+            usersDao.save(user);
+            return REDIRECT_TO_INDEX;
+        }
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
