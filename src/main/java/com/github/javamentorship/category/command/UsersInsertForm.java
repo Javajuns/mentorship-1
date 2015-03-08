@@ -16,7 +16,7 @@ public class UsersInsertForm {
     private String secondName;
     private String email;
     private Date dateCreated;
-    private Integer isAdmin;
+    private boolean isAdmin;
 
     public String getLogin() {
         return login;
@@ -58,11 +58,11 @@ public class UsersInsertForm {
         this.dateCreated = dateCreated;
     }
 
-    public Integer getIsAdmin() {
+    public boolean getIsAdmin() {
         return isAdmin;
     }
 
-    public void setIsAdmin(Integer isAdmin) {
+    public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
 }

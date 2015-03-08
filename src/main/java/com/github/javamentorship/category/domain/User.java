@@ -20,7 +20,7 @@ public class User {
     @Column(name = "date_created")
     private Date dateCreated;
     @Column(name = "is_admin")
-    private Integer isAdmin;
+    private boolean isAdmin;
 
     public User() {
     }
@@ -73,11 +73,11 @@ public class User {
         this.dateCreated = dateCreated;
     }
 
-    public Integer getIsAdmin() {
+    public boolean getIsAdmin() {
         return isAdmin;
     }
 
-    public void setIsAdmin(Integer isAdmin) {
+    public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
 }

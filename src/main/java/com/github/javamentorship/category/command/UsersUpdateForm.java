@@ -10,14 +10,20 @@ import java.util.Date;
 public class UsersUpdateForm {
 
     @NotEmpty
-    @Size(max = 64)
+    @Size(max = 254)
     private String login;
     private Integer id;
+    @NotEmpty
+    @Size(max = 35)
     private String firstName;
+    @NotEmpty
+    @Size(max = 35)
     private String secondName;
+    @NotEmpty
+    @Size(max = 254)
     private String email;
     private Date dateCreated;
-    private Integer isAdmin;
+    private boolean isAdmin;
 
     public String getLogin() {
         return login;
@@ -57,10 +63,10 @@ public class UsersUpdateForm {
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
-    public Integer getIsAdmin() {
+    public boolean getIsAdmin() {
         return isAdmin;
     }
-    public void setIsAdmin(Integer isAdmin) {
+    public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
 
