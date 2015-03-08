@@ -9,6 +9,7 @@ public class Order {
     @Id
     @GeneratedValue
     private Integer id;
+    @Temporal(TemporalType.DATE)
     @Column(name = "date_created", nullable = false)
     private Date dateCreated = new Date();
     @Column(name = "user_id", nullable = false)
