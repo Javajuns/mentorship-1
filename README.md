@@ -1,6 +1,6 @@
 # Java Juniors Mentorship
 
-[![Build Status](https://travis-ci.org/javamentorship/mentorship.svg?branch=spring-boot)](https://travis-ci.org/javamentorship/mentorship)
+[![Build Status](https://travis-ci.org/javamentorship/mentorship.svg?branch=master)](https://travis-ci.org/javamentorship/mentorship)
 
 Java Juniors mentorship workshop
 
