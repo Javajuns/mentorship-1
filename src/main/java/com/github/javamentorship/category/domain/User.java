@@ -19,8 +19,8 @@ public class User {
     private String email;
     @Column(name = "date_created")
     private Date dateCreated;
-    @Column(name = "is_admin")
-    private boolean isAdmin;
+    @Column(name = "is_admin", nullable = false)
+    private boolean isAdmin = false;
 
     public User() {
     }
