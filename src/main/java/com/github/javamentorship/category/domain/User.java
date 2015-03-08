@@ -23,6 +23,10 @@ public class User {
     @Column(name = "is_admin", nullable = false)
     private boolean isAdmin = false;
 
+    @OneToOne
+    @JoinColumn(name="address_id")
+    private Address address;
+
     public User() {
     }
 
@@ -80,6 +84,14 @@ public class User {
 
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }
 
