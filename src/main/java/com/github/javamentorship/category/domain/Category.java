@@ -1,6 +1,7 @@
 package com.github.javamentorship.category.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="category")
@@ -10,7 +11,7 @@ public class Category {
     private Integer id;
     @Column(name="name", nullable = false)
     private String name;
-    @Column(name="parent_id", nullable = true)
+    @Column(name="parent_id", nullable = true) //TODO parentId repacle with parrent (OneTomany
     private Integer parentId;
 
     public Category() {
@@ -41,4 +42,7 @@ public class Category {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    //TODO many to one
+    List<Good> getGoods;
 }

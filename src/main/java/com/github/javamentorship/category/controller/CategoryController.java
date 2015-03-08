@@ -108,4 +108,6 @@ public class CategoryController {
         categoryDao.delete(category);
         return REDIRECT_TO_INDEX;
     }
+
+    //TODO show action ie. /category/show/{id} and target from goods controller
 }

@@ -14,6 +14,7 @@ public class Address {
     String street;
     @Column(nullable = false)
     String building;
-    @OneToOne(mappedBy = "address")
+    @OneToOne(mappedBy = "address") //TODO owner_id
     User owner;
+    // select u.* from address a where a.city = "Kyiv" join users u on a.owner_id = u.id
 }

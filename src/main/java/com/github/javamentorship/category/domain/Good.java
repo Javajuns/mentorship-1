@@ -8,9 +8,9 @@ public class Good {
     @Id
     @GeneratedValue
     private Integer id;
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false) //TODO constraint not empty
     private String name;
-    @Column(name = "price", nullable = false)
+    @Column(name = "price", nullable = false) //TODO minimal constraint
     private Double price;
 
     @ManyToOne
@@ -18,7 +18,7 @@ public class Good {
     private Category category;
 
     @Column(name = "rest")
-    private Double rest;
+    private Double rest; //TODO minimal constraint 0
 
     public Good() {
     }

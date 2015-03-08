@@ -12,11 +12,11 @@ public class Order {
     @Temporal(TemporalType.DATE)
     @Column(name = "date_created", nullable = false)
     private Date dateCreated = new Date();
-    @Column(name = "user_id", nullable = false)
+    @Column(name = "user_id", nullable = false) //TODO @OneToMany
     private Integer userId;
-    @Column(name = "goods_id", nullable = false)
+    @Column(name = "goods_id", nullable = false) //TODO @OneToMany
     private Integer goodsId;
-    @Column(name = "amount", nullable = false)
+    @Column(name = "amount", nullable = false) //TODO minimal constraint > 0
     private Double amount;
 
     public Order() {
