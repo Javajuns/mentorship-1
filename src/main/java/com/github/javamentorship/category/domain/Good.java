@@ -1,6 +1,9 @@
 package com.github.javamentorship.category.domain;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "goods")
@@ -8,17 +11,18 @@ public class Good {
     @Id
     @GeneratedValue
     private Integer id;
-    @Column(name = "name", nullable = false) //TODO constraint not empty
+    @NotEmpty
+    @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "price", nullable = false) //TODO minimal constraint
+    @Min(0)
+    @Column(name = "price", nullable = false)
     private Double price;
-
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-
+    @Min(0)
     @Column(name = "rest")
-    private Double rest; //TODO minimal constraint 0
+    private Double rest;
 
     public Good() {
     }

@@ -14,6 +14,10 @@ public class Category {
     @Column(name="parent_id", nullable = true) //TODO parentId repacle with parrent (OneTomany
     private Integer parentId;
 
+    //TODO many to one
+    //List<Good> getGoods;
+
+
     public Category() {
         // no-args constructor required by JPA spec
         // this one is protected since it shouldn't be used directly
@@ -43,6 +47,4 @@ public class Category {
         this.id = id;
     }
 
-    //TODO many to one
-    List<Good> getGoods;
 }
