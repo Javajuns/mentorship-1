@@ -1,11 +1,11 @@
-package com.github.javamentorship.category.controller;
+package com.github.javamentorship.tables.controller;
 
-import com.github.javamentorship.category.command.GoodsInsertForm;
-import com.github.javamentorship.category.command.GoodsUpdateForm;
-import com.github.javamentorship.category.dao.CategoryDao;
-import com.github.javamentorship.category.dao.GoodsDao;
-import com.github.javamentorship.category.domain.Category;
-import com.github.javamentorship.category.domain.Good;
+import com.github.javamentorship.tables.command.GoodsInsertForm;
+import com.github.javamentorship.tables.command.GoodsUpdateForm;
+import com.github.javamentorship.tables.dao.CategoryDao;
+import com.github.javamentorship.tables.dao.GoodsDao;
+import com.github.javamentorship.tables.domain.Category;
+import com.github.javamentorship.tables.domain.Good;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

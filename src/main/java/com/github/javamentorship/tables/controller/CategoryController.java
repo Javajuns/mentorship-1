@@ -1,9 +1,9 @@
-package com.github.javamentorship.category.controller;
+package com.github.javamentorship.tables.controller;
 
-import com.github.javamentorship.category.command.CategoryInsertForm;
-import com.github.javamentorship.category.command.CategoryUpdateForm;
-import com.github.javamentorship.category.dao.CategoryDao;
-import com.github.javamentorship.category.domain.Category;
+import com.github.javamentorship.tables.command.CategoryInsertForm;
+import com.github.javamentorship.tables.command.CategoryUpdateForm;
+import com.github.javamentorship.tables.dao.CategoryDao;
+import com.github.javamentorship.tables.domain.Category;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,5 +109,5 @@ public class CategoryController {
         return REDIRECT_TO_INDEX;
     }
 
-    //TODO show action ie. /category/show/{id} and target from goods controller
+    //TODO show action ie. /tables/show/{id} and target from goods controller
 }

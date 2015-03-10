@@ -1,4 +1,4 @@
-package com.github.javamentorship.category.domain;
+package com.github.javamentorship.tables.domain;
 
 import javax.persistence.*;
 

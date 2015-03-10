@@ -1,22 +1,30 @@
-package com.github.javamentorship.category.command;
+package com.github.javamentorship.tables.domain;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.Size;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
 
-@Validated
-public class GoodsUpdateForm {
-
+@Entity
+@Table(name = "goods")
+public class Good {
+    @Id
+    @GeneratedValue
     private Integer id;
     @NotEmpty
-    @Size(max = 64)
+    @Column(name = "name", nullable = false)
     private String name;
+    @Min(0)
+    @Column(name = "price", nullable = false)
     private Double price;
-    private Integer categoryId;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+    @Min(0)
+    @Column(name = "rest")
     private Double rest;
 
-    public GoodsUpdateForm() {
+    public Good() {
     }
 
     public Integer getId() {
@@ -43,14 +51,6 @@ public class GoodsUpdateForm {
         this.price = price;
     }
 
-    public Integer getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
-    }
-
     public Double getRest() {
         return rest;
     }
@@ -58,4 +58,13 @@ public class GoodsUpdateForm {
     public void setRest(Double rest) {
         this.rest = rest;
     }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.github.javamentorship.category.command;
+package com.github.javamentorship.tables.command;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.validation.annotation.Validated;
@@ -6,8 +6,9 @@ import org.springframework.validation.annotation.Validated;
 import javax.validation.constraints.Size;
 
 @Validated
-public class GoodsInsertForm {
+public class GoodsUpdateForm {
 
+    private Integer id;
     @NotEmpty
     @Size(max = 64)
     private String name;
@@ -15,7 +16,15 @@ public class GoodsInsertForm {
     private Integer categoryId;
     private Double rest;
 
-    public GoodsInsertForm() {
+    public GoodsUpdateForm() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {

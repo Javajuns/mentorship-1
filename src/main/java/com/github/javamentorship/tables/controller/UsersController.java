@@ -1,10 +1,9 @@
-package com.github.javamentorship.category.controller;
+package com.github.javamentorship.tables.controller;
 
-import com.github.javamentorship.category.command.UsersInsertForm;
-import com.github.javamentorship.category.command.UsersUpdateForm;
-import com.github.javamentorship.category.dao.UsersDao;
-import com.github.javamentorship.category.domain.User;
-import com.github.stokito.gag.annotation.remark.Magic;
+import com.github.javamentorship.tables.command.UsersInsertForm;
+import com.github.javamentorship.tables.command.UsersUpdateForm;
+import com.github.javamentorship.tables.dao.UsersDao;
+import com.github.javamentorship.tables.domain.User;
 import com.github.stokito.gag.annotation.remark.WTF;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

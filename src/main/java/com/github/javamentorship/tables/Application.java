@@ -1,4 +1,4 @@
-package com.github.javamentorship.category;
+package com.github.javamentorship.tables;
 
 import com.github.stokito.gag.annotation.remark.Hack;
 import com.github.stokito.gag.annotation.remark.Magic;

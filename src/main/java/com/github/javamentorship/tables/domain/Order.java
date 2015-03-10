@@ -1,20 +1,35 @@
-package com.github.javamentorship.category.command;
+package com.github.javamentorship.tables.domain;
 
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.validation.annotation.Validated;
-
+import javax.persistence.*;
 import java.util.Date;
 
-@Validated
-public class OrdersInsertForm {
-
-    @NotEmpty
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date dateCreated;
+@Entity
+@Table(name = "orders")
+public class Order {
+    @Id
+    @GeneratedValue
+    private Integer id;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "date_created", nullable = false)
+    private Date dateCreated = new Date();
+    @Column(name = "user_id", nullable = false) //TODO @OneToMany
     private Integer userId;
+    @Column(name = "goods_id", nullable = false) //TODO @OneToMany
     private Integer goodsId;
+    @Column(name = "amount", nullable = false) //TODO minimal constraint > 0
     private Double amount;
+
+    public Order() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
 
     public Date getDateCreated() {
         return dateCreated;
@@ -47,4 +62,6 @@ public class OrdersInsertForm {
     public void setAmount(Double amount) {
         this.amount = amount;
     }
+
 }
+

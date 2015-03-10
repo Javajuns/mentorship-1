@@ -1,9 +1,9 @@
-package com.github.javamentorship.category.controller;
+package com.github.javamentorship.tables.controller;
 
-import com.github.javamentorship.category.command.OrdersInsertForm;
-import com.github.javamentorship.category.command.OrdersUpdateForm;
-import com.github.javamentorship.category.dao.OrdersDao;
-import com.github.javamentorship.category.domain.Order;
+import com.github.javamentorship.tables.command.OrdersInsertForm;
+import com.github.javamentorship.tables.command.OrdersUpdateForm;
+import com.github.javamentorship.tables.dao.OrdersDao;
+import com.github.javamentorship.tables.domain.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 @Controller
 @RequestMapping(value = "/orders")

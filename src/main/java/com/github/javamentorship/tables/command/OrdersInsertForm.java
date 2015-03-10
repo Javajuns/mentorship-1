@@ -1,25 +1,20 @@
-package com.github.javamentorship.category.command;
+package com.github.javamentorship.tables.command;
 
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.Date;
 
 @Validated
-public class OrdersUpdateForm {
+public class OrdersInsertForm {
 
-    private Integer id;
+    @NotEmpty
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date dateCreated;
     private Integer userId;
     private Integer goodsId;
     private Double amount;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Date getDateCreated() {
         return dateCreated;

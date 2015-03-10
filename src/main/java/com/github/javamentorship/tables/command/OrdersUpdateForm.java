@@ -1,26 +1,17 @@
-package com.github.javamentorship.category.domain;
+package com.github.javamentorship.tables.command;
 
-import javax.persistence.*;
+import org.springframework.validation.annotation.Validated;
+
 import java.util.Date;
 
-@Entity
-@Table(name = "orders")
-public class Order {
-    @Id
-    @GeneratedValue
-    private Integer id;
-    @Temporal(TemporalType.DATE)
-    @Column(name = "date_created", nullable = false)
-    private Date dateCreated = new Date();
-    @Column(name = "user_id", nullable = false) //TODO @OneToMany
-    private Integer userId;
-    @Column(name = "goods_id", nullable = false) //TODO @OneToMany
-    private Integer goodsId;
-    @Column(name = "amount", nullable = false) //TODO minimal constraint > 0
-    private Double amount;
+@Validated
+public class OrdersUpdateForm {
 
-    public Order() {
-    }
+    private Integer id;
+    private Date dateCreated;
+    private Integer userId;
+    private Integer goodsId;
+    private Double amount;
 
     public Integer getId() {
         return id;
@@ -29,7 +20,6 @@ public class Order {
     public void setId(Integer id) {
         this.id = id;
     }
-
 
     public Date getDateCreated() {
         return dateCreated;
@@ -62,6 +52,4 @@ public class Order {
     public void setAmount(Double amount) {
         this.amount = amount;
     }
-
 }
-
