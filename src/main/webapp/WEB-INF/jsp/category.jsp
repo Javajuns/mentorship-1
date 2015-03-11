@@ -3,11 +3,14 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <html>
+<head>
+    <link href="<c:url value="/resources/css/table.css" />" rel="stylesheet">
+</head>
 <body>
 <h1><spring:message code="category.view"/></h1>
-
-<table border="1">
+<table>
     <caption><spring:message code="category.name"/></caption>
     <tr>
         <th>ID</th>

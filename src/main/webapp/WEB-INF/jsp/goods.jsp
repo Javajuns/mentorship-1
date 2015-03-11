@@ -4,6 +4,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
+<head>
+    <link href="<c:url value="/resources/css/table.css" />" rel="stylesheet">
+</head>
 <body>
 <h1><spring:message code="goods.view"/></h1>
 <table border="1">

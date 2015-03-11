@@ -5,6 +5,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
+<head>
+    <link href="<c:url value="/resources/css/table.css" />" rel="stylesheet">
+</head>
 <body>
 <h1><spring:message code="orders.view"/></h1>
 <table border="1">
