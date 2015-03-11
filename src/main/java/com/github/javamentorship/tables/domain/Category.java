@@ -1,6 +1,8 @@
 package com.github.javamentorship.tables.domain;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="category")
@@ -12,14 +14,22 @@ public class Category {
     private String name;
     @Column(name="parent_id", nullable = true) //TODO parentId repacle with parrent (OneTomany
     private Integer parentId;
-
-    //TODO many to one
-    //List<Good> getGoods;
-
+    @OneToMany(mappedBy = "category")
+    @Column(name = "good_id")
+    private List<Good> goods;
 
     public Category() {
         // no-args constructor required by JPA spec
         // this one is protected since it shouldn't be used directly
+    }
+
+
+    public List<Good> getGoods() {
+        return goods;
+    }
+
+    public void setGoods(List<Good> goods) {
+        this.goods = goods;
     }
 
     public Integer getParentId() {

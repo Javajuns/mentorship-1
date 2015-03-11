@@ -9,20 +9,19 @@ public class User {
     @Id
     @GeneratedValue
     private Integer id;
-    @Column(name = "login", nullable = false)
-    private String login; //TODO max length 254
-    @Column(name = "first_name", nullable = false)
-    private String firstName; //TODO max length 35
-    @Column(name = "second_name", nullable = false)
-    private String secondName; //TODO max length 35
-    @Column(name = "email", nullable = false)
-    private String email; //TODO max length 254
+    @Column(name = "login", nullable = false, length = 254)
+    private String login;
+    @Column(name = "first_name", nullable = false, length = 35)
+    private String firstName;
+    @Column(name = "second_name", nullable = false, length = 35)
+    private String secondName;
+    @Column(name = "email", nullable = false, length = 254)
+    private String email;
     @Temporal(TemporalType.DATE)
     @Column(name = "date_created", nullable = false)
     private Date dateCreated = new Date();
     @Column(name = "is_admin", nullable = false)
     private boolean isAdmin = false;
-
     @OneToOne
     @JoinColumn(name="address_id")
     private Address address; //TODO на странице пользователей выводить их адресс. Ну добавить их редактирования

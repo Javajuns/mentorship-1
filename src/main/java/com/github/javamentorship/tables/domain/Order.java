@@ -1,6 +1,7 @@
 package com.github.javamentorship.tables.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.util.Date;
 
 @Entity
@@ -16,7 +17,8 @@ public class Order {
     private Integer userId;
     @Column(name = "goods_id", nullable = false) //TODO @OneToMany
     private Integer goodsId;
-    @Column(name = "amount", nullable = false) //TODO minimal constraint > 0
+    @Min(0)
+    @Column(name = "amount", nullable = false)
     private Double amount;
 
     public Order() {
