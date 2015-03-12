@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1><spring:message code="goods.view"/></h1>
-<table border="1">
+<table>
     <caption><spring:message code="goods.name"/></caption>
     <tr>
         <th>ID</th>

@@ -109,5 +109,14 @@ public class CategoryController {
         return REDIRECT_TO_INDEX;
     }
 
+    @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
+    public ModelAndView show(@PathVariable("id") int id) {
+        ModelAndView modelAndView = new ModelAndView("category_show");
+        Category category = categoryDao.findOne(id);
+        modelAndView.addObject("showCategory", category);
+        return modelAndView;
+    }
+
+
     //TODO show action ie. /tables/show/{id} and target from goods controller
 }

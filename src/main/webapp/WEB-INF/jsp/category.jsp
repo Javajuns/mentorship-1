@@ -22,7 +22,8 @@
     <c:forEach items="${viewCategory}" var="row">
         <tr>
             <td>
-                <c:out value="${row.getId()}"/>
+                <a href="<spring:url value="/category/show/${row.getId()}" />"/>
+                <spring:message text="${row.getId()}"/>
             </td>
             <td>
                 <c:out value="${row.getName()}"/>
@@ -31,7 +32,7 @@
                 <c:out value="${row.getParentId()}"/>
             </td>
             <td>
-                <a href="<spring:url value="/category/edit/${row.getId()}" />">
+                <a href="<spring:url value="/category/edit/${row.getId()}" />"/>
                     <spring:message code="link.update"/>
                 </a>
             </td>
