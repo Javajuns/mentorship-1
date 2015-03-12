@@ -32,7 +32,8 @@
                 <c:out value="${row.getPrice()}"/>
             </td>
             <td>
-                <a href="/category/edit/${row.getCategory().getId()}"><c:out value="${row.getCategory().getName()}"/></a>
+                <a href="/category/show/${row.getCategory().getId()}"><c:out
+                        value="${row.getCategory().getName()}"/></a>
             </td>
             <td>
                 <c:out value="${row.getRest()}"/>
