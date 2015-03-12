@@ -59,6 +59,18 @@ Hello
                 </form>
             </td>
         </tr>
+        <tr>
+            <td colspan="2"></td>
+            <td>
+                    <%--<a href="<spring:url value="/users/addr/${row.getAddress().getId()}" />"/>--%>
+                <spring:message text="Адрес:"/>
+            </td>
+            <td>${row.getAddress().getCountry()}</td>
+            <td>${row.getAddress().getCity()}</td>
+            <td>${row.getAddress().getStreet()}</td>
+            <td>${row.getAddress().getBuilding()}</td>
+
+        </tr>
     </c:forEach>
 </table>
 <a href="<spring:url value="/users/add" />"><spring:message code="users.insert"/></a>

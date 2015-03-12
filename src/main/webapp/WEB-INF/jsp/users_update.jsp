@@ -5,7 +5,10 @@
 <body>
 <h1><spring:message code="users.update"/></h1>
 <a href="<spring:url value="/users" />"><spring:message code="users.view"/></a>
+
+<h2>Данные пользователя</h2>
 <form:form method="POST" action="/users/update" modelAttribute="update_form">
+    <form:errors path="" element="div"/>
     <div>
         <form:hidden path="id"/>
     </div>
@@ -35,6 +38,28 @@
         <form:label path="isAdmin"><spring:message code="users.col.isadmin"/></form:label>
         <form:input path="isAdmin"/>
     </div>
+    <h2>Адрес</h2>
+
+    <div>
+        <form:hidden path="address.id"/>
+    </div>
+    <div>
+        <form:label path="address.country"><spring:message text="Страна:"/></form:label>
+        <form:input path="address.country"/>
+    </div>
+    <div>
+        <form:label path="address.city"><spring:message text="Город:"/></form:label>
+        <form:input path="address.city"/>
+    </div>
+    <div>
+        <form:label path="address.street"><spring:message text="Улица:"/></form:label>
+        <form:input path="address.street"/>
+    </div>
+    <div>
+        <form:label path="address.building"><spring:message text="Дом:"/></form:label>
+        <form:input path="address.building"/>
+    </div>
+    <br>
     <div>
         <input type="submit"/>
     </div>

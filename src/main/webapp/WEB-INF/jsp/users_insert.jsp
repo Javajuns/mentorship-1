@@ -6,6 +6,8 @@
 <body>
 <h1><spring:message code="users.insert"/></h1>
 <a href="<spring:url value="/users" />"><spring:message code="users.view"/></a>
+
+<h2>Данные пользователя</h2>
 <form:form method="POST" action="/users/save" modelAttribute="insert_form">
     <form:errors path="" element="div"/>
     <div>
@@ -23,10 +25,6 @@
     <div>
         <form:label path="email"><spring:message code="users.col.email"/></form:label>
         <form:input path="email"/>
-    </div>
-    <div>
-        <form:label path="dateCreated"><spring:message code="users.col.date-created"/></form:label>
-        <form:input path="dateCreated"/>
     </div>
     <div>
         <form:label path="isAdmin"><spring:message code="users.col.isadmin"/></form:label>
