@@ -3,6 +3,7 @@ package com.github.javamentorship.tables.controller;
 import com.github.javamentorship.tables.command.UsersInsertForm;
 import com.github.javamentorship.tables.command.UsersUpdateForm;
 import com.github.javamentorship.tables.dao.UsersDao;
+import com.github.javamentorship.tables.domain.Address;
 import com.github.javamentorship.tables.domain.User;
 import com.github.stokito.gag.annotation.remark.WTF;
 import org.slf4j.Logger;
@@ -51,7 +52,6 @@ public class UsersController {
             user.setFirstName(form.getFirstName());
             user.setSecondName(form.getSecondName());
             user.setEmail(form.getEmail());
-            user.setDateCreated(form.getDateCreated());
             user.setIsAdmin(form.getIsAdmin());
             usersDao.save(user);
             return REDIRECT_TO_INDEX;
@@ -72,12 +72,12 @@ public class UsersController {
         updateForm.setEmail(user.getEmail());
         updateForm.setDateCreated(user.getDateCreated());
         updateForm.setIsAdmin(user.getIsAdmin());
+        updateForm.setAddress(user.getAddress());
         modelAndView.addObject("update_form", updateForm);
         return modelAndView;
 
     }
 
-    @WTF
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@Valid @ModelAttribute("update_form") UsersUpdateForm updateForm, BindingResult result) {
         LOGGER.debug("Received request for UPDATE data in table USERS");
@@ -89,6 +89,12 @@ public class UsersController {
             user.setEmail(updateForm.getEmail());
             user.setDateCreated(updateForm.getDateCreated());
             user.setIsAdmin(updateForm.getIsAdmin());
+            Address address = updateForm.getAddress();
+            address.setCountry(updateForm.getAddress().getCountry());
+            address.setCity(updateForm.getAddress().getCity());
+            address.setStreet(updateForm.getAddress().getStreet());
+            address.setBuilding(updateForm.getAddress().getBuilding());
+            user.setAddress(address);
             usersDao.save(user);
             return REDIRECT_TO_INDEX;
         } else {

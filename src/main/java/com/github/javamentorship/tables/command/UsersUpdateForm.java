@@ -1,5 +1,6 @@
 package com.github.javamentorship.tables.command;
 
+import com.github.javamentorship.tables.domain.Address;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -27,7 +28,16 @@ public class UsersUpdateForm {
     @DateTimeFormat(iso= ISO.DATE)
     private Date dateCreated;
     private boolean isAdmin;
+    private Address address;
 
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
     public String getLogin() {
         return login;
     }
