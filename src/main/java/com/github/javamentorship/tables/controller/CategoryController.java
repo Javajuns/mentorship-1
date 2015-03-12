@@ -117,6 +117,4 @@ public class CategoryController {
         return modelAndView;
     }
 
-
-    //TODO show action ie. /tables/show/{id} and target from goods controller
 }
